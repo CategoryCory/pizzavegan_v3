@@ -150,8 +150,7 @@ dmypy.json
 # profiling data
 .prof
 
-# static and media
-static/
+# media
 media/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
