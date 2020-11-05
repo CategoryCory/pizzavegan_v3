@@ -29,6 +29,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     'home',
+    'articles.apps.ArticlesConfig',
     'search',
     'users.apps.UsersConfig',
 
