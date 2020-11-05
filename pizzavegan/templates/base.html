@@ -4,20 +4,16 @@
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>
-            {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
-        </title>
+        <title>PizzaVegan{% block title %}{% endblock title %}</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
+        <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+              integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.20/dist/shoelace/shoelace.css">
         <link rel="stylesheet" type="text/css" href="{% static 'css/pizzavegan.css' %}">
 
         {% block extra_css %}
@@ -28,9 +24,61 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-5">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/pizzavegan-color-small.png' %}" alt="PizzaVerse Logo" loading="lazy">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ml-3">
+                        <a href="#" class="nav-item nav-link">Why PizzaVegan?</a>
+                    </li>
+                    <li class="nav-item ml-3">
+                        <a href="#" class="nav-item nav-link">Meet the Editor</a>
+                    </li>
+                    <li class="nav-item ml-3">
+                        <a href="#" class="nav-item nav-link">Find Vegan Pizza</a>
+                    </li>
+                    <li class="nav-item ml-3">
+                        <a href="#" class="nav-item nav-link">Articles</a>
+                    </li>
+                    <li class="nav-item ml-3">
+                        <a href="#" class="nav-item nav-link">Recipes</a>
+                    </li>
+                    <li class="nav-item ml-3">
+                        <a href="#" class="nav-item nav-link">Sign Up</a>
+                    </li>
+                    <li class="nav-item ml-3">
+                        <a href="#" class="nav-item nav-link">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
         {% block content %}{% endblock %}
 
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">
+                    Copyright &copy; <a href="https://www.pmq.com" class="primary-link">PMQ Pizza Magazine</a>
+                </span>
+            </div>
+        </footer>
+
         {# Global javascript #}
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+                crossorigin="anonymous"></script>
         <script type="text/javascript" src="{% static 'js/pizzavegan.js' %}"></script>
 
         {% block extra_js %}
