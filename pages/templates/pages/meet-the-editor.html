@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} | Meet the Editor{% endblock title %}
+
+{% block content %}
+    <main class="container-fluid my-5 px-5">
+        <div class="row justify-content-center">
+            <div class="col-10 col-md-7 col-lg-5">
+                <h2 class="responsive-header primary-text mt-4">Meet the Editor</h2>
+                <hr>
+                <div class="article-header-image mb-4 shadow">
+                    <img src="{% static 'images/tracy.jpg' %}" class="rounded" />
+                </div>
+                <p>
+                    Tracy Morin joined PMQ Pizza Magazine as senior copy editor in 2008 and has since traveled the
+                    world to meet with some of the industry's most dedicated and accomplished pizzeria owners, chefs
+                    and employees. As a longtime magazine writer and editor, Morin is a regular contributor of PMQ
+                    feature articles on food and beverage, equipment, marketing and more. She also writes the monthly
+                    column <a href="http://pizzahalloffame.com/" class="text-success" target="_blank">Pizza Hall of
+                    Fame</a>, which profiles historic pizzerias and received the National Award of Excellence from the
+                    American Society of Business Publication Editors in 2011.
+                </p>
+                <p>
+                    In addition to her passion for pizza, Morin brings a firsthand understanding of alternative diets
+                    to the PizzaVegan.com community. A vegetarian since 1995, she has welcomed the booming growth of
+                    cruelty-free foods in recent years&mdash;and the ever-growing number of consumers who crave them.
+                    In her position as editor of PizzaVegan.com, she relishes the opportunity to oversee a thriving
+                    community of vegan pizza lovers and the enterprising pizzeria owners who are successfully catering
+                    to this burgeoning market.
+                </p>
+            </div>
+        </div>
+    </main>
+{% endblock content %}
