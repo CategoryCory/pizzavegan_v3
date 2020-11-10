@@ -21,7 +21,7 @@
                         {{ article.title }}
                     </a>
                 </h4>
-                <p class="articles-list-post-meta mt-1">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>
+                <p class="muted mt-1">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>
                 <p>{{ article.specific.subtitle }}</p>
                 <a href="{% pageurl article %}" class="btn btn-outline-success btn-block mt-auto">
                     Read More

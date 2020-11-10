@@ -30,6 +30,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'home',
     'pages.apps.PagesConfig',
+    'contacts.apps.ContactsConfig',
     'articles.apps.ArticlesConfig',
     'search',
     'users.apps.UsersConfig',
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -198,3 +200,6 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+
+# Crispy Forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

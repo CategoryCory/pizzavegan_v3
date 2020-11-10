@@ -1,6 +1,10 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 from articles.models import ArticleSinglePage
+
+from contacts.forms import ContactUsForm
 
 
 def homepage_view(request):
@@ -19,3 +23,10 @@ class AboutView(TemplateView):
 
 class MeetTheEditorView(TemplateView):
     template_name = 'pages/meet-the-editor.html'
+
+
+class ContactUsView(SuccessMessageMixin, CreateView):
+    form_class = ContactUsForm
+    template_name = 'pages/contact.html'
+    success_url = reverse_lazy('pages:contact_us')
+    success_message = 'Thank you for contacting us! We will read your message and respond soon!'

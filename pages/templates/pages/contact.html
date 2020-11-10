@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} | Contact Us{% endblock title %}
+
+{% block content %}
+    <div class="page-banner">
+        <div class="container">
+            <h2 class="responsive-header text-white">Contact Us</h2>
+        </div>
+    </div>
+
+    <div class="container-fluid my-5 pb-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-7 col-xl-5">
+{#                {% include 'partials/_alerts.html' %}#}
+                <p class="lead">
+                    Do you have a message for the PizzaVegan.com staff? Fill out the form below!
+                </p>
+                <hr>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-outline-success btn-block mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
