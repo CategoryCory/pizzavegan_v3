@@ -87,7 +87,7 @@ nav.navbar {
 }
 
 /* HOMEPAGE STYLES */
-.homepage-banner {
+.page-banner {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
