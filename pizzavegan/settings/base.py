@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import environ
+from django.contrib.messages import constants as messages
 
 env = environ.Env()
 environ.Env.read_env()
@@ -203,3 +204,8 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 # Crispy Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
