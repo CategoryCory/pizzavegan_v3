@@ -4,7 +4,7 @@ from articles.models import ArticleSinglePage
 
 
 def homepage_view(request):
-    articles_list = ArticleSinglePage.objects.all().order_by('-first_published_at')[:6]
+    articles_list = ArticleSinglePage.objects.live().order_by('-first_published_at')[:6]
 
     context = {
         'articles_list': articles_list

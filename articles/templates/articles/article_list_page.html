@@ -13,16 +13,16 @@
                 <h1 class="font-italic">{{ page.title }}</h1>
                 <hr>
             </div>
-            {% for article in page.get_children %}
+            {% for article in article_pages %}
                 {% with article=article.specific %}
                     <article class="col-12 col-md-6 col-lg-4 d-flex flex-column mt-3 mb-5">
                         {% image article.specific.featured_image scale-100 class="articles-list-image rounded" %}
-                        <h4 class="articles-list-post-title mt-3">
+                        <h3 class="articles-list-post-title mt-3">
                             <a href="{% pageurl article %}" class="text-success">
                                 {{ article.title }}
                             </a>
-                        </h4>
-                        <p class="articles-list-post-meta mt-1">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>
+                        </h3>
+                        <p class="muted mt-1">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>
                         <p>{{ article.specific.subtitle }}</p>
                         <a href="{% pageurl article %}" class="btn btn-outline-success btn-block mt-auto">
                             Read More

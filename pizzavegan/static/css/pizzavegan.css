@@ -13,6 +13,13 @@ html {
 
 body {
     margin-bottom: 60px;
+    font-family: 'Nunito Sans', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.1rem;
+    color: #516470;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 }
 
 .responsive-header {
@@ -30,6 +37,10 @@ body {
 
 .primary-link:hover {
     color: var(--primary-color-hover);
+}
+
+.muted {
+    color: #7794A6;
 }
 
 .footer {
@@ -51,6 +62,7 @@ nav.navbar {
 
 .navbar-nav .nav-item {
     position: relative;
+    font-size: 1rem;
 }
 
 .navbar-nav .nav-item a.nav-link::before {
@@ -75,8 +87,19 @@ nav.navbar {
 }
 
 /* HOMEPAGE STYLES */
-
 .homepage-banner {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 5em 0;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+        url(../images/pizzavegan-banner.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+/* SIGNUP PAGE STYLES */
+.signup-banner {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,13 +111,13 @@ nav.navbar {
     background-position: center center;
 }
 
-.homepage-banner__textblock {
+.signup-banner__textblock {
     padding: 2em 1em;
     width: 85%;
     background-color: var(--primary-background-overlay);
 }
 
-.homepage-banner__button {
+.signup-banner__button {
     display: inline-block;
     width: 100%;
     margin: 0.5em 0;
@@ -106,7 +129,7 @@ nav.navbar {
     transition: background-color 200ms;
 }
 
-.homepage-banner__button:hover {
+.signup-banner__button:hover {
     background-color: var(--primary-color-hover);
     color: #ffffff;
     text-decoration: none;
@@ -114,27 +137,27 @@ nav.navbar {
 }
 
 @media screen and (min-width: 500px) {
-    .homepage-banner__button {
+    .signup-banner__button {
         width: auto;
         margin-right: 1em;
     }
 }
 
 @media screen and (min-width: 800px) {
-    .homepage-banner {
+    .signup-banner {
         width: 90%;
         margin: 0 auto 4em;
     }
 }
 
 @media screen and (min-width: 1000px) {
-    .homepage-banner {
+    .signup-banner {
         width: 80%;
         margin: 0 auto 6em;
         padding: 4em 0;
     }
 
-    .homepage-banner__textblock {
+    .signup-banner__textblock {
         width: 70%;
         padding: 2em 1.5em;
         transform: translate(30%, 30%);
@@ -142,11 +165,11 @@ nav.navbar {
 }
 
 @media screen and (min-width: 1440px) {
-    .homepage-banner {
+    .signup-banner {
         width: 60%;
     }
 
-    .homepage-banner__textblock {
+    .signup-banner__textblock {
         width: 60%;
         transform: translate(45%, 35%);
     }

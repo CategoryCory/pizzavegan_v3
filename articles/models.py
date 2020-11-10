@@ -14,6 +14,12 @@ class ArticleListPage(Page):
         FieldPanel('intro', classname='full'),
     ]
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        article_pages = self.get_children().live().order_by('-first_published_at')
+        context['article_pages'] = article_pages
+        return context
+
 
 class ArticleSinglePage(Page):
     subtitle = models.CharField(max_length=200, blank=True)
