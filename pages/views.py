@@ -1,10 +1,11 @@
 from django.views.generic import TemplateView, CreateView
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from articles.models import ArticleSinglePage
 
-from contacts.forms import ContactUsForm
+from contacts.forms import ContactUsForm, SurveyResponseForm
 
 
 def homepage_view(request):
@@ -30,3 +31,32 @@ class ContactUsView(SuccessMessageMixin, CreateView):
     template_name = 'pages/contact.html'
     success_url = reverse_lazy('pages:contact_us')
     success_message = 'Thank you for contacting us! We will read your message and respond soon!'
+
+
+def pizzavegan_signup_view(request):
+    if request.method == 'POST':
+        form = SurveyResponseForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Thank you for signing up! We will let you know when we officially launch!'
+            )
+            return redirect('pages:pizzavegan_signup')
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'There was a problem signing up. Please try again later.'
+            )
+            return redirect('pages:pizzavegan_signup')
+    else:
+        form = SurveyResponseForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'pages/pizzavegan-signup.html', context)

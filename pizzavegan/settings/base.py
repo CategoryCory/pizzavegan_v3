@@ -209,3 +209,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+# Google APIs
+MAPS_API_KEY = env('MAPS_API_KEY')
+GEOCODING_API_KEY = env('GEOCODING_API_KEY')
+DISTANCE_API_KEY = env('DISTANCE_API_KEY')
