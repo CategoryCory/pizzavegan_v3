@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} | Register{% endblock title %}
+
+{% block content %}
+<div class="container-fluid my-5 py-4 px-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-5 mb-4 pr-md-5">
+            <img src="{% static 'images/pizzavegan-pin.jpg' %}" alt="PizzaVegan Pin" class="img-fluid mb-4">
+            <h2 class="primary-text">Join PMQ's Second National Independent Pizzeria Promotion</h2>
+            <p class="lead">
+                Drive vegan consumers closer to your vegan pizza through this national vegan pizza promotion
+            </p>
+            <hr>
+            <p>
+                <em>PMQ Pizza Magazine</em> is launching PizzaVegan.com, a website community designed to bring more
+                attention to&mdash;and consumers closer to&mdash;vegan pizza through exclusive editorial content, a
+                product guide, recipes, a directory of independent pizzerias offering vegan pizza, and a kickoff
+                promotion during the month of November that begins on World Vegan Day, November 1! Through
+                PizzaVegan.com, vegan consumers will have an unprecedented opportunity to find vegan versions of
+                Americans' favorite food: pizza.
+            </p>
+            <h5 class="primary-text">Why Now?</h5>
+            <p>Vegan pizza has never been more popular than it is now. Here's a look at the numbers:</p>
+            <ul>
+                <li>
+                    60% of Americans have started to eat a more plant-based diet since the beginning of the pandemic,
+                    according to a recent poll of 2,000 adults by OnePoll. Respondents cited health as the No. 1 reason
+                    for this change, but they also cited a desire to consume less animal products and lead a more
+                    sustainable lifestyle. The same poll revealed that 39% of people ages 18 to 25, and 23% of people
+                    ages 26 to 41, already exclude animal products from their diets.
+                </li>
+                <li>
+                    ADM reports that 44% of U.S. consumers identify as flexitarians--those who eat a mostly vegetarian
+                    diet, with occasional servings of meat.
+                </li>
+                <li>
+                    The average American eats four meat-free meals per week, and 50% of Americans are trying to
+                    incorporate more plant-based meals in their daily lives.
+                </li>
+                <li>
+                    25% of customers are looking for vegan pizza options, but only 25% of pizzerias are offering them.
+                </li>
+                <li>
+                    In 2019, plant-based food sales had increased by 31% over the last two years, according to the
+                    Plant Based Foods Association.
+                </li>
+                <li>
+                    Plant-based options are the fastest growing section on pizza menus today, notes trends expert
+                    Daniel Levine of the Avant-Guide Institute in New York City.
+                </li>
+            </ul>
+            <h5 class="primary-text">How It Works</h5>
+            <p>As a participating pizzeria:</p>
+            <ul>
+                <li>
+                    Provide a link to your online ordering (through the Facebook-based service Tap The Table or your
+                    own ordering link), an image, and a description of your vegan pizza offering.
+                </li>
+                <li>
+                    Display point-of-sale elements, such as a window cling, box topper, table tent, door hanger and
+                    social media graphics, from November 1 to December 1, 2020. These materials are provided by PMQ
+                    Pizza Magazine upon registration.
+                </li>
+                <li>
+                    Maintain the inventory needed for your vegan pizza throughout the month of November!
+                </li>
+            </ul>
+            <p>PMQ will:</p>
+            <ul>
+                <li>Provide a promotional artwork kit that can be customized with your pizzeria's brand.</li>
+                <li>List your pizzeria in the PizzaVegan.com directory.</li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-10 col-lg-5">
+            {% include 'partials/_alerts.html' %}
+            <p>
+                <strong>If you have a Facebook page</strong> and would like to sign up through Facebook Messenger,
+                click the button below!
+            </p>
+            <a href="https://m.me/PMQPizzaMag?ref=Sign-Up" class="btn btn-outline-success btn-block">
+                Click Here to Sign Up
+            </a>
+            <hr class="my-4">
+            <p class="text-muted">
+                <strong>If you do not have Facebook available right now,</strong> just fill in the form below.
+            </p>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <p class="text-small text-muted">
+                    In order to participate, you must be a subscriber to PMQ Pizza Magazine. If you are not,
+                    please <a href="https://www.pmq.com/Subscribe-PMQ/" class="primary-link">click here</a> to fill
+                    out the subscription form.
+                </p>
+                <button type="submit" class="btn btn-outline-success btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

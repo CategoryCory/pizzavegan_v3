@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from articles.models import ArticleSinglePage
 
-from contacts.forms import ContactUsForm, SurveyResponseForm
+from contacts.forms import ContactUsForm, SurveyResponseForm, PizzeriaSignupResponseForm
 
 
 def homepage_view(request):
@@ -31,6 +31,14 @@ class ContactUsView(SuccessMessageMixin, CreateView):
     template_name = 'pages/contact.html'
     success_url = reverse_lazy('pages:contact_us')
     success_message = 'Thank you for contacting us! We will read your message and respond soon!'
+
+
+class RegisterPizzeriaView(SuccessMessageMixin, CreateView):
+    form_class = PizzeriaSignupResponseForm
+    template_name = 'pages/register-pizzeria.html'
+    success_url = reverse_lazy('pages:register_pizzeria')
+    success_message = 'Your submission has been received! You will receive an email confirmation with additional ' \
+                      'information and steps.'
 
 
 def pizzavegan_signup_view(request):
