@@ -20,12 +20,12 @@
                         <p>{{ pizzeria.menu_description }}</p>
                         {% if pizzeria.facebook_page %}
                         <p>
-                            Find {{ pizzeria.restaurant_name }} <a href="#" class="text-success">on Facebook!</a>
+                            Find {{ pizzeria.restaurant_name }} <a href="{{ pizzeria.facebook_page }}" class="text-success">on Facebook!</a>
                         </p>
                         {% endif %}
                         {% if pizzeria.online_ordering_link %}
                         <p>
-                            <a href="#" class="text-success">Order a pizza</a> from {{ pizzeria.restaurant_name }}!
+                            <a href="{{ pizzeria.online_ordering_link }}" class="text-success">Order a pizza</a> from {{ pizzeria.restaurant_name }}!
                         </p>
                         {% endif %}
                     </div>
