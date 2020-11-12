@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'contacts.apps.ContactsConfig',
     'articles.apps.ArticlesConfig',
+    'recipes.apps.RecipesConfig',
     'search',
     'users.apps.UsersConfig',
 
