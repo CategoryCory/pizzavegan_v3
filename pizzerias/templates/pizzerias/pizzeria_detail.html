@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <main class="container-fluid my-5 px-5">
+        <div class="row justify-content-center">
+            <article class="col-10 col-md-7 col-lg-5">
+                {% if pizzeria.pizza_photo %}
+                    <div class="article-header-image mb-4 shadow">
+                        <img src="{{ pizzeria.pizza_photo.url }}" class="rounded" />
+                    </div>
+                {% endif %}
+                <div class="article-title mb-4 border-bottom">
+                    <h2 class="text-success display-4 font-weight-bold">{{ pizzeria.restaurant_name }}</h2>
+                    <p class="lead h5">{{ pizzeria.vegan_pizza_type }}</p>
+                </div>
+                <div class="article-body">
+                    <div class="my-3">
+                        <p>{{ pizzeria.menu_description }}</p>
+                        {% if pizzeria.facebook_page %}
+                        <p>
+                            Find {{ pizzeria.restaurant_name }} <a href="#" class="text-success">on Facebook!</a>
+                        </p>
+                        {% endif %}
+                        {% if pizzeria.online_ordering_link %}
+                        <p>
+                            <a href="#" class="text-success">Order a pizza</a> from {{ pizzeria.restaurant_name }}!
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="pizzeria-map"></div>
+            </article>
+        </div>
+    </main>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    function initMap() {
+        const pizzeriaLatitude = {{ pizzeria.latitude }};
+        const pizzeriaLongitude = {{ pizzeria.longitude }};
+        const pizzeriaName = "{{ pizzeria.restaurant_name }}";
+
+        const listingPosition = { lat: pizzeriaLatitude, lng: pizzeriaLongitude };
+        const mapCenter = listingPosition;
+
+        const mapDiv = document.getElementById('pizzeria-map');
+        const mapOptions = {
+            zoom: 13,
+            center: mapCenter
+        };
+        const map = new google.maps.Map(mapDiv, mapOptions);
+
+        const pizzeriaMarker = new google.maps.Marker({
+            position: listingPosition,
+            map: map,
+            title: pizzeriaName
+        });
+    }
+</script>
+<script
+    defer
+    src="https://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}&callback=initMap">
+</script>
+{% endblock extra_js %}
