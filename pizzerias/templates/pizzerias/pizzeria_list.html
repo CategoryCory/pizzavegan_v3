@@ -38,11 +38,10 @@
                             </h4>
                             <p>{{ pizzeria.vegan_pizza_type }}</p>
                             {% if pizzeria.dist_from_source %}
-                                <p>Distance from {{ search_zip }}: {{ pizzeria.dist_from_source }} miles</p>
+                                <p class="muted">
+                                    Distance from {{ search_zip }}: {{ pizzeria.dist_from_source }} miles
+                                </p>
                             {% endif %}
-                            <a href="{% url 'pizzerias:pizzeria_detail' pizzeria.id %}" class="btn btn-outline-success btn-block mt-auto">
-                                View Page
-                            </a>
                         </div>
                     </div>
                 {% empty %}
