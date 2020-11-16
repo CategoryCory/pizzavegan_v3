@@ -199,16 +199,20 @@ nav.navbar {
 }
 
 .pizzeria-card {
-    margin: 0 1rem;
-    padding: 0 0 1.25rem;
     background-color: #ffffff;
-    border-radius: 5px;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.pizzeria-card img {
+    box-shadow: 0 -2px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .pizzeria-card__body {
-    padding: 0 1rem;
+    padding: 1rem;
+    border: 1px solid #eaeaea;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 #pizzeria-map,
