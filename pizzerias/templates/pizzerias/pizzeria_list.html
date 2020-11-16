@@ -12,8 +12,13 @@
         <div class="col-12 col-lg-7">
             <h1 class="font-italic">Vegan Pizzerias</h1>
             <hr>
+            {% if closest_pizzeria_dist %}
+                <div class="container-fluid d-flex align-items-center bg-light rounded p-4">
+                    <p class="m-0">The nearest vegan pizzeria from your location is {{ closest_pizzeria_dist }} miles.</p>
+                </div>
+            {% endif %}
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
-                {% for pizzeria in pizzeriasignupresponse_list %}
+                {% for pizzeria in pizzeria_list %}
                     <div
                         class="col-12 col-md-6 col-lg-4 d-flex flex-column mt-3 mb-5 pizzeria-card"
                         data-lat="{{ pizzeria.latitude }}"
@@ -32,6 +37,9 @@
                                 </a>
                             </h4>
                             <p>{{ pizzeria.vegan_pizza_type }}</p>
+                            {% if pizzeria.dist_from_source %}
+                                <p>Distance from {{ search_zip }}: {{ pizzeria.dist_from_source }} miles</p>
+                            {% endif %}
                             <a href="{% url 'pizzerias:pizzeria_detail' pizzeria.id %}" class="btn btn-outline-success btn-block mt-auto">
                                 View Page
                             </a>
