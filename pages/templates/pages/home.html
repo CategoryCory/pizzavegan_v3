@@ -31,16 +31,35 @@
     </div>
 </div>
 
-<div class="container-fluid bg-dark d-flex justify-content-center align-items-center py-5">
-    <form action="{% url 'pizzerias:pizzeria_list' %}" class="form-inline">
+<div class="container-fluid bg-dark d-flex flex-column justify-content-center align-items-center py-5">
+    <form action="{% url 'pizzerias:pizzeria_list' %}" id="searchZipCodeForm" class="form-inline">
         <div class="form-group">
             <label for="searchZipCode" class="text-light mx-sm-3">
                 Enter your ZIP code to find vegan pizza near you!
             </label>
             <input type="text" id="searchZipCode" class="form-control mx-sm-3" name="zip" placeholder="ZIP Code">
-            <button type="submit" class="btn btn-success">Search</button>
+            <button type="submit" id="searchZipCodeButton" class="btn btn-success">Search</button>
         </div>
     </form>
+    <p class="search-form-error hidden">Please enter a valid ZIP code.</p>
 </div>
 
 {% endblock content %}
+
+{% block extra_js %}
+    <script>
+        const zipCodeSearchForm = document.getElementById('searchZipCodeForm');
+        const zipCodeSearchButton = document.getElementById('searchZipCodeButton');
+        const zipCodeSearchError = document.querySelector('.search-form-error');
+
+        zipCodeSearchButton.addEventListener('click', function(e) {
+            const zipCodeInput = document.getElementById('searchZipCode').value;
+            const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCodeInput);
+
+            if (!isValidZip) {
+                e.preventDefault();
+                zipCodeSearchError.classList.add('show');
+            }
+        });
+    </script>
+{% endblock extra_js %}
