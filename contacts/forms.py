@@ -47,9 +47,10 @@ class SurveyResponseForm(forms.ModelForm):
         model = SurveyResponse
         fields = ('email', 'pizza_description', )
         labels = {
-            'email': _('If you\'d like to get a notification for our launch party, drop your email below:'),
+            'email': _('If you\'d like to get updates from PizzaVegan.com, drop your email below:'),
             'pizza_description': _('Also, if there is a vegan pizza you\'d like to recommend or boast about, '
-                                   'feel free to share it with us! Maybe it\'ll get featured in a future promotion!'),
+                                   'feel free to share it with us! Maybe it\'ll get featured in a future article on '
+                                   'PizzaVegan.com!'),
         }
         widgets = {
             'pizza_description': forms.Textarea(attrs={'rows': 3})

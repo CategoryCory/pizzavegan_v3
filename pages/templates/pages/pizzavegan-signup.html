@@ -16,7 +16,7 @@
         <hr>
         <p class="lead">Are you a...</p>
         <button type="button" class="signup-banner__button" data-toggle="modal" data-target="#emailSignup">
-            Vegan That Loves Pizza
+            Vegan Who Loves Pizza
         </button>
         <a href="{% url 'pages:register_pizzeria' %}" class="signup-banner__button">Pizzeria Owner</a>
     </div>
@@ -33,8 +33,7 @@
             </div>
             <div class="modal-body p-5">
                 <p>
-                    <strong>Are you vegan and obsessed with pizza?</strong> This will soon be the place for
-                    you! Visit us on our opening day, World Vegan Day, November 1!
+                    <strong>Are you vegan and obsessed with pizza?</strong> This is the place for you!
                 </p>
                 <form method="post">
                     {% csrf_token %}
