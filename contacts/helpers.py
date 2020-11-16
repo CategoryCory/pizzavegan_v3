@@ -13,6 +13,6 @@ def geocode_address(street_addr, city, state):
 def geocode_zip(zipcode):
     gmaps_key = settings.GEOCODING_API_KEY
     gmaps = googlemaps.Client(key=gmaps_key)
-    result = gmaps.geocode(f'{zipcode}')
+    result = gmaps.geocode(zipcode)
     lat_lng = {'lat': result[0]['geometry']['location']['lat'], 'lng': result[0]['geometry']['location']['lng']}
     return lat_lng

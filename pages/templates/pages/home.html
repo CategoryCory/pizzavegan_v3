@@ -31,4 +31,16 @@
     </div>
 </div>
 
+<div class="container-fluid bg-dark d-flex justify-content-center align-items-center py-5">
+    <form action="{% url 'pizzerias:pizzeria_list' %}" class="form-inline">
+        <div class="form-group">
+            <label for="searchZipCode" class="text-light mx-sm-3">
+                Enter your ZIP code to find vegan pizza near you!
+            </label>
+            <input type="text" id="searchZipCode" class="form-control mx-sm-3" name="zip" placeholder="ZIP Code">
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </form>
+</div>
+
 {% endblock content %}
