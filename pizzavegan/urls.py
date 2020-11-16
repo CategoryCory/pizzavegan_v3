@@ -11,7 +11,7 @@ from search import views as search_views
 urlpatterns = [
     path('', include('pages.urls')),
     path('pizzerias/', include('pizzerias.urls')),
-    path('django-admin/', admin.site.urls),
+    path('site-admin/', admin.site.urls),
     path('admin/', include(wagtailadmin_urls)),
     path('accounts/', include('allauth.urls')),
     path('documents/', include(wagtaildocs_urls)),

@@ -1,0 +1,21 @@
+#header {
+    background: #292b2c;
+}
+
+#head img {
+    margin-right: 1.5rem;
+}
+
+#container .breadcrumbs,
+.module caption,
+input[type="submit"].default {
+    background-color: #5cb85c;
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+    background-color: #82de82;
+}
