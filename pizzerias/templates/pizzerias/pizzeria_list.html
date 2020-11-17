@@ -41,7 +41,6 @@
                         data-lng="{{ pizzeria.longitude }}"
                         data-title="{{ pizzeria.restaurant_name }}"
                         data-link="{% url 'pizzerias:pizzeria_detail' pizzeria.id %}"
-                        data-image="{{ pizzeria.pizza_photo.url }}"
                     >
                         {% if pizzeria.pizza_photo %}
                             <img src="{{ pizzeria.pizza_photo.url }}" alt="{{ pizzeria.restaurant_name }}" class="articles-list-image rounded" />
