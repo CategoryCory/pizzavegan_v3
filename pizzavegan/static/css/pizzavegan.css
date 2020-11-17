@@ -234,6 +234,18 @@ nav.navbar {
     height: 500px;
 }
 
+.infowindow {
+    padding: 0.7rem 1rem;
+}
+
+.infowindow-link {
+    font-size: 1.25em;
+}
+
+.infowindow-image {
+    width: 150px;
+}
+
 .sticky-offset {
     top: 7.5rem;
 }

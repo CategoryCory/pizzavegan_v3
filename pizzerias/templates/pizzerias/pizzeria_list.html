@@ -40,6 +40,8 @@
                         data-lat="{{ pizzeria.latitude }}"
                         data-lng="{{ pizzeria.longitude }}"
                         data-title="{{ pizzeria.restaurant_name }}"
+                        data-link="{% url 'pizzerias:pizzeria_detail' pizzeria.id %}"
+                        data-image="{{ pizzeria.pizza_photo.url }}"
                     >
                         {% if pizzeria.pizza_photo %}
                             <img src="{{ pizzeria.pizza_photo.url }}" alt="{{ pizzeria.restaurant_name }}" class="articles-list-image rounded" />
@@ -87,12 +89,27 @@
         pizzerias.forEach((pizzeria, indx) => {
             const pizzeriaPosition = { lat: parseFloat(pizzeria.dataset.lat), lng: parseFloat(pizzeria.dataset.lng) };
             const title = pizzeria.dataset.title;
+            const pizzeriaLink = pizzeria.dataset.link;
+            const pizzeriaImage = pizzeria.dataset.image;
+
+            const infoWindowText =
+                `<div class="infowindow">` +
+                `<a href="${pizzeriaLink}" class="primary-link infowindow-link">${title}</a>` +
+                `</div>`;
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: infoWindowText
+            });
 
             const pizzeriaMarker = new google.maps.Marker({
                 position: pizzeriaPosition,
                 map: map,
                 title: title
             });
+
+            pizzeriaMarker.addListener("click", () => {
+                infoWindow.open(map, pizzeriaMarker);
+            })
 
             markerArray.push(pizzeriaMarker);
         });
