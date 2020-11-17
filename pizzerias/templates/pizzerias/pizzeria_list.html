@@ -12,11 +12,27 @@
         <div class="col-12 col-lg-7">
             <h1 class="font-italic">Vegan Pizzerias</h1>
             <hr>
-            {% if closest_pizzeria_dist %}
-                <div class="container-fluid d-flex align-items-center bg-light rounded p-4">
-                    <p class="m-0">The nearest vegan pizzeria from your location is {{ closest_pizzeria_dist }} miles.</p>
-                </div>
-            {% endif %}
+            <div class="container-fluid d-flex flex-column bg-dark rounded p-4">
+                {% if closest_pizzeria_dist %}
+                    <p class="mb-4 text-light">
+                        The nearest vegan pizzeria from your location is
+                        <span class="font-weight-bold">{{ closest_pizzeria_dist }} miles.</span>
+                    </p>
+                {% endif %}
+                <form action="{% url 'pizzerias:pizzeria_list' %}" id="searchZipCodeForm" class="form-inline">
+                    <div class="form-group">
+                        <label for="searchZipCode" class="text-light mr-sm-3">
+                            Enter your ZIP code to find vegan pizza near you!
+                        </label>
+                        <input type="text" id="searchZipCode" class="form-control mx-sm-3" name="zip" placeholder="ZIP Code">
+                        <button type="submit" id="searchZipCodeButton" class="btn btn-success">Search</button>
+                    </div>
+                </form>
+                <p class="search-form-error hidden">Please enter a valid ZIP code.</p>
+                {% if error %}
+                    <p class="search-form-error">{{ error }}</p>
+                {% endif %}
+            </div>
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
                 {% for pizzeria in pizzeria_list %}
                     <div
@@ -56,11 +72,11 @@
 {% block extra_js %}
 <script>
     function initMap() {
-        const usCenter = { lat: 39.8283, lng: -98.5795 };
+        const center = { lat: {{ map_center.lat }}, lng: {{ map_center.lng }} };
         const mapDiv = document.getElementById("pizzeria-list-map");
         const mapOptions = {
             zoom: 4,
-            center: usCenter
+            center: center
         };
 
         const map = new google.maps.Map(mapDiv, mapOptions);
@@ -81,6 +97,15 @@
             markerArray.push(pizzeriaMarker);
         });
 
+        // Add marker for search location if not default value and set zoom level
+        if (center['lat'] != 39.8283 && center['lng'] != -98.5795) {
+            const searchLocationMarker = new google.maps.Marker({
+                position: center,
+                map: map,
+                title: "Your search location"
+            });
+        }
+
         const clusterImagePath = "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m";
 
         const markerClusterer = new MarkerClusterer(map, markerArray, { imagePath: clusterImagePath });
@@ -91,4 +116,19 @@
     src="https://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}&callback=initMap">
 </script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script>
+    const zipCodeSearchForm = document.getElementById('searchZipCodeForm');
+    const zipCodeSearchButton = document.getElementById('searchZipCodeButton');
+    const zipCodeSearchError = document.querySelector('.search-form-error');
+
+    zipCodeSearchButton.addEventListener('click', function(e) {
+        const zipCodeInput = document.getElementById('searchZipCode').value;
+        const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCodeInput);
+
+        if (!isValidZip) {
+            e.preventDefault();
+            zipCodeSearchError.classList.add('show');
+        }
+    });
+</script>
 {% endblock extra_js %}
