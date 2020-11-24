@@ -22,6 +22,7 @@ class RecipeListPage(Page):
 
 
 class RecipeSinglePage(Page):
+    provided_by = models.CharField(max_length=200, blank=True)
     body = RichTextField(features=[
         'bold',
         'italic',
@@ -50,6 +51,7 @@ class RecipeSinglePage(Page):
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('provided_by'),
         FieldPanel('body', classname='full'),
         ImageChooserPanel('featured_image'),
     ]
