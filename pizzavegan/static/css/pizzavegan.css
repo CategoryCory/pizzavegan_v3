@@ -112,6 +112,15 @@ nav.navbar {
     font-weight: bold;
 }
 
+.leaderboard-ad {
+    display: flex;
+    justify-content: center;
+}
+
+.leaderboard-ad img {
+    max-width: 100%;
+}
+
 /* SIGNUP PAGE STYLES */
 .signup-banner {
     display: flex;

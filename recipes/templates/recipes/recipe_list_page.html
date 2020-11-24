@@ -23,6 +23,9 @@
                             </a>
                         </h3>
                         <p class="muted mt-1">Posted on {{ recipe.first_published_at|date:'F j, Y' }}</p>
+                        {% if recipe.provided_by %}
+                            <p>Provided by {{ recipe.provided_by }}</p>
+                        {% endif %}
                         <a href="{% pageurl recipe %}" class="btn btn-outline-success btn-block mt-auto">
                             Read More
                         </a>

@@ -15,7 +15,12 @@
                 </div>
                 <div class="article-title mb-4 border-bottom">
                     <h2 class="text-success display-4 font-weight-bold">{{ page.title }}</h2>
-                    <p class="muted">Posted on {{ page.first_published_at|date:'F j, Y' }}</p>
+                    <p class="muted">
+                        Posted on {{ page.first_published_at|date:'F j, Y' }}
+                    </p>
+                    {% if page.provided_by %}
+                        <p class="muted mt-0">Provided by {{ page.provided_by }}</p>
+                    {% endif %}
                 </div>
                 <div class="article-body">
                     <div class="my-3">
