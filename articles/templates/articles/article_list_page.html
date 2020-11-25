@@ -16,7 +16,7 @@
             {% for article in article_pages %}
                 {% with article=article.specific %}
                     <article class="col-12 col-md-6 col-lg-4 d-flex flex-column mt-3 mb-5">
-                        {% image article.specific.featured_image scale-100 class="articles-list-image rounded" %}
+                        {% image article.specific.featured_image fill-500x250-c50 class="articles-list-image rounded" %}
                         <h3 class="articles-list-post-title mt-3">
                             <a href="{% pageurl article %}" class="text-success">
                                 {{ article.title }}
