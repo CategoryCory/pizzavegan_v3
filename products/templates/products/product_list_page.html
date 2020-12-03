@@ -4,7 +4,7 @@
 
 {% block title %} | {{ self.title }}{% endblock title %}
 
-{% block body_class %}template-articlelistpage{% endblock %}
+{% block body_class %}template-productlistpage{% endblock %}
 
 {% block content %}
     <main class="container my-5 px-5">
@@ -13,25 +13,25 @@
                 <h1 class="font-italic">{{ page.title }}</h1>
                 <hr>
             </div>
-            {% for article in article_pages %}
-                {% with article=article.specific %}
+            {% for product in product_pages %}
+                {% with product=product.specific %}
                     <article class="col-12 col-md-6 col-lg-4 d-flex flex-column mt-3 mb-5">
-                        {% image article.featured_image fill-500x250-c50 class="articles-list-image rounded" %}
+                        {% image product.featured_image fill-500x250-c50 class="articles-list-image rounded" %}
                         <h3 class="articles-list-post-title mt-3">
-                            <a href="{% pageurl article %}" class="text-success">
-                                {{ article.title }}
+                            <a href="{% pageurl product %}" class="text-success">
+                                {{ product.title }}
                             </a>
                         </h3>
-                        <p class="muted mt-1">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>
-                        <p>{{ article.subtitle }}</p>
-                        <a href="{% pageurl article %}" class="btn btn-outline-success btn-block mt-auto">
+                        <p class="muted mt-1">Posted on {{ product.first_published_at|date:'F j, Y' }}</p>
+                        <p>{{ product.subtitle }}</p>
+                        <a href="{% pageurl product %}" class="btn btn-outline-success btn-block mt-auto">
                             Read More
                         </a>
                     </article>
                 {% endwith %}
             {% empty %}
-                <p>Sorry, there are no articles at this time.</p>
+                <p>Sorry, there are no products at this time.</p>
             {% endfor %}
         </div>
     </main>
-{% endblock %}
+{% endblock content %}

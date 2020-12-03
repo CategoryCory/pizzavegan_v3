@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'contacts.apps.ContactsConfig',
     'articles.apps.ArticlesConfig',
     'recipes.apps.RecipesConfig',
+    'products.apps.ProductsConfig',
     'pizzerias.apps.PizzeriasConfig',
     'search',
     'users.apps.UsersConfig',
