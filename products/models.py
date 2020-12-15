@@ -1,10 +1,13 @@
 from django.db import models
+from django import forms
 
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 
 
 class ProductListPage(Page):
@@ -41,6 +44,7 @@ class ProductSinglePage(Page):
         'embed',
     ])
     is_featured = models.BooleanField(default=False)
+    categories = ParentalManyToManyField('products.ProductCategory', blank=True)
     related_link = models.URLField(blank=True)
     featured_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -59,6 +63,25 @@ class ProductSinglePage(Page):
         FieldPanel('subtitle'),
         FieldPanel('body', classname='full'),
         FieldPanel('is_featured'),
+        FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         FieldPanel('related_link'),
         ImageChooserPanel('featured_image'),
     ]
+
+
+@register_snippet
+class ProductCategory(models.Model):
+    name = models.CharField(max_length=150)
+    slug = models.SlugField(max_length=150, unique=True)
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('slug'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
