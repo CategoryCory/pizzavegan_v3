@@ -17,7 +17,9 @@ class ProductListPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         product_pages = self.get_children().live().order_by('-first_published_at')
-        context['product_pages'] = product_pages
+        featured_products = [pg for pg in product_pages if pg.specific.is_featured is True]
+        regular_products = [pg for pg in product_pages if pg.specific.is_featured is False]
+        context['product_pages'] = featured_products + regular_products
         return context
 
 
