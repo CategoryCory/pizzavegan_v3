@@ -38,6 +38,7 @@ class ProductSinglePage(Page):
         'image',
         'embed',
     ])
+    is_featured = models.BooleanField(default=False)
     related_link = models.URLField(blank=True)
     featured_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -55,6 +56,7 @@ class ProductSinglePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('subtitle'),
         FieldPanel('body', classname='full'),
+        FieldPanel('is_featured'),
         FieldPanel('related_link'),
         ImageChooserPanel('featured_image'),
     ]
