@@ -63,8 +63,24 @@
                     <li class="nav-item ml-3">
                         <a href="/recipes/" class="nav-item nav-link">Recipes</a>
                     </li>
-                    <li class="nav-item ml-3">
-                        <a href="/products/" class="nav-item nav-link">Products</a>
+                    <li class="nav-item dropdown ml-3">
+                        <a
+                            href="#"
+                            id="navbarDropdown"
+                            class="nav-item nav-link dropdown-toggle"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                                Products
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="/products/" class="dropdown-item">All Products</a>
+                            <a href="/products/category/egg-dairy-alternatives/" class="dropdown-item">Egg & Dairy Alternatives</a>
+                            <a href="/products/category/meat-alternatives/" class="dropdown-item">Meat Alternatives</a>
+                            <a href="/products/category/snacks-and-staples/" class="dropdown-item">Snacks & Staples</a>
+                            <a href="/products/category/beverages/" class="dropdown-item">Beverages</a>
+                        </div>
                     </li>
                     <li class="nav-item ml-3">
                         <a href="{% url 'pages:pizzavegan_signup' %}" class="nav-item nav-link">Sign Up</a>
