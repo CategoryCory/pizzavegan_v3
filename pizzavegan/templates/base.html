@@ -10,15 +10,12 @@
 
         {# Global stylesheets #}
         <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-              integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-              crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Nunito+Sans:wght@200;400;900&display=swap"
-              rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;800&family=Lora:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.20/dist/shoelace/shoelace.css">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/pizzavegan.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bundle.css' %}">
+        <script src="{% static 'js/bundle.js' %}" defer></script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S2FHHP8C4"></script>
@@ -38,86 +35,72 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-5">
-            <a class="navbar-brand" href="{% url 'pages:home' %}">
-                <img src="{% static 'images/pizzavegan-color-small.png' %}" alt="PizzaVerse Logo" loading="lazy">
+        <header class="site-header">
+            <a href="{% url 'pages:home' %}" class="site-header__branding">
+                <img src="{% static 'images/pizzavegan-color-small.png' %}" alt="PizzaVegan Logo" loading="lazy">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item ml-3">
-                        <a href="{% url 'pages:about' %}" class="nav-item nav-link">Why PizzaVegan?</a>
+            <nav class="site-header__nav">
+                <ul class="site-header__navcontainer">
+                    <li class="site-header__navitem">
+                        <a href="{% url 'pages:about' %}" class="site-header__navlink">Why PizzaVegan?</a>
                     </li>
-                    <li class="nav-item ml-3">
-                        <a href="{% url 'pages:meet_the_editor' %}" class="nav-item nav-link">Meet the Editor</a>
+                    <li class="site-header__navitem">
+                        <a href="{% url 'pages:meet_the_editor' %}" class="site-header__navlink">Meet the Editor</a>
                     </li>
-                    <li class="nav-item ml-3">
-                        <a href="{% url 'pizzerias:pizzeria_list' %}" class="nav-item nav-link">Find Vegan Pizza</a>
+                    <li class="site-header__navitem">
+                        <a href="{% url 'pizzerias:pizzeria_list' %}" class="site-header__navlink">Find Vegan Pizza</a>
                     </li>
-                    <li class="nav-item ml-3">
-                        <a href="/articles/" class="nav-item nav-link">Articles</a>
+                    <li class="site-header__navitem">
+                        <a href="/articles/" class="site-header__navlink">Articles</a>
                     </li>
-                    <li class="nav-item ml-3">
-                        <a href="/recipes/" class="nav-item nav-link">Recipes</a>
+                    <li class="site-header__navitem">
+                        <a href="/recipes/" class="site-header__navlink">Recipes</a>
                     </li>
-                    <li class="nav-item dropdown ml-3">
+                    <li class="site-header__navitem">
                         <a
                             href="#"
                             id="navbarDropdown"
-                            class="nav-item nav-link dropdown-toggle"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                                Products
+                            class="site-header__navlink"
+                        >
+                            Products
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a href="/products/" class="dropdown-item">All Products</a>
-                            <a href="/products/category/egg-dairy-alternatives/" class="dropdown-item">Egg & Dairy Alternatives</a>
-                            <a href="/products/category/meat-alternatives/" class="dropdown-item">Meat Alternatives</a>
-                            <a href="/products/category/snacks-and-staples/" class="dropdown-item">Snacks & Staples</a>
-                            <a href="/products/category/beverages/" class="dropdown-item">Beverages</a>
-                        </div>
+                        <ul class="site-header__dropdown">
+                            <li><a href="/products/">All Products</a></li>
+                            <li><a href="/products/category/egg-dairy-alternatives/">Egg & Dairy Alternatives</a></li>
+                            <li><a href="/products/category/meat-alternatives/">Meat Alternatives</a></li>
+                            <li><a href="/products/category/snacks-and-staples/">Snacks & Staples</a></li>
+                            <li><a href="/products/category/beverages/">Beverages</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item ml-3">
-                        <a href="{% url 'pages:pizzavegan_signup' %}" class="nav-item nav-link">Sign Up</a>
+                    <li class="site-header__navitem">
+                        <a href="{% url 'pages:pizzavegan_signup' %}" class="site-header__navlink">Sign Up</a>
                     </li>
-                    <li class="nav-item ml-3">
-                        <a href="{% url 'pages:contact_us' %}" class="nav-item nav-link">Contact Us</a>
+                    <li class="site-header__navitem">
+                        <a href="{% url 'pages:contact_us' %}" class="site-header__navlink">Contact Us</a>
                     </li>
                 </ul>
+            </nav>
+            <div class="site-header__menu-btn">
+                <div class="site-header__hamburger"></div>
             </div>
-        </nav>
+        </header>
 
         {% block content %}{% endblock %}
 
-        <footer class="footer">
-            <div class="container">
-                <span class="text-muted">
-                    Copyright &copy; <a href="https://www.pmq.com" class="primary-link">PMQ Pizza Magazine</a>
-                </span>
-            </div>
-        </footer>
+{#        <footer class="footer">#}
+{#            <div class="container">#}
+{#                <span class="text-muted">#}
+{#                    Copyright &copy; <a href="https://www.pmq.com" class="primary-link">PMQ Pizza Magazine</a>#}
+{#                </span>#}
+{#            </div>#}
+{#        </footer>#}
 
         {# Global javascript #}
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-                crossorigin="anonymous"></script>
         <script type="module"
                 src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.20/dist/shoelace/shoelace.esm.js">
         </script>
         <script src="https://cdn.broadstreetads.com/init-2.min.js"></script>
         <script>broadstreet.watch({ networkId: 6069 })</script>
-        <script type="text/javascript" src="{% static 'js/pizzavegan.js' %}"></script>
         <script src="https://js.adsrvr.org/up_loader.1.1.0.js" type="text/javascript"></script>
         <script type="text/javascript">
             ttd_dom_ready( function() {
@@ -127,7 +110,6 @@
                 }
             });
         </script>
-
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

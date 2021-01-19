@@ -13,13 +13,13 @@ html {
 
 body {
     margin-bottom: 60px;
-    font-family: 'Nunito Sans', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-    font-size: 1.1rem;
+    /*font-family: 'Nunito Sans', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;*/
+    /*font-size: 1.1rem;*/
     color: #516470;
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    /*font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;*/
 }
 
 .responsive-header {
@@ -43,6 +43,11 @@ h1, h2, h3, h4 {
     color: #7794A6;
 }
 
+.card a {
+    color: hsla(0, 0%, 0%, 0.8);
+    text-decoration: none;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -61,37 +66,9 @@ h1, h2, h3, h4 {
 }
 
 /* NAVBAR STYLES */
-nav.navbar {
-    position: sticky;
-    top: 0;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-}
-
-.navbar-nav .nav-item {
-    position: relative;
-    font-size: 1rem;
-}
-
-.navbar-nav .nav-item a.nav-link::before {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 50%;
-    width: 90%;
-    height: 3px;
-    background-color: var(--primary-color);
-    transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
-    transition: transform 200ms ease-in-out;
-}
-
-.navbar-nav .nav-item a.nav-link:hover::before {
-    transform: translateX(-50%) scaleX(1);
-}
-
-.navbar-nav .nav-item a.nav-link:hover {
-    color: var(--primary-color);
+.site-header a {
+    text-decoration: none;
+    color: hsla(0, 0%, 0%, 0.8);
 }
 
 /* HOMEPAGE STYLES */

@@ -1,35 +1,39 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block title %} | {{ self.title }}{% endblock title %}
 
 {% block body_class %}template-recipelistpage{% endblock %}
 
 {% block content %}
-    <main class="container my-5 px-5">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="font-italic">{{ page.title }}</h1>
-                <hr>
-            </div>
+    <div class="page-heading">
+        <img src="{% static 'images/pizza-slice.png' %}" class="page-heading__image" alt="PizzaVegan Slice Logo">
+        <h2 class="page-heading__title">Vegan Recipes</h2>
+        <p class="page-heading__subtitle">
+            If you equate eating vegan with sacrifice, think again! From flavor-packed savory sauces and toppings to
+            artfully crafted specialty pizzas, these recipes are designed to get the creative juices flowing—and mouths
+            watering. Thumb through our selection of vegan sides, mains and add-ons for endless inspiration.
+        </p>
+    </div>
+    <main>
+        <div class="post-grid">
             {% for recipe in recipe_pages %}
                 {% with recipe=recipe.specific %}
-                    <article class="col-12 col-md-6 col-lg-4 d-flex flex-column mt-3 mb-5">
-                        {% image recipe.featured_image fill-500x250-c50 class="articles-list-image rounded" %}
-                        <h3 class="articles-list-post-title mt-3">
-                            <a href="{% pageurl recipe %}" class="text-success">
-                                {{ recipe.title }}
-                            </a>
-                        </h3>
-                        <p class="muted mt-1">Posted on {{ recipe.first_published_at|date:'F j, Y' }}</p>
-                        {% if recipe.provided_by %}
-                            <p>Provided by {{ recipe.provided_by }}</p>
-                        {% endif %}
-                        <a href="{% pageurl recipe %}" class="btn btn-outline-success btn-block mt-auto">
-                            Read More
+                    <div class="card">
+                        <a href="{% pageurl recipe %}">
+                            {% image recipe.featured_image width-450 class="card__image" %}
                         </a>
-                    </article>
+                        <div class="card__body">
+                            <a href="{% pageurl recipe %}">
+                                <h3 class="card__title">{{ recipe.title }}</h3>
+                            </a>
+                            <p class="card__meta">Posted on {{ recipe.first_published_at|date:'F j, Y' }}</p>
+                            {% if recipe.provided_by %}
+                                <p class="card__subtitle">Provided by {{ recipe.provided_by }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
                 {% endwith %}
             {% empty %}
                 <p>Sorry, there are no recipes at this time.</p>

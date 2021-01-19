@@ -7,28 +7,48 @@
 {% block body_class %}template-recipepage{% endblock %}
 
 {% block content %}
-    <main class="container-fluid my-5 px-5">
-        <div class="row justify-content-center">
-            <article class="col-12 col-md-7 col-lg-5">
-                <div class="article-header-image mb-4 shadow">
-                    {% image page.featured_image fill-1000x750-c50 class="rounded" %}
-                </div>
-                <div class="article-title mb-4 border-bottom">
-                    <h2 class="text-success display-4 font-weight-bold">{{ page.title }}</h2>
-                    <p class="muted">
-                        Posted on {{ page.first_published_at|date:'F j, Y' }}
-                    </p>
-                    {% if page.provided_by %}
-                        <p class="muted mt-0">Provided by {{ page.provided_by }}</p>
-                    {% endif %}
-                </div>
-                <div class="article-body">
-                    <div class="my-3">
-                        {{ page.body|richtext }}
-                    </div>
-                </div>
-                <p><a href="{{ page.get_parent.url }}" class="primary-link">Return to recipes</a></p>
-            </article>
+    <main class="post">
+        <h1 class="responsive-heading">{{ page.title }}</h1>
+        <p class="meta">Posted on {{ page.first_published_at|date:'F j, Y' }}</p>
+        {% image page.featured_image width-1000 class="post__featured-image responsive-image" %}
+        <div class="post__body">
+            <div class="post__share-links">
+                <a
+                    href="https://www.facebook.com/sharer/sharer.php?display=page&u=https://pizzavegan.com{{ request.path }}"
+                    target="_blank"
+                >
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a
+                    href="https://twitter.com/intent/tweet?text={{ page.title|urlencode }}&url=https://pizzavegan.com{{ request.path }}"
+                    target="_blank"
+                >
+                    <i class="fab fa-twitter-square"></i>
+                </a>
+                <a
+                    href="https://pinterest.com/pin/create/button/?url=https://pizzavegan.com{{ request.path }}&description={{ page.title|urlencode }}"
+                    target="_blank"
+                >
+                    <i class="fab fa-pinterest"></i>
+                </a>
+                <a
+                    href="mailto:?subject={{ page.title }}&body=https://pizzavegan.com{{ request.path }}"
+                    target="_blank"
+                >
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <div class="post__content">
+                {% if page.provided_by %}
+                    <p class="subtitle">Recipe provided by {{ page.provided_by }}</p>
+                {% endif %}
+                {{ page.body|richtext }}
+                <p><a href="{{ page.get_parent.url }}">Return to recipes</a></p>
+            </div>
         </div>
     </main>
 {% endblock content %}
+
+{% block extra_js %}
+    <script src="https://kit.fontawesome.com/bcdd1ea5a6.js" crossorigin="anonymous"></script>
+{% endblock extra_js %}

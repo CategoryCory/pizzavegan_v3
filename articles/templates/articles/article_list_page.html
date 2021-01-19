@@ -1,37 +1,69 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block title %} | {{ self.title }}{% endblock title %}
 
 {% block body_class %}template-articlelistpage{% endblock %}
 
 {% block content %}
-    <main class="container my-5 px-5">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="font-italic">{{ page.title }}</h1>
-                <hr>
-            </div>
+    <div class="page-heading">
+        <img src="{% static 'images/pizza-slice.png' %}" class="page-heading__image" alt="PizzaVegan Slice Logo">
+        <h2 class="page-heading__title">PizzaVegan Articles</h2>
+        <p class="page-heading__subtitle">
+            Are you a pizzeria owner looking to better cater to the vegan crowd? Or a vegan pizza lover who wants to
+            connect with a like-minded community? Here, we gather helpful articles for those on both sides of the aisle,
+            as well as those who are considering or testing out the vegan lifestyle. Welcome to our community, where
+            vegans and pizza lovers unite!
+        </p>
+    </div>
+    <main>
+        <div class="post-grid">
             {% for article in article_pages %}
                 {% with article=article.specific %}
-                    <article class="col-12 col-md-6 col-lg-4 d-flex flex-column mt-3 mb-5">
-                        {% image article.featured_image fill-500x250-c50 class="articles-list-image rounded" %}
-                        <h3 class="articles-list-post-title mt-3">
-                            <a href="{% pageurl article %}" class="text-success">
-                                {{ article.title }}
-                            </a>
-                        </h3>
-                        <p class="muted mt-1">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>
-                        <p>{{ article.subtitle }}</p>
-                        <a href="{% pageurl article %}" class="btn btn-outline-success btn-block mt-auto">
-                            Read More
+                    <div class="card">
+                        <a href="{% pageurl article %}">
+                            {% image article.featured_image width-450 class="card__image" %}
                         </a>
-                    </article>
+                        <div class="card__body">
+                            <a href="{% pageurl article %}">
+                                <h3 class="card__title">{{ article.title }}</h3>
+                            </a>
+                            <p class="card__meta">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>
+                            <p class="card__subtitle">{{ article.subtitle }}</p>
+                        </div>
+                    </div>
                 {% endwith %}
             {% empty %}
                 <p>Sorry, there are no articles at this time.</p>
             {% endfor %}
         </div>
+
+
+{#        <div class="row">#}
+{#            <div class="col-12">#}
+{#                <h1 class="font-italic">{{ page.title }}</h1>#}
+{#                <hr>#}
+{#            </div>#}
+{#            {% for article in article_pages %}#}
+{#                {% with article=article.specific %}#}
+{#                    <article class="col-12 col-md-6 col-lg-4 d-flex flex-column mt-3 mb-5">#}
+{#                        {% image article.featured_image fill-500x250-c50 class="articles-list-image rounded" %}#}
+{#                        <h3 class="articles-list-post-title mt-3">#}
+{#                            <a href="{% pageurl article %}" class="text-success">#}
+{#                                {{ article.title }}#}
+{#                            </a>#}
+{#                        </h3>#}
+{#                        <p class="muted mt-1">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>#}
+{#                        <p>{{ article.subtitle }}</p>#}
+{#                        <a href="{% pageurl article %}" class="btn btn-outline-success btn-block mt-auto">#}
+{#                            Read More#}
+{#                        </a>#}
+{#                    </article>#}
+{#                {% endwith %}#}
+{#            {% empty %}#}
+{#                <p>Sorry, there are no articles at this time.</p>#}
+{#            {% endfor %}#}
+{#        </div>#}
     </main>
 {% endblock %}
