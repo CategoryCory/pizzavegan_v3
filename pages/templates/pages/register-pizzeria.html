@@ -122,11 +122,12 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <p class="text-small text-muted">
+                <p class="form-text">
                     In order to participate, you must be a subscriber to PMQ Pizza Magazine. If you are not,
                     please <a href="https://www.pmq.com/Subscribe-PMQ/" class="primary-link">click here</a> to fill
                     out the subscription form.
                 </p>
+                <p class="form-text">* denotes required field</p>
                 <button type="submit" class="btn btn-outline-success btn-block">Submit</button>
             </form>
         </div>
