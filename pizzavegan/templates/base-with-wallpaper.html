@@ -1,0 +1,134 @@
+{% load static wagtailuserbar %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>PizzaVegan{% block title %}{% endblock title %}</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Global stylesheets #}
+        <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;800&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.20/dist/shoelace/shoelace.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bundle.css' %}">
+        <link rel="stylesheet" href="{% static 'css/page-with-wallpaper.css' %}">
+        <script src="{% static 'js/bundle.js' %}" defer></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S2FHHP8C4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-4S2FHHP8C4');
+        </script>
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        <broadstreet-zone zone-id="84520"></broadstreet-zone>
+
+        <div class="main-wallpaper-container">
+            <header class="site-header">
+                <a href="{% url 'pages:home' %}" class="site-header__branding">
+                    <img src="{% static 'images/pizzavegan-color-small.png' %}" alt="PizzaVegan Logo" loading="lazy">
+                </a>
+                <nav class="site-header__nav">
+                    <ul class="site-header__navcontainer">
+                        <li class="site-header__navitem">
+                            <a href="{% url 'pizzerias:pizzeria_list' %}" class="site-header__navlink">Find Vegan Pizza</a>
+                        </li>
+                        <li class="site-header__navitem">
+                            <a href="/articles/" class="site-header__navlink">Articles</a>
+                        </li>
+                        <li class="site-header__navitem">
+                            <a href="/recipes/" class="site-header__navlink">Recipes</a>
+                        </li>
+                        <li class="site-header__navitem">
+                            <a
+                                href="#"
+                                id="navbarDropdown"
+                                class="site-header__navlink"
+                            >
+                                Products
+                            </a>
+                            <ul class="site-header__dropdown">
+                                <li><a href="/products/">All Products</a></li>
+                                <li><a href="/products/category/egg-dairy-alternatives/">Egg & Dairy Alternatives</a></li>
+                                <li><a href="/products/category/meat-alternatives/">Meat Alternatives</a></li>
+                                <li><a href="/products/category/snacks-and-staples/">Snacks & Staples</a></li>
+                                <li><a href="/products/category/beverages/">Beverages</a></li>
+                            </ul>
+                        </li>
+                        <li class="site-header__navitem">
+                            <a href="#" id="navbarDropdown" class="site-header__navlink">About</a>
+                            <ul class="site-header__dropdown">
+                                <li><a href="{% url 'pages:about' %}">Why PizzaVegan?</a></li>
+                                <li><a href="{% url 'pages:meet_the_editor' %}">Meet the Editor</a></li>
+                            </ul>
+                        </li>
+                        <li class="site-header__navitem">
+                            <a href="{% url 'pages:pizzavegan_signup' %}" class="site-header__navlink">Sign Up</a>
+                        </li>
+                        <li class="site-header__navitem">
+                            <a href="{% url 'pages:contact_us' %}" class="site-header__navlink">Contact Us</a>
+                        </li>
+                    </ul>
+                    <div class="site-header__navsocial">
+                        <a href="https://www.facebook.com/pizzavegan/"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/PizzaVegan_"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/pizzavegan_/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.pinterest.com/PizzaVegan_/"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </nav>
+                <div class="site-header__menu-btn">
+                    <div class="site-header__hamburger"></div>
+                </div>
+            </header>
+
+            {% block content %}{% endblock %}
+
+        </div>
+
+
+
+{#        <footer class="footer">#}
+{#            <div class="container">#}
+{#                <span class="text-muted">#}
+{#                    Copyright &copy; <a href="https://www.pmq.com" class="primary-link">PMQ Pizza Magazine</a>#}
+{#                </span>#}
+{#            </div>#}
+{#        </footer>#}
+
+        {# Global javascript #}
+        <script type="module"
+                src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.20/dist/shoelace/shoelace.esm.js">
+        </script>
+        <script src="https://kit.fontawesome.com/bcdd1ea5a6.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.broadstreetads.com/init-2.min.js"></script>
+        <script>broadstreet.watch({ networkId: 6069 })</script>
+        <script src="https://js.adsrvr.org/up_loader.1.1.0.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            ttd_dom_ready( function() {
+                if (typeof TTDUniversalPixelApi === 'function') {
+                    var universalPixelApi = new TTDUniversalPixelApi();
+                    universalPixelApi.init("mwj74fa", ["8pombog"], "https://insight.adsrvr.org/track/up");
+                }
+            });
+        </script>
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+    </body>
+</html>
