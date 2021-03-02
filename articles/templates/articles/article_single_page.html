@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/pizzavegan.css' %}">
+{% endblock extra_css %}
 
 {% block title %} | {{ self.title }}{% endblock title %}
 
@@ -13,6 +21,9 @@
         <p class="meta">Posted on {{ page.first_published_at|date:'F j, Y' }}</p>
 {#        <p class="badge">Food</p>#}
         {% image page.featured_image width-1000 class="post__featured-image responsive-image" %}
+        <div class="leaderboard-ad mb-4">
+            <broadstreet-zone zone-id="83144"></broadstreet-zone>
+        </div>
         <div class="post__body">
             <div class="post__share-links">
                 <a
