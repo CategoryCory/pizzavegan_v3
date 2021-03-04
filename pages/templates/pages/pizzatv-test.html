@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | PizzaTV Integration Test{% endblock title %}
+
+{% block extra_css %}
+    <style>
+        .featured-image {
+            max-width: 100%;
+        }
+    </style>
+{% endblock extra_css %}
+
+{% block content %}
+    <main>
+        <div class="post-grid">
+            {% for post in recent_posts %}
+                <div class="card">
+                    <a href="{{ post.link }}" target="_blank">
+                        <img src="{{ post.featured_image }}" class="featured-image">
+                    </a>
+                    <div class="card__body">
+                        <a href="{{ post.link }}" target="_blank">
+                            <h3 class="card__title">{{ post.title | safe}}</h3>
+                        </a>
+                        <p class="card__subtitle">{{ post.excerpt | safe }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Sorry, there are no posts at this time.</p>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock content %}

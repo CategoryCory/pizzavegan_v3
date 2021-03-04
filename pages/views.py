@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from articles.models import ArticleSinglePage
+import requests
 
 from contacts.forms import ContactUsForm, SurveyResponseForm, PizzeriaSignupResponseForm
 
@@ -24,6 +25,29 @@ class AboutView(TemplateView):
 
 class MeetTheEditorView(TemplateView):
     template_name = 'pages/meet-the-editor.html'
+
+
+def pizzatv_test(request):
+    response = requests.get('https://pizzatv.com/wp-json/wp/v2/posts/?_embed&page=1&per_page=5')
+    data = response.json()
+    recent_posts = []
+    for i in range(len(data)):
+        if 'wp:featuredmedia' not in data[i]['_embedded']:
+            continue
+
+        post = {
+            'link': data[i]['link'],
+            'title': data[i]['title']['rendered'],
+            'excerpt': data[i]['excerpt']['rendered'],
+            'featured_image': data[i]['_embedded']['wp:featuredmedia'][0]['source_url'],
+        }
+
+        recent_posts.append(post)
+
+    context = {
+        'recent_posts': recent_posts
+    }
+    return render(request, 'pages/pizzatv-test.html', context)
 
 
 class ContactUsView(SuccessMessageMixin, CreateView):
