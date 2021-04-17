@@ -10,5 +10,4 @@ urlpatterns = [
     path('contact/', views.ContactUsView.as_view(), name='contact_us'),
     path('pizzavegan-signup/', views.pizzavegan_signup_view, name='pizzavegan_signup'),
     path('register/', views.RegisterPizzeriaView.as_view(), name='register_pizzeria'),
-    path('pizzatv-test/', views.pizzatv_test, name='pizzatv_test'),
 ]
