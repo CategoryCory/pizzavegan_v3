@@ -10,7 +10,9 @@ from search import views as search_views
 
 urlpatterns = [
     path('', include('pages.urls')),
+    path('api/v1/', include('api_v1.urls')),
     path('pizzerias/', include('pizzerias.urls')),
+    # path('signups/', include('contacts.urls')),
     path('site-admin/', admin.site.urls),
     path('admin/', include(wagtailadmin_urls)),
     path('accounts/', include('allauth.urls')),

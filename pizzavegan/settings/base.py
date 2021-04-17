@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'pizzerias.apps.PizzeriasConfig',
     'search',
     'users.apps.UsersConfig',
+    'api_v1.apps.ApiV1Config',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -67,6 +68,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -218,3 +220,10 @@ MESSAGE_TAGS = {
 MAPS_API_KEY = env('MAPS_API_KEY')
 GEOCODING_API_KEY = env('GEOCODING_API_KEY')
 DISTANCE_API_KEY = env('DISTANCE_API_KEY')
+
+# REST API Setup
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ]
+}
