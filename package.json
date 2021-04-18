@@ -1,0 +1,26 @@
+{
+  "name": "pizzavegan",
+  "version": "1.0.0",
+  "description": "PizzaVegan.com",
+  "main": "index.js",
+  "scripts": {
+    "start": "postcss tailwind_theme/**/*.css -d pizzavegan/static/css --watch",
+    "build": "postcss tailwind_theme/**/*.css -d pizzavegan/static/css --env production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CategoryCory/pizzavegan_v3.git"
+  },
+  "author": "Cory Coward",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CategoryCory/pizzavegan_v3/issues"
+  },
+  "homepage": "https://github.com/CategoryCory/pizzavegan_v3#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.10",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.1.1"
+  }
+}
