@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .hero {
+        background: linear-gradient(
+                to bottom right,
+                rgba(234, 88, 12, 0.5),
+                rgba(220, 38, 38, 0.5)
+            ),
+            url(/static/images/pizzavegan-banner.jpg) no-repeat center center;
+        background-size: cover;
+    }
+
+    .hero__heading {
+        font-size: calc(2.5rem + 2.25vw);
+        font-weight: 800;
+        line-height: 3.5rem;
+    }
+
+    .hero__subtitle {
+        font-size: calc(1.25rem + 1.25vw);
+    }
+
+    .btn {
+        @apply px-5 py-2 uppercase tracking-wider rounded-md text-white duration-300;
+    }
+
+    .nav__dropdown {
+        @apply absolute top-full left-0 w-max px-5 py-4 space-y-3 bg-gray-600 z-50;
+    }
+
+    nav li:hover > .nav__dropdown {
+        @apply block;
+    }
+
+    .card__image {
+        @apply w-full rounded-t-lg bg-center;
+        height: calc(250px + 4vw);
+        object-fit: cover;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-bold text-gray-800;
+    }
+
+    p {
+        @apply font-serif text-gray-800;
+    }
+}

@@ -2,60 +2,86 @@
 
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-{% block extra_css %}
-<link rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-    crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{% static 'css/pizzavegan.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
-<div class="page-banner">
-    <div class="container">
-        <h2 class="responsive-header text-white">Pizza Vegan Community</h2>
-        <p class="lead responsive-lead text-white">Vegan pizza at your fingertips&mdash;literally!</p>
-    </div>
-</div>
-
-<div class="container my-4">
-{#    <div class="leaderboard-ad">#}
-{#        <broadstreet-zone zone-id="83144"></broadstreet-zone>#}
-{#    </div>#}
-    <h2 class="border-bottom mt-5 pb-2">Recent PizzaVegan Articles</h2>
-    <div class="post-grid">
-        {% for article in articles_list %}
-            {% with article=article.specific %}
-                <div class="card">
-                    <a href="{% pageurl article %}">
-                        {% image article.featured_image width-450 class="card__image" %}
-                    </a>
-                    <div class="card__body">
-                        <a href="{% pageurl article %}">
-                            <h3 class="card__title">{{ article.title }}</h3>
-                        </a>
-                        <p class="card__meta">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>
-                        <p class="card__subtitle">{{ article.subtitle }}</p>
-                    </div>
-                </div>
-            {% endwith %}
-        {% endfor %}
-    </div>
-</div>
-
-<div class="container-fluid bg-dark d-flex flex-column justify-content-center align-items-center py-5">
-    <form action="{% url 'pizzerias:pizzeria_list' %}" id="searchZipCodeForm" class="form-inline">
-        <div class="form-group">
-            <label for="searchZipCode" class="text-light mx-sm-3">
-                Enter your ZIP code to find vegan pizza near you!
-            </label>
-            <input type="text" id="searchZipCode" class="form-control mx-sm-3" name="zip" placeholder="ZIP Code">
-            <button type="submit" id="searchZipCodeButton" class="btn btn-success">Search</button>
+    <section class="hero py-16 lg:py-24">
+        <div class="container mx-auto px-6">
+            <h2 class="hero__heading mb-6 md:mb-10 text-yellow-50 font-sans tracking-tight">Pizza Vegan Community</h2>
+            <p class="hero__subtitle text-yellow-50">Vegan pizza at your fingertips&mdash;literally!</p>
         </div>
-    </form>
-    <p class="search-form-error hidden">Please enter a valid ZIP code.</p>
-</div>
+    </section>
 
+    <main class="container mx-auto my-8 flex flex-col items-center xl:flex-row xl:items-start xl:space-x-12 px-6 xl:px-10"><!-- THE MAIN BODY -->
+        <section><!-- THE LATEST ARTICLES -->
+            <h2 class="mb-10 text-3xl md:text-5xl border-b-2 border-gray-300">Our Latest Articles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><!-- THE GRID -->
+                {% for article in articles_list %}
+                    <div class="mb-10 rounded-lg shadow-md hover:shadow-xl transition-shadow"><!-- A CARD -->
+                        <!-- CARD IMAGE -->
+                        <a href="{% pageurl article %}">
+                            {% image article.featured_image width-450 class="card__image" %}
+                        </a>
+                        <!-- CARD BODY -->
+                        <div class="px-8 py-6">
+                            <!-- CARD TITLE -->
+                            <a href="{% pageurl article %}" class="">
+                                <h3 class="mb-3 text-2xl md:text-3xl">{{ article.title }}</h3>
+                            </a>
+                            <!-- DATE POSTED -->
+                            <p class="mb-5 text-sm md:text-base font-sans text-gray-500">
+                                Posted on {{ article.first_published_at|date:'F j, Y' }}
+                            </p>
+                            <!-- EXCERPT -->
+                            <p class="md:text-lg">{{ article.subtitle }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <aside class="max-w-lg bg-gray-100 px-8 py-6 rounded-lg"><!-- THE SIDEBAR -->
+            <h3 class="mb-4 text-2xl lg:text-3xl text-brand">Featured Product</h3>
+            <a href="{% pageurl featured_product %}">
+                {% image featured_product.featured_image width-450 class="w-full" %}
+                <h3 class="mt-5 mb-2 text-brand text-lg lg:text-xl">{{ featured_product.title }}</h3>
+            </a>
+            <p class="text-lg">
+                {{ featured_product.subtitle }}
+            </p>
+            <hr class="my-5 border-gray-300">
+            <h3 class="mb-4 text-2xl lg:text-3xl text-brand">Latest Recipes</h3>
+            {% for recipe in recipes_list %}
+                <div class="mb-6">
+                    <a href="{% pageurl recipe %}">
+                        {% image recipe.featured_image width-450 class="w-full" %}
+                        <h3 class="mt-5 mb-2 text-brand text-lg lg:text-xl">{{ recipe.title }}</h3>
+                    </a>
+                    {% if recipe.provided_by %}
+                        <p class="text-lg">
+                            Provided by {{ recipe.provided_by }}
+                        </p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <hr class="my-5 border-gray-300">
+            <p class="text-base"><span class="text-brand font-extrabold font-sans text-lg">Looking for vegan pizza near you?</span> Enter your ZIP code below!</p>
+            <form action="{% url 'pizzerias:pizzeria_list' %}" id="searchZipCodeForm" class="flex flex-col my-3 space-y-3">
+                <input
+                    type="text"
+                    id="searchZipCodeInput"
+                    class="px-3 py-2 rounded-md outline-none border-gray-300 focus:border-brand focus:ring-0"
+                    placeholder="ZIP Code"
+                >
+                <p class="search-form-error text-red-600 font-sans hidden">Please enter a valid ZIP code.</p>
+                <button
+                    type="submit"
+                    id="searchZipCodeButton"
+                    class="btn bg-brand hover:bg-brand-dark outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-light"
+                >
+                    Search
+                </button>
+            </form>
+        </aside>
+    </main>
 {% endblock content %}
 
 {% block extra_js %}
@@ -65,23 +91,13 @@
         const zipCodeSearchError = document.querySelector('.search-form-error');
 
         zipCodeSearchButton.addEventListener('click', function(e) {
-            const zipCodeInput = document.getElementById('searchZipCode').value;
+            const zipCodeInput = document.getElementById('searchZipCodeInput').value;
             const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCodeInput);
 
             if (!isValidZip) {
                 e.preventDefault();
-                zipCodeSearchError.classList.add('show');
+                zipCodeSearchError.classList.remove('hidden');
             }
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{% static 'js/pizzavegan.js' %}"></script>
 {% endblock extra_js %}

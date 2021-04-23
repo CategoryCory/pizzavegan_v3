@@ -4,16 +4,23 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from articles.models import ArticleSinglePage
-import requests
+from products.models import ProductSinglePage
+from recipes.models import RecipeSinglePage
 
 from contacts.forms import ContactUsForm, SurveyResponseForm, PizzeriaSignupResponseForm
 
 
 def homepage_view(request):
-    articles_list = ArticleSinglePage.objects.live().order_by('-first_published_at')[:6]
+    articles_list = ArticleSinglePage.objects.live().order_by('-first_published_at')[:4]
+    recipes_list = RecipeSinglePage.objects.live().order_by('-first_published_at')[:2]
+    featured_product = ProductSinglePage.objects.live().filter(is_featured=True)[0]
+
+    print(featured_product.title)
 
     context = {
-        'articles_list': articles_list
+        'articles_list': articles_list,
+        'featured_product': featured_product,
+        'recipes_list': recipes_list,
     }
 
     return render(request, 'pages/home.html', context)
@@ -23,8 +30,8 @@ class AboutView(TemplateView):
     template_name = 'pages/about.html'
 
 
-class MeetTheEditorView(TemplateView):
-    template_name = 'pages/meet-the-editor.html'
+# class MeetTheEditorView(TemplateView):
+#     template_name = 'pages/meet-the-editor.html'
 
 
 class ContactUsView(SuccessMessageMixin, CreateView):
