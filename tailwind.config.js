@@ -13,9 +13,12 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "#5eae46",
-          light: "#72c25a",
-          dark: "#4a9a32"
+          // DEFAULT: "#5eae46",
+          // light: "#72c25a",
+          // dark: "#4a9a32"
+          DEFAULT: "#40A075",
+          light: "#59B98E",
+          dark: "#26865B"
         },
         gray: colors.warmGray,
       },
