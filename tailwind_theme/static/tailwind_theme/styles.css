@@ -24,7 +24,7 @@
     }
 
     .btn {
-        @apply px-5 py-2 uppercase tracking-wider rounded-md text-white duration-300;
+        @apply px-5 py-2 uppercase tracking-wider text-white duration-300;
     }
 
     .nav__dropdown {
