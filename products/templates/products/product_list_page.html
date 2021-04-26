@@ -7,29 +7,40 @@
 {% block body_class %}template-productlistpage{% endblock %}
 
 {% block content %}
-    <div class="page-heading">
-        <img src="{% static 'images/pizza-slice.png' %}" class="page-heading__image" alt="PizzaVegan Slice Logo">
-        <h2 class="page-heading__title">Products</h2>
-        <p class="page-heading__subtitle">
-            Eating vegan is easier than ever. With a plethora of products continuously emerging in this fast-growing
-            category, consumers and restaurant owners alike can find more options than ever to satisfy their taste buds.
-            Whether you’re seeking plant-based meat and dairy alternatives or pantry staples, we’ve got you covered.
-        </p>
-    </div>
+    <section class="relative mx-auto my-10 lg:my-16 p-4 max-w-2xl">
+        <div class="relative space-y-4 z-10">
+            <h1 class="text-3xl lg:text-5xl text-brand">Products</h1>
+            <p class="font-sans text-lg lg:text-xl text-gray-700">
+                Eating vegan is easier than ever. With a plethora of products continuously emerging in this fast-growing
+                category, consumers and restaurant owners alike can find more options than ever to satisfy their taste buds.
+                Whether you’re seeking plant-based meat and dairy alternatives or pantry staples, we’ve got you covered.
+            </p>
+        </div>
+        <div class="absolute inset-0 bg-gray-100 transform -skew-y-3 lg:-skew-x-6"></div>
+        <img
+            src="{% static 'images/pizza-slice.png' %}"
+            alt="PizzaVegan Slice"
+            class="absolute -top-12 -left-16 w-20 h-20 hidden lg:block"
+        >
+    </section>
     <main>
-        <div class="post-grid">
+        <div class="container mx-auto grid grid-cols-1 px-6 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-8">
             {% for product in product_pages %}
                 {% with product=product.specific %}
-                    <div class="card">
+                    <div class="mb-10 rounded-lg shadow-md hover:shadow-xl transition-shadow"><!-- A CARD -->
+                        <!-- CARD IMAGE -->
                         <a href="{% pageurl product %}">
                             {% image product.featured_image width-450 class="card__image" %}
                         </a>
-                        <div class="card__body">
+                        <!-- CARD BODY -->
+                        <div class="px-8 py-6">
                             <a href="{% pageurl product %}">
-                                <h3 class="card__title">{{ product.title }}</h3>
+                                <h3 class="mb-3 text-2xl md:text-3xl">{{ product.title }}</h3>
                             </a>
-                            <p class="card__meta">Posted on {{ product.first_published_at|date:'F j, Y' }}</p>
-                            <p class="card__subtitle">{{ product.subtitle }}</p>
+                            <p class="mb-5 text-sm md:text-base font-sans text-gray-500">
+                                Posted on {{ product.first_published_at|date:'F j, Y' }}
+                            </p>
+                            <p class="md:text-lg">{{ product.subtitle }}</p>
                         </div>
                     </div>
                 {% endwith %}

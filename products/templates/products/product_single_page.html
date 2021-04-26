@@ -7,47 +7,47 @@
 {% block body_class %}template-productpage{% endblock %}
 
 {% block content %}
-    <main class="post">
-        <h1 class="responsive-heading">{{ page.title }}</h1>
-        <p class="subtitle">{{ page.subtitle }}</p>
-        <p class="meta">Posted on {{ page.first_published_at|date:'F j, Y' }}</p>
+    <main class="mx-auto max-w-4xl px-5 py-8">
+        <h1 class="mb-4 text-4xl lg:text-6xl lg:leading-tight">{{ page.title }}</h1>
+        <p class="mb-2 lg:mb-6 font-sans font-extralight text-xl lg:text-2xl leading-relaxed lg:leading-10 text-gray-700">{{ page.subtitle }}</p>
+        <p class="mb-6 font-sans text-gray-500 lg:text-lg">Posted on {{ page.first_published_at|date:'F j, Y' }}</p>
         {% image page.featured_image width-1000 class="post__featured-image responsive-image" %}
-        <div class="post__body">
-            <div class="post__share-links">
+        <section class="relative mt-10 flex flex-col-reverse md:items-start md:flex-row">
+            <div class="flex mt-6 justify-center space-x-12 md:mt-0 md:pl-5 md:pr-8 md:flex-col md:items-center md:space-x-0 md:space-y-7 md:sticky md:top-32">
                 <a
                     href="https://www.facebook.com/sharer/sharer.php?display=page&u=https://pizzavegan.com{{ request.path }}"
                     target="_blank"
                 >
-                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-facebook-square text-3xl md:text-4xl md:hover:text-brand duration-300"></i>
                 </a>
                 <a
                     href="https://twitter.com/intent/tweet?text={{ page.title|urlencode }}&url=https://pizzavegan.com{{ request.path }}"
                     target="_blank"
                 >
-                    <i class="fab fa-twitter-square"></i>
+                    <i class="fab fa-twitter-square text-3xl md:text-4xl md:hover:text-brand duration-300"></i>
                 </a>
                 <a
                     href="https://pinterest.com/pin/create/button/?url=https://pizzavegan.com{{ request.path }}&description={{ page.title|urlencode }}"
                     target="_blank"
                 >
-                    <i class="fab fa-pinterest"></i>
+                    <i class="fab fa-pinterest text-3xl md:text-4xl md:hover:text-brand duration-300"></i>
                 </a>
                 <a
                     href="mailto:?subject={{ page.title }}&body=https://pizzavegan.com{{ request.path }}"
                     target="_blank"
                 >
-                    <i class="fas fa-envelope"></i>
+                    <i class="fas fa-envelope text-3xl md:text-4xl md:hover:text-brand duration-300"></i>
                 </a>
             </div>
-            <div class="post__content">
+            <article class="prose md:prose-lg lg:prose-xl max-w-none prose-brand">
                 {{ page.body|richtext }}
                 {% if page.related_link %}
-                    <p class="my-3">
+                    <p>
                         Find out more at <a href="{{ page.related_link }}" target="_blank">{{ page.related_link }}</a>
                     </p>
                 {% endif %}
                 <p><a href="{{ page.get_parent.url }}">Return to products</a></p>
-            </div>
-        </div>
+            </article>
+        </section>
     </main>
 {% endblock %}

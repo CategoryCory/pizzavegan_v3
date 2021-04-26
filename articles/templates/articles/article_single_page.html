@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 
-{% load static wagtailcore_tags wagtailimages_tags %}
-
-{% block extra_css %}
-{#<link rel="stylesheet"#}
-{#    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"#}
-{#    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"#}
-{#    crossorigin="anonymous">#}
-{#<link rel="stylesheet" type="text/css" href="{% static 'css/pizzavegan.css' %}">#}
-{% endblock extra_css %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block title %} | {{ self.title }}{% endblock title %}
 
@@ -16,10 +8,9 @@
 
 {% block content %}
     <main class="mx-auto max-w-4xl px-5 py-8">
-        <h1 class="mb-4 text-4xl lg:text-6xl">{{ page.title }}</h1>
+        <h1 class="mb-4 text-4xl lg:text-6xl lg:leading-tight">{{ page.title }}</h1>
         <p class="mb-2 lg:mb-6 font-sans font-extralight text-xl lg:text-2xl leading-relaxed lg:leading-10 text-gray-700">{{ page.subtitle }}</p>
         <p class="mb-6 font-sans text-gray-500 lg:text-lg">Posted on {{ page.first_published_at|date:'F j, Y' }}</p>
-{#        <p class="badge">Food</p>#}
         {% image page.featured_image width-1000 class="post__featured-image responsive-image" %}
         <div class="flex justify-center my-6">
             <broadstreet-zone zone-id="83144"></broadstreet-zone>

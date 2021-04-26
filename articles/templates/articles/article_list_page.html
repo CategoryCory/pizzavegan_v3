@@ -2,29 +2,11 @@
 
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-{% block extra_css %}
-{#<link rel="stylesheet"#}
-{#    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"#}
-{#    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"#}
-{#    crossorigin="anonymous">#}
-{#<link rel="stylesheet" type="text/css" href="{% static 'css/pizzavegan.css' %}">#}
-{% endblock extra_css %}
-
 {% block title %} | {{ self.title }}{% endblock title %}
 
 {% block body_class %}template-articlelistpage{% endblock %}
 
 {% block content %}
-{#    <div class="page-heading">#}
-{#        <img src="{% static 'images/pizza-slice.png' %}" class="page-heading__image" alt="PizzaVegan Slice Logo">#}
-{#        <h2 class="page-heading__title">PizzaVegan Articles</h2>#}
-{#        <p class="page-heading__subtitle">#}
-{#            Are you a pizzeria owner looking to better cater to the vegan crowd? Or a vegan pizza lover who wants to#}
-{#            connect with a like-minded community? Here, we gather helpful articles for those on both sides of the aisle,#}
-{#            as well as those who are considering or testing out the vegan lifestyle. Welcome to our community, where#}
-{#            vegans and pizza lovers unite!#}
-{#        </p>#}
-{#    </div>#}
     <section class="relative mx-auto my-10 lg:my-16 p-4 max-w-2xl">
         <div class="relative space-y-4 z-10">
             <h1 class="text-3xl lg:text-5xl text-brand">PizzaVegan Articles</h1>
@@ -47,38 +29,21 @@
     </div>
 
     <main class="container mx-auto grid grid-cols-1 px-6 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-8">
-{#        <div class="post-grid">#}
         {% for article in article_pages %}
             {% with article=article.specific %}
-{#                <div class="card">#}
-{#                    <a href="{% pageurl article %}">#}
-{#                        {% image article.featured_image width-450 class="card__image" %}#}
-{#                    </a>#}
-{#                    <div class="card__body">#}
-{#                        <a href="{% pageurl article %}">#}
-{#                            <h3 class="card__title">{{ article.title }}</h3>#}
-{#                        </a>#}
-{#                        <p class="card__meta">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>#}
-{#                        <p class="card__subtitle">{{ article.subtitle }}</p>#}
-{#                    </div>#}
-{#                </div>#}
                 <div class="mb-10 rounded-lg shadow-md hover:shadow-xl transition-shadow"><!-- A CARD -->
                     <!-- CARD IMAGE -->
                     <a href="{% pageurl article %}">
-{#                        <img src="images/pizza.jpg" alt="Delicious Pizza" class="rounded-t-lg bg-cover bg-center">#}
                         {% image article.featured_image width-450 class="card__image" %}
                     </a>
                     <!-- CARD BODY -->
                     <div class="px-8 py-6">
-                        <!-- CARD TITLE -->
-                        <a href="{% pageurl article %}" class="">
+                        <a href="{% pageurl article %}">
                             <h3 class="mb-3 text-2xl md:text-3xl">{{ article.title }}</h3>
                         </a>
-                        <!-- DATE POSTED -->
                         <p class="mb-5 text-sm md:text-base font-sans text-gray-500">
                             Posted on {{ article.first_published_at|date:'F j, Y' }}
                         </p>
-                        <!-- EXCERPT -->
                         <p class="md:text-lg">
                             {{ article.subtitle }}
                         </p>
@@ -88,33 +53,5 @@
         {% empty %}
             <p>Sorry, there are no articles at this time.</p>
         {% endfor %}
-{#        </div>#}
-
-
-{#        <div class="row">#}
-{#            <div class="col-12">#}
-{#                <h1 class="font-italic">{{ page.title }}</h1>#}
-{#                <hr>#}
-{#            </div>#}
-{#            {% for article in article_pages %}#}
-{#                {% with article=article.specific %}#}
-{#                    <article class="col-12 col-md-6 col-lg-4 d-flex flex-column mt-3 mb-5">#}
-{#                        {% image article.featured_image fill-500x250-c50 class="articles-list-image rounded" %}#}
-{#                        <h3 class="articles-list-post-title mt-3">#}
-{#                            <a href="{% pageurl article %}" class="text-success">#}
-{#                                {{ article.title }}#}
-{#                            </a>#}
-{#                        </h3>#}
-{#                        <p class="muted mt-1">Posted on {{ article.first_published_at|date:'F j, Y' }}</p>#}
-{#                        <p>{{ article.subtitle }}</p>#}
-{#                        <a href="{% pageurl article %}" class="btn btn-outline-success btn-block mt-auto">#}
-{#                            Read More#}
-{#                        </a>#}
-{#                    </article>#}
-{#                {% endwith %}#}
-{#            {% empty %}#}
-{#                <p>Sorry, there are no articles at this time.</p>#}
-{#            {% endfor %}#}
-{#        </div>#}
     </main>
 {% endblock %}
