@@ -16,9 +16,14 @@ module.exports = {
           // DEFAULT: "#5eae46",
           // light: "#72c25a",
           // dark: "#4a9a32"
-          DEFAULT: "#40A075",
-          light: "#59B98E",
-          dark: "#26865B"
+          DEFAULT: "#BC150C",
+          light: "#D62F26",
+          dark: "#980B09"
+        },
+        secondary: {
+          DEFAULT: "#3fa649",
+          light: "#53BA5D",
+          dark: "#2B9235"
         },
         gray: colors.warmGray,
       },
@@ -26,9 +31,9 @@ module.exports = {
         brand: {
           css: {
             a: {
-              color: "#5eae46",
+              color: "#BC150C",
               "&:hover": {
-                color: "#4a9a32"
+                color: "#980B09"
               }
             }
           }

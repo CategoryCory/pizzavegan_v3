@@ -36,7 +36,7 @@
     }
 
     .card__image {
-        @apply w-full rounded-t-lg bg-center;
+        @apply w-full rounded-t bg-center;
         height: calc(250px + 4vw);
         object-fit: cover;
     }

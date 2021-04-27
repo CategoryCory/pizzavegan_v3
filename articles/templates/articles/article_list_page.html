@@ -31,7 +31,7 @@
     <main class="container mx-auto grid grid-cols-1 px-6 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-8">
         {% for article in article_pages %}
             {% with article=article.specific %}
-                <div class="mb-10 rounded-lg shadow-md hover:shadow-xl transition-shadow"><!-- A CARD -->
+                <div class="mb-10 rounded shadow-md hover:shadow-xl transition-shadow"><!-- A CARD -->
                     <!-- CARD IMAGE -->
                     <a href="{% pageurl article %}">
                         {% image article.featured_image width-450 class="card__image" %}
