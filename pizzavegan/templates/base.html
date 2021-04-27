@@ -108,12 +108,13 @@
 
         <!-- HAMBURGER TOGGLE -->
         <button class="fixed bottom-6 right-6 h-16 w-16 flex justify-center items-center
-            lg:hidden bg-white rounded-full border border-gray-100 shadow-md mobile-menu-open z-20">
+            lg:hidden bg-white rounded-full border border-gray-100 shadow-md mobile-menu-open
+            focus:outline-none focus:ring-2 focus:ring-gray-300 z-20">
             <i class="fas fa-bars text-3xl text-gray-600"></i>
         </button>
 
         <!-- MOBILE MENU -->
-        <sl-drawer placement="left" class="mobile-menu">
+        <sl-drawer placement="left" class="hidden mobile-menu">
             <div slot="label" class="flex items-center space-x-4">
                 <a href="{% url 'pages:home' %}">
                     <img src="{% static 'images/pizzavegan-main-logo.svg' %}" alt="" class="h-12">
@@ -144,17 +145,6 @@
                     </ul>
                 </div>
                 <a href="{% url 'pages:about' %}" class="text-gray-600 text-xl">About</a>
-{#                <div>#}
-{#                    <p class="font-sans text-gray-600 text-xl">About</p>#}
-{#                    <ul class="mt-3 px-4 space-y-3">#}
-{#                        <li>#}
-{#                            <a href="{% url 'pages:about' %}" class="text-gray-600 text-base">Why PizzaVegan?</a>#}
-{#                        </li>#}
-{#                        <li>#}
-{#                            <a href="{% url 'pages:meet_the_editor' %}" class="text-gray-600 text-base">Meet the Editor</a>#}
-{#                        </li>#}
-{#                    </ul>#}
-{#                </div>#}
                 <a href="{% url 'pages:pizzavegan_signup' %}" class="text-gray-600 text-xl">Sign Up</a>
                 <a href="{% url 'pages:contact_us' %}" class="text-gray-600 text-xl">Contact Us</a>
                 <div class="flex justify-start py-2 space-x-4">
@@ -165,7 +155,8 @@
                 </div>
             </div>
             <button slot="footer" class="fixed bottom-6 right-6 h-16 w-16 flex justify-center items-center
-                rounded-full bg-white border border-gray-100 shadow-md mobile-menu-close">
+                rounded-full bg-white border border-gray-100 shadow-md focus:outline-none focus:ring-2
+                focus:ring-gray-300 mobile-menu-close">
                 <i class="fas fa-arrow-left text-3xl text-gray-600"></i>
             </button>
         </sl-drawer>
@@ -196,21 +187,14 @@
         </footer>
 
         {# Global javascript #}
-        <script type="module"
-                src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.37/dist/shoelace.js">
-        </script>
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.37/dist/shoelace.js"
+        ></script>
         <script src="https://kit.fontawesome.com/bcdd1ea5a6.js" crossorigin="anonymous"></script>
         <script src="https://cdn.broadstreetads.com/init-2.min.js"></script>
         <script>broadstreet.watch({ networkId: 6069 })</script>
         <script src="https://js.adsrvr.org/up_loader.1.1.0.js" type="text/javascript"></script>
-        <script>
-            const drawer = document.querySelector(".mobile-menu");
-            const openButton = document.querySelector(".mobile-menu-open");
-            const closeButton = document.querySelector(".mobile-menu-close");
-
-            openButton.addEventListener("click", () => drawer.show());
-            closeButton.addEventListener("click", () => drawer.hide());
-        </script>
         <script type="text/javascript">
             ttd_dom_ready( function() {
                 if (typeof TTDUniversalPixelApi === 'function') {
@@ -218,6 +202,18 @@
                     universalPixelApi.init("mwj74fa", ["8pombog"], "https://insight.adsrvr.org/track/up");
                 }
             });
+        </script>
+        <script>
+            const drawer = document.querySelector(".mobile-menu");
+            const openButton = document.querySelector(".mobile-menu-open");
+            const closeButton = document.querySelector(".mobile-menu-close");
+
+            openButton.addEventListener("click", () => drawer.show());
+            closeButton.addEventListener("click", () => drawer.hide());
+
+            window.onload = function showMobileMenu() {
+                drawer.classList.remove("hidden");
+            }
         </script>
 
         {% block extra_js %}
