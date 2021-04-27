@@ -2,7 +2,8 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   purge: [
-      "{articles,home,pages,pizzavegan,pizzerias,products,recipes,search,templates}/**/*.html"
+      "{articles,home,pages,pizzavegan,pizzerias,products,recipes,search,templates}/**/*.html",
+      "contacts/forms.py"
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
