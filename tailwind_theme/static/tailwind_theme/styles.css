@@ -6,11 +6,16 @@
     .hero {
         background: linear-gradient(
                 to bottom right,
-                rgba(234, 88, 12, 0.5),
-                rgba(220, 38, 38, 0.5)
+                rgba(234, 88, 12, 0.3),
+                rgba(234, 88, 12, 0.3)
             ),
-            url(/static/images/pizzavegan-banner.jpg) no-repeat center center;
+            url(/static/images/pizzavegan-banner-2.jpg) no-repeat center center;
         background-size: cover;
+    }
+
+    .hero__heading,
+    .hero__subtitle {
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     }
 
     .hero__heading {
@@ -23,8 +28,16 @@
         font-size: calc(1.25rem + 1.25vw);
     }
 
+    .alert {
+        @apply w-full px-3 py-2 bg-white font-sans;
+    }
+
+    .alert-error {
+        @apply text-red-600 border-red-600 border border-l-4
+    }
+
     .btn {
-        @apply px-5 py-2 uppercase tracking-wider text-white duration-300;
+        @apply px-5 py-2 uppercase tracking-wider text-white outline-none focus:outline-none duration-200;
     }
 
     .nav__dropdown {

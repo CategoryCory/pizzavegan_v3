@@ -11,7 +11,7 @@
     </section>
 
     <main class="container mx-auto my-8 flex flex-col items-center xl:flex-row xl:items-start xl:space-x-12 px-6 xl:px-10"><!-- THE MAIN BODY -->
-        <section class="xl:w-2/3"><!-- THE LATEST ARTICLES -->
+        <section class="xl:mb-4 xl:w-2/3"><!-- THE LATEST ARTICLES -->
             <h2 class="mb-10 text-3xl md:text-5xl border-b-2 border-gray-300">Our Latest Articles</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><!-- THE GRID -->
                 {% for article in articles_list %}
@@ -36,6 +36,10 @@
                     </div>
                 {% endfor %}
             </div>
+            <div class="pr-3 flex justify-end">
+                <a href="/articles/" class="font-sans text-gray-700 uppercase hover:text-brand duration-300">More Articles</a>
+                <span class="text-brand">&nbsp;&rarr;</span>
+            </div>
         </section>
 
         <aside class="xl:w-1/3 bg-gray-100 px-8 py-6"><!-- THE SIDEBAR -->
@@ -47,6 +51,10 @@
             <p class="text-lg">
                 {{ featured_product.subtitle }}
             </p>
+            <div class="mt-4 px-3 py-2 flex justify-end bg-gray-200">
+                <a href="/products/" class="font-sans text-gray-600 uppercase hover:text-brand duration-300">More Products</a>
+                <span class="text-brand">&nbsp;&rarr;</span>
+            </div>
             <hr class="my-5 border-gray-300">
             <h3 class="mb-4 text-gray-700 text-2xl lg:text-3xl">Latest Recipes</h3>
             {% for recipe in recipes_list %}
@@ -62,6 +70,10 @@
                     {% endif %}
                 </div>
             {% endfor %}
+            <div class="mt-4 px-3 py-2 flex justify-end bg-gray-200">
+                <a href="/recipes/" class="font-sans text-gray-600 uppercase hover:text-brand duration-300">More Recipes</a>
+                <span class="text-brand">&nbsp;&rarr;</span>
+            </div>
             <hr class="my-5 border-gray-300">
             <p class="text-base"><span class="text-gray-700 font-extrabold font-sans text-lg">Looking for vegan pizza near you?</span> Enter your ZIP code below!</p>
             <form action="{% url 'pizzerias:pizzeria_list' %}" id="searchZipCodeForm" class="flex flex-col my-3 space-y-3">
@@ -71,11 +83,11 @@
                     class="px-3 py-2 outline-none border-gray-300 focus:border-brand-light focus:ring-0"
                     placeholder="ZIP Code"
                 >
-                <p class="search-form-error text-red-600 font-sans hidden">Please enter a valid ZIP code.</p>
+                <p class="search-form-error alert alert-error hidden">Please enter a valid ZIP code.</p>
                 <button
                     type="submit"
                     id="searchZipCodeButton"
-                    class="btn bg-brand hover:bg-brand-dark outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-light"
+                    class="btn bg-brand hover:bg-brand-dark focus:ring-2 focus:ring-offset-2 focus:ring-brand-light"
                 >
                     Search
                 </button>
