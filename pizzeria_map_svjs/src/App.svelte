@@ -1,5 +1,6 @@
 <script>
 	import Map from './components/Map.svelte';
+	import SearchBar from './components/SearchBar.svelte';
 	export let ready;
 </script>
 
@@ -23,7 +24,7 @@
 		{/if}
 	</div>
 	<div class="">
-		<div>This is the search area.</div>
+		<SearchBar />
 		<div>This is the results area.</div>
 	</div>
 </div>
