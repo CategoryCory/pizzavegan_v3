@@ -20,4 +20,10 @@
     });
 </script>
 
-<div class="h-full" bind:this={container}></div>
+<div class="gmap" bind:this={container}></div>
+
+<style>
+    .gmap {
+        height: 100%;
+    }
+</style>

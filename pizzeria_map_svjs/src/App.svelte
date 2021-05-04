@@ -1,6 +1,7 @@
 <script>
 	import Map from './components/Map.svelte';
 	import SearchBar from './components/SearchBar.svelte';
+	import SearchResults from './components/SearchResults.svelte';
 	export let ready;
 </script>
 
@@ -13,18 +14,56 @@
 	</script>
 </svelte:head>
 
-<div class="w-full h-screen lg:grid lg:grid-cols-2">
-	<div class="h-1/3 lg:h-full">
+<main class="map-container">
+	<div class="map">
 		{#if ready}
 			<Map />
 		{:else}
-			<div class="h-full grid place-content-center">
-				<h2 class="text-2xl text-gray-400">Loading map...</h2>
+			<div class="map__loading-container">
+				<h2 class="map__loading-message">Loading map...</h2>
 			</div>
 		{/if}
 	</div>
-	<div class="">
+	<div class="search-container">
 		<SearchBar />
-		<div>This is the results area.</div>
+		<SearchResults />
 	</div>
-</div>
+</main>
+
+<style>
+	.map-container {
+		width: 100%;
+	}
+
+	.map {
+		height: 300px;
+	}
+
+	.map__loading-container {
+		height: 100%;
+		display: grid;
+		place-items: center;
+	}
+
+	.map__loading-message {
+		font-size: 2rem;
+		color: rgb(168, 162, 158);
+	}
+
+	.search-container {
+		height: inherit;
+		padding: 0.75em 0;
+	}
+
+	@media screen and (min-width: 1024px) {
+		.map-container {
+			height: 750px;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.map {
+			height: 100%;
+		}
+	}
+</style>

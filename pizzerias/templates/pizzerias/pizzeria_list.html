@@ -4,6 +4,7 @@
 {% block title %} | Pizzerias{% endblock title %}
 
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'pizzeria-maps-build/pizzeria-maps.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
@@ -11,5 +12,5 @@
 {% endblock content %}
 
 {% block extra_js %}
-    <script src="{% static 'js/pizzeria-maps.js' %}"></script>
+    <script src="{% static 'pizzeria-maps-build/pizzeria-maps.js' %}"></script>
 {% endblock extra_js %}
