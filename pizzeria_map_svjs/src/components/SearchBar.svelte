@@ -23,7 +23,7 @@
     .sb-form {
         width: 95%;
         margin: 0 auto;
-        padding: 0.5em 0.75em;
+        padding: 0.2rem 0.5rem;
         display: flex;
         justify-content: space-between;
         border: 1px solid rgb(168, 162, 158);
@@ -52,6 +52,7 @@
     @media screen and (min-width: 640px) {
         .sb-form {
             width: 75%;
+            padding: 0.5em 0.75em;
         }
     }
 

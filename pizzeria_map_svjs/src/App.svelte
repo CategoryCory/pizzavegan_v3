@@ -36,7 +36,7 @@
 	}
 
 	.map {
-		height: 300px;
+		height: 250px;
 	}
 
 	.map__loading-container {

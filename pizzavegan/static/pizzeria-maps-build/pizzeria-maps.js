@@ -323,13 +323,6 @@ var app = (function () {
         else
             dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
     }
-    function set_data_dev(text, data) {
-        data = '' + data;
-        if (text.wholeText === data)
-            return;
-        dispatch_dev('SvelteDOMSetData', { node: text, data });
-        text.data = data;
-    }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
             if (!~keys.indexOf(slot_key)) {
@@ -488,20 +481,20 @@ var app = (function () {
     			img = element("img");
     			attr_dev(input, "id", "zipCode");
     			attr_dev(input, "type", "text");
-    			attr_dev(input, "class", "sb-form__input svelte-bmiope");
+    			attr_dev(input, "class", "sb-form__input svelte-1fq7fsf");
     			attr_dev(input, "placeholder", "Search by ZIP");
     			attr_dev(input, "aria-label", "Search by ZIP");
     			add_location(input, file$3, 4, 8, 85);
     			if (img.src !== (img_src_value = "/static/images/magnifying-glass.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Search");
-    			attr_dev(img, "class", "svelte-bmiope");
+    			attr_dev(img, "class", "svelte-1fq7fsf");
     			add_location(img, file$3, 12, 12, 340);
     			attr_dev(button, "type", "submit");
-    			attr_dev(button, "class", "sb-form__button svelte-bmiope");
+    			attr_dev(button, "class", "sb-form__button svelte-1fq7fsf");
     			add_location(button, file$3, 11, 8, 280);
-    			attr_dev(form, "class", "sb-form svelte-bmiope");
+    			attr_dev(form, "class", "sb-form svelte-1fq7fsf");
     			add_location(form, file$3, 3, 4, 53);
-    			attr_dev(div, "class", "sb-container svelte-bmiope");
+    			attr_dev(div, "class", "sb-container svelte-1fq7fsf");
     			add_location(div, file$3, 2, 0, 21);
     		},
     		l: function claim(nodes) {
@@ -565,30 +558,92 @@ var app = (function () {
     const file$2 = "src\\components\\PizzeriaListing.svelte";
 
     function create_fragment$2(ctx) {
-    	let p;
-    	let t;
+    	let div2;
+    	let div0;
+    	let img;
+    	let img_src_value;
+    	let t0;
+    	let div1;
+    	let h2;
+    	let t2;
+    	let p0;
+    	let t4;
+    	let p1;
+    	let t10;
+    	let p2;
+    	let t12;
+    	let p3;
 
     	const block = {
     		c: function create() {
-    			p = element("p");
-    			t = text(/*message*/ ctx[0]);
-    			attr_dev(p, "class", "m-3 px-3 py-2 bg-gray-100");
-    			add_location(p, file$2, 4, 0, 48);
+    			div2 = element("div");
+    			div0 = element("div");
+    			img = element("img");
+    			t0 = space();
+    			div1 = element("div");
+    			h2 = element("h2");
+    			h2.textContent = `${/*pizzeriaName*/ ctx[1]}`;
+    			t2 = space();
+    			p0 = element("p");
+    			p0.textContent = `${/*streetAddress*/ ctx[2]}`;
+    			t4 = space();
+    			p1 = element("p");
+    			p1.textContent = `${/*city*/ ctx[3]}, ${/*state*/ ctx[4]}  ${/*zip*/ ctx[5]}`;
+    			t10 = space();
+    			p2 = element("p");
+    			p2.textContent = `${/*phone*/ ctx[6]}`;
+    			t12 = space();
+    			p3 = element("p");
+    			p3.textContent = "This is another line.";
+    			if (img.src !== (img_src_value = /*logo*/ ctx[0])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "Pizza Logo");
+    			attr_dev(img, "class", "listing-image svelte-1oew10w");
+    			add_location(img, file$2, 14, 8, 326);
+    			attr_dev(div0, "class", "listing-image-container svelte-1oew10w");
+    			add_location(div0, file$2, 13, 4, 279);
+    			attr_dev(h2, "class", "svelte-1oew10w");
+    			add_location(h2, file$2, 17, 8, 445);
+    			attr_dev(p0, "class", "svelte-1oew10w");
+    			add_location(p0, file$2, 18, 8, 478);
+    			attr_dev(p1, "class", "svelte-1oew10w");
+    			add_location(p1, file$2, 19, 8, 510);
+    			attr_dev(p2, "class", "svelte-1oew10w");
+    			add_location(p2, file$2, 20, 8, 548);
+    			attr_dev(p3, "class", "svelte-1oew10w");
+    			add_location(p3, file$2, 21, 8, 572);
+    			attr_dev(div1, "class", "listing-info-container svelte-1oew10w");
+    			add_location(div1, file$2, 16, 4, 399);
+    			attr_dev(div2, "class", "listing-container svelte-1oew10w");
+    			add_location(div2, file$2, 12, 0, 242);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, p, anchor);
-    			append_dev(p, t);
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div0);
+    			append_dev(div0, img);
+    			append_dev(div2, t0);
+    			append_dev(div2, div1);
+    			append_dev(div1, h2);
+    			append_dev(div1, t2);
+    			append_dev(div1, p0);
+    			append_dev(div1, t4);
+    			append_dev(div1, p1);
+    			append_dev(div1, t10);
+    			append_dev(div1, p2);
+    			append_dev(div1, t12);
+    			append_dev(div1, p3);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*message*/ 1) set_data_dev(t, /*message*/ ctx[0]);
+    			if (dirty & /*logo*/ 1 && img.src !== (img_src_value = /*logo*/ ctx[0])) {
+    				attr_dev(img, "src", img_src_value);
+    			}
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p);
+    			if (detaching) detach_dev(div2);
     		}
     	};
 
@@ -606,34 +661,54 @@ var app = (function () {
     function instance$2($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("PizzeriaListing", slots, []);
-    	let { message } = $$props;
-    	const writable_props = ["message"];
+    	let pizzeriaName = "Bob's Pizza";
+    	let streetAddress = "123 Main Street";
+    	let city = "Oxford";
+    	let state = "MS";
+    	let zip = "38655";
+    	let phone = "662-555-1234";
+    	let { logo } = $$props;
+    	const writable_props = ["logo"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<PizzeriaListing> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ("message" in $$props) $$invalidate(0, message = $$props.message);
+    		if ("logo" in $$props) $$invalidate(0, logo = $$props.logo);
     	};
 
-    	$$self.$capture_state = () => ({ message });
+    	$$self.$capture_state = () => ({
+    		pizzeriaName,
+    		streetAddress,
+    		city,
+    		state,
+    		zip,
+    		phone,
+    		logo
+    	});
 
     	$$self.$inject_state = $$props => {
-    		if ("message" in $$props) $$invalidate(0, message = $$props.message);
+    		if ("pizzeriaName" in $$props) $$invalidate(1, pizzeriaName = $$props.pizzeriaName);
+    		if ("streetAddress" in $$props) $$invalidate(2, streetAddress = $$props.streetAddress);
+    		if ("city" in $$props) $$invalidate(3, city = $$props.city);
+    		if ("state" in $$props) $$invalidate(4, state = $$props.state);
+    		if ("zip" in $$props) $$invalidate(5, zip = $$props.zip);
+    		if ("phone" in $$props) $$invalidate(6, phone = $$props.phone);
+    		if ("logo" in $$props) $$invalidate(0, logo = $$props.logo);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [message];
+    	return [logo, pizzeriaName, streetAddress, city, state, zip, phone];
     }
 
     class PizzeriaListing extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { message: 0 });
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { logo: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -645,16 +720,16 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*message*/ ctx[0] === undefined && !("message" in props)) {
-    			console.warn("<PizzeriaListing> was created without expected prop 'message'");
+    		if (/*logo*/ ctx[0] === undefined && !("logo" in props)) {
+    			console.warn("<PizzeriaListing> was created without expected prop 'logo'");
     		}
     	}
 
-    	get message() {
+    	get logo() {
     		throw new Error("<PizzeriaListing>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set message(value) {
+    	set logo(value) {
     		throw new Error("<PizzeriaListing>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -665,17 +740,141 @@ var app = (function () {
     function create_fragment$1(ctx) {
     	let div;
     	let pizzerialisting0;
-    	let t;
+    	let t0;
     	let pizzerialisting1;
+    	let t1;
+    	let pizzerialisting2;
+    	let t2;
+    	let pizzerialisting3;
+    	let t3;
+    	let pizzerialisting4;
+    	let t4;
+    	let pizzerialisting5;
+    	let t5;
+    	let pizzerialisting6;
+    	let t6;
+    	let pizzerialisting7;
+    	let t7;
+    	let pizzerialisting8;
+    	let t8;
+    	let pizzerialisting9;
+    	let t9;
+    	let pizzerialisting10;
+    	let t10;
+    	let pizzerialisting11;
+    	let t11;
+    	let pizzerialisting12;
+    	let t12;
+    	let pizzerialisting13;
+    	let t13;
+    	let pizzerialisting14;
+    	let t14;
+    	let pizzerialisting15;
+    	let t15;
+    	let pizzerialisting16;
+    	let t16;
+    	let pizzerialisting17;
     	let current;
 
     	pizzerialisting0 = new PizzeriaListing({
-    			props: { message: "First one" },
+    			props: { logo: "/static/images/pizza-slice.png" },
     			$$inline: true
     		});
 
     	pizzerialisting1 = new PizzeriaListing({
-    			props: { message: "Second one" },
+    			props: {
+    				logo: "/static/images/Pizza-Hut-Logo.png"
+    			},
+    			$$inline: true
+    		});
+
+    	pizzerialisting2 = new PizzeriaListing({
+    			props: { logo: "/static/images/slices.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting3 = new PizzeriaListing({
+    			props: { logo: "/static/images/pizza-slice.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting4 = new PizzeriaListing({
+    			props: {
+    				logo: "/static/images/Pizza-Hut-Logo.png"
+    			},
+    			$$inline: true
+    		});
+
+    	pizzerialisting5 = new PizzeriaListing({
+    			props: { logo: "/static/images/slices.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting6 = new PizzeriaListing({
+    			props: { logo: "/static/images/pizza-slice.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting7 = new PizzeriaListing({
+    			props: {
+    				logo: "/static/images/Pizza-Hut-Logo.png"
+    			},
+    			$$inline: true
+    		});
+
+    	pizzerialisting8 = new PizzeriaListing({
+    			props: { logo: "/static/images/slices.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting9 = new PizzeriaListing({
+    			props: { logo: "/static/images/pizza-slice.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting10 = new PizzeriaListing({
+    			props: {
+    				logo: "/static/images/Pizza-Hut-Logo.png"
+    			},
+    			$$inline: true
+    		});
+
+    	pizzerialisting11 = new PizzeriaListing({
+    			props: { logo: "/static/images/slices.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting12 = new PizzeriaListing({
+    			props: { logo: "/static/images/pizza-slice.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting13 = new PizzeriaListing({
+    			props: {
+    				logo: "/static/images/Pizza-Hut-Logo.png"
+    			},
+    			$$inline: true
+    		});
+
+    	pizzerialisting14 = new PizzeriaListing({
+    			props: { logo: "/static/images/slices.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting15 = new PizzeriaListing({
+    			props: { logo: "/static/images/pizza-slice.png" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting16 = new PizzeriaListing({
+    			props: {
+    				logo: "/static/images/Pizza-Hut-Logo.png"
+    			},
+    			$$inline: true
+    		});
+
+    	pizzerialisting17 = new PizzeriaListing({
+    			props: { logo: "/static/images/slices.png" },
     			$$inline: true
     		});
 
@@ -683,9 +882,41 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(pizzerialisting0.$$.fragment);
-    			t = space();
+    			t0 = space();
     			create_component(pizzerialisting1.$$.fragment);
-    			attr_dev(div, "class", "search-results-container svelte-rjewdu");
+    			t1 = space();
+    			create_component(pizzerialisting2.$$.fragment);
+    			t2 = space();
+    			create_component(pizzerialisting3.$$.fragment);
+    			t3 = space();
+    			create_component(pizzerialisting4.$$.fragment);
+    			t4 = space();
+    			create_component(pizzerialisting5.$$.fragment);
+    			t5 = space();
+    			create_component(pizzerialisting6.$$.fragment);
+    			t6 = space();
+    			create_component(pizzerialisting7.$$.fragment);
+    			t7 = space();
+    			create_component(pizzerialisting8.$$.fragment);
+    			t8 = space();
+    			create_component(pizzerialisting9.$$.fragment);
+    			t9 = space();
+    			create_component(pizzerialisting10.$$.fragment);
+    			t10 = space();
+    			create_component(pizzerialisting11.$$.fragment);
+    			t11 = space();
+    			create_component(pizzerialisting12.$$.fragment);
+    			t12 = space();
+    			create_component(pizzerialisting13.$$.fragment);
+    			t13 = space();
+    			create_component(pizzerialisting14.$$.fragment);
+    			t14 = space();
+    			create_component(pizzerialisting15.$$.fragment);
+    			t15 = space();
+    			create_component(pizzerialisting16.$$.fragment);
+    			t16 = space();
+    			create_component(pizzerialisting17.$$.fragment);
+    			attr_dev(div, "class", "search-results-container svelte-1dl4i7q");
     			add_location(div, file$1, 4, 0, 84);
     		},
     		l: function claim(nodes) {
@@ -694,8 +925,40 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			mount_component(pizzerialisting0, div, null);
-    			append_dev(div, t);
+    			append_dev(div, t0);
     			mount_component(pizzerialisting1, div, null);
+    			append_dev(div, t1);
+    			mount_component(pizzerialisting2, div, null);
+    			append_dev(div, t2);
+    			mount_component(pizzerialisting3, div, null);
+    			append_dev(div, t3);
+    			mount_component(pizzerialisting4, div, null);
+    			append_dev(div, t4);
+    			mount_component(pizzerialisting5, div, null);
+    			append_dev(div, t5);
+    			mount_component(pizzerialisting6, div, null);
+    			append_dev(div, t6);
+    			mount_component(pizzerialisting7, div, null);
+    			append_dev(div, t7);
+    			mount_component(pizzerialisting8, div, null);
+    			append_dev(div, t8);
+    			mount_component(pizzerialisting9, div, null);
+    			append_dev(div, t9);
+    			mount_component(pizzerialisting10, div, null);
+    			append_dev(div, t10);
+    			mount_component(pizzerialisting11, div, null);
+    			append_dev(div, t11);
+    			mount_component(pizzerialisting12, div, null);
+    			append_dev(div, t12);
+    			mount_component(pizzerialisting13, div, null);
+    			append_dev(div, t13);
+    			mount_component(pizzerialisting14, div, null);
+    			append_dev(div, t14);
+    			mount_component(pizzerialisting15, div, null);
+    			append_dev(div, t15);
+    			mount_component(pizzerialisting16, div, null);
+    			append_dev(div, t16);
+    			mount_component(pizzerialisting17, div, null);
     			current = true;
     		},
     		p: noop,
@@ -703,17 +966,65 @@ var app = (function () {
     			if (current) return;
     			transition_in(pizzerialisting0.$$.fragment, local);
     			transition_in(pizzerialisting1.$$.fragment, local);
+    			transition_in(pizzerialisting2.$$.fragment, local);
+    			transition_in(pizzerialisting3.$$.fragment, local);
+    			transition_in(pizzerialisting4.$$.fragment, local);
+    			transition_in(pizzerialisting5.$$.fragment, local);
+    			transition_in(pizzerialisting6.$$.fragment, local);
+    			transition_in(pizzerialisting7.$$.fragment, local);
+    			transition_in(pizzerialisting8.$$.fragment, local);
+    			transition_in(pizzerialisting9.$$.fragment, local);
+    			transition_in(pizzerialisting10.$$.fragment, local);
+    			transition_in(pizzerialisting11.$$.fragment, local);
+    			transition_in(pizzerialisting12.$$.fragment, local);
+    			transition_in(pizzerialisting13.$$.fragment, local);
+    			transition_in(pizzerialisting14.$$.fragment, local);
+    			transition_in(pizzerialisting15.$$.fragment, local);
+    			transition_in(pizzerialisting16.$$.fragment, local);
+    			transition_in(pizzerialisting17.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(pizzerialisting0.$$.fragment, local);
     			transition_out(pizzerialisting1.$$.fragment, local);
+    			transition_out(pizzerialisting2.$$.fragment, local);
+    			transition_out(pizzerialisting3.$$.fragment, local);
+    			transition_out(pizzerialisting4.$$.fragment, local);
+    			transition_out(pizzerialisting5.$$.fragment, local);
+    			transition_out(pizzerialisting6.$$.fragment, local);
+    			transition_out(pizzerialisting7.$$.fragment, local);
+    			transition_out(pizzerialisting8.$$.fragment, local);
+    			transition_out(pizzerialisting9.$$.fragment, local);
+    			transition_out(pizzerialisting10.$$.fragment, local);
+    			transition_out(pizzerialisting11.$$.fragment, local);
+    			transition_out(pizzerialisting12.$$.fragment, local);
+    			transition_out(pizzerialisting13.$$.fragment, local);
+    			transition_out(pizzerialisting14.$$.fragment, local);
+    			transition_out(pizzerialisting15.$$.fragment, local);
+    			transition_out(pizzerialisting16.$$.fragment, local);
+    			transition_out(pizzerialisting17.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			destroy_component(pizzerialisting0);
     			destroy_component(pizzerialisting1);
+    			destroy_component(pizzerialisting2);
+    			destroy_component(pizzerialisting3);
+    			destroy_component(pizzerialisting4);
+    			destroy_component(pizzerialisting5);
+    			destroy_component(pizzerialisting6);
+    			destroy_component(pizzerialisting7);
+    			destroy_component(pizzerialisting8);
+    			destroy_component(pizzerialisting9);
+    			destroy_component(pizzerialisting10);
+    			destroy_component(pizzerialisting11);
+    			destroy_component(pizzerialisting12);
+    			destroy_component(pizzerialisting13);
+    			destroy_component(pizzerialisting14);
+    			destroy_component(pizzerialisting15);
+    			destroy_component(pizzerialisting16);
+    			destroy_component(pizzerialisting17);
     		}
     	};
 
@@ -768,9 +1079,9 @@ var app = (function () {
     			div = element("div");
     			h2 = element("h2");
     			h2.textContent = "Loading map...";
-    			attr_dev(h2, "class", "map__loading-message svelte-tqz2zm");
+    			attr_dev(h2, "class", "map__loading-message svelte-1vx6nxw");
     			add_location(h2, file, 22, 4, 663);
-    			attr_dev(div, "class", "map__loading-container svelte-tqz2zm");
+    			attr_dev(div, "class", "map__loading-container svelte-1vx6nxw");
     			add_location(div, file, 21, 3, 621);
     		},
     		m: function mount(target, anchor) {
@@ -883,11 +1194,11 @@ var app = (function () {
     			script1.defer = true;
     			if (script1.src !== (script1_src_value = "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js")) attr_dev(script1, "src", script1_src_value);
     			add_location(script1, file, 11, 1, 371);
-    			attr_dev(div0, "class", "map svelte-tqz2zm");
+    			attr_dev(div0, "class", "map svelte-1vx6nxw");
     			add_location(div0, file, 17, 1, 561);
-    			attr_dev(div1, "class", "search-container svelte-tqz2zm");
+    			attr_dev(div1, "class", "search-container svelte-1vx6nxw");
     			add_location(div1, file, 26, 1, 747);
-    			attr_dev(main, "class", "map-container svelte-tqz2zm");
+    			attr_dev(main, "class", "map-container svelte-1vx6nxw");
     			add_location(main, file, 16, 0, 530);
     		},
     		l: function claim(nodes) {
