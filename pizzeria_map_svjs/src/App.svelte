@@ -52,7 +52,7 @@
 
 	.search-container {
 		height: inherit;
-		padding: 0.75em 0;
+		padding-top: 0.75em;
 	}
 
 	@media screen and (min-width: 1024px) {
