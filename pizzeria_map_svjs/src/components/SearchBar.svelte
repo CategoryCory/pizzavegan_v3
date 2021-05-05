@@ -27,6 +27,7 @@
         display: flex;
         justify-content: space-between;
         border: 1px solid rgb(168, 162, 158);
+        border-radius: 0.5rem;
     }
 
     .sb-form__input {

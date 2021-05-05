@@ -323,6 +323,13 @@ var app = (function () {
         else
             dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
     }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.wholeText === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
             if (!~keys.indexOf(slot_key)) {
@@ -481,20 +488,20 @@ var app = (function () {
     			img = element("img");
     			attr_dev(input, "id", "zipCode");
     			attr_dev(input, "type", "text");
-    			attr_dev(input, "class", "sb-form__input svelte-9jb0sj");
+    			attr_dev(input, "class", "sb-form__input svelte-bmiope");
     			attr_dev(input, "placeholder", "Search by ZIP");
     			attr_dev(input, "aria-label", "Search by ZIP");
     			add_location(input, file$3, 4, 8, 85);
     			if (img.src !== (img_src_value = "/static/images/magnifying-glass.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Search");
-    			attr_dev(img, "class", "svelte-9jb0sj");
+    			attr_dev(img, "class", "svelte-bmiope");
     			add_location(img, file$3, 12, 12, 340);
     			attr_dev(button, "type", "submit");
-    			attr_dev(button, "class", "sb-form__button svelte-9jb0sj");
+    			attr_dev(button, "class", "sb-form__button svelte-bmiope");
     			add_location(button, file$3, 11, 8, 280);
-    			attr_dev(form, "class", "sb-form svelte-9jb0sj");
+    			attr_dev(form, "class", "sb-form svelte-bmiope");
     			add_location(form, file$3, 3, 4, 53);
-    			attr_dev(div, "class", "sb-container svelte-9jb0sj");
+    			attr_dev(div, "class", "sb-container svelte-bmiope");
     			add_location(div, file$3, 2, 0, 21);
     		},
     		l: function claim(nodes) {
@@ -559,21 +566,25 @@ var app = (function () {
 
     function create_fragment$2(ctx) {
     	let p;
+    	let t;
 
     	const block = {
     		c: function create() {
     			p = element("p");
-    			p.textContent = "Some stuff.";
+    			t = text(/*message*/ ctx[0]);
     			attr_dev(p, "class", "m-3 px-3 py-2 bg-gray-100");
-    			add_location(p, file$2, 2, 0, 21);
+    			add_location(p, file$2, 4, 0, 48);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
+    			append_dev(p, t);
     		},
-    		p: noop,
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*message*/ 1) set_data_dev(t, /*message*/ ctx[0]);
+    		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
@@ -592,22 +603,37 @@ var app = (function () {
     	return block;
     }
 
-    function instance$2($$self, $$props) {
+    function instance$2($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("PizzeriaListing", slots, []);
-    	const writable_props = [];
+    	let { message } = $$props;
+    	const writable_props = ["message"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<PizzeriaListing> was created with unknown prop '${key}'`);
     	});
 
-    	return [];
+    	$$self.$$set = $$props => {
+    		if ("message" in $$props) $$invalidate(0, message = $$props.message);
+    	};
+
+    	$$self.$capture_state = () => ({ message });
+
+    	$$self.$inject_state = $$props => {
+    		if ("message" in $$props) $$invalidate(0, message = $$props.message);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [message];
     }
 
     class PizzeriaListing extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { message: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -615,6 +641,21 @@ var app = (function () {
     			options,
     			id: create_fragment$2.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*message*/ ctx[0] === undefined && !("message" in props)) {
+    			console.warn("<PizzeriaListing> was created without expected prop 'message'");
+    		}
+    	}
+
+    	get message() {
+    		throw new Error("<PizzeriaListing>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set message(value) {
+    		throw new Error("<PizzeriaListing>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -627,8 +668,16 @@ var app = (function () {
     	let t;
     	let pizzerialisting1;
     	let current;
-    	pizzerialisting0 = new PizzeriaListing({ $$inline: true });
-    	pizzerialisting1 = new PizzeriaListing({ $$inline: true });
+
+    	pizzerialisting0 = new PizzeriaListing({
+    			props: { message: "First one" },
+    			$$inline: true
+    		});
+
+    	pizzerialisting1 = new PizzeriaListing({
+    			props: { message: "Second one" },
+    			$$inline: true
+    		});
 
     	const block = {
     		c: function create() {

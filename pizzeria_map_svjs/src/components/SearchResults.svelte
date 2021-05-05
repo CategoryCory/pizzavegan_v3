@@ -3,8 +3,8 @@
 </script>
 
 <div class="search-results-container">
-    <PizzeriaListing />
-    <PizzeriaListing />
+    <PizzeriaListing message="First one"/>
+    <PizzeriaListing message="Second one"/>
 <!--    <PizzeriaListing />-->
 <!--    <PizzeriaListing />-->
 <!--    <PizzeriaListing />-->
