@@ -40,16 +40,11 @@
 
 <style>
     .search-results-container {
-        padding: 0.5rem 1rem 1rem;
+        padding: 0.5rem 1rem;
         display: grid;
         grid-auto-rows: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
         gap: 0.75rem;
-    }
-
-    @media screen and (min-width: 640px) {
-        .search-results-container {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
     }
 
     @media screen and (min-width: 1024px) {
@@ -58,13 +53,6 @@
             max-height: 87%;
             overflow-y: auto;
             gap: 1.5rem;
-            grid-template-columns: repeat(1, minmax(0, 1fr));
-        }
-    }
-
-    @media screen and (min-width: 1536px) {
-        .search-results-container {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
 </style>

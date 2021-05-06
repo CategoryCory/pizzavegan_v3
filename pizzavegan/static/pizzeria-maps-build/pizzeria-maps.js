@@ -594,26 +594,26 @@ var app = (function () {
     			p2.textContent = `${/*phone*/ ctx[6]}`;
     			t12 = space();
     			p3 = element("p");
-    			p3.textContent = "This is another line.";
+    			p3.textContent = "Dine In | Pickup | Delivery";
     			if (img.src !== (img_src_value = /*logo*/ ctx[0])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Pizza Logo");
-    			attr_dev(img, "class", "listing-image svelte-1oew10w");
+    			attr_dev(img, "class", "listing-image svelte-c6poiv");
     			add_location(img, file$2, 14, 8, 326);
-    			attr_dev(div0, "class", "listing-image-container svelte-1oew10w");
+    			attr_dev(div0, "class", "listing-image-container svelte-c6poiv");
     			add_location(div0, file$2, 13, 4, 279);
-    			attr_dev(h2, "class", "svelte-1oew10w");
+    			attr_dev(h2, "class", "svelte-c6poiv");
     			add_location(h2, file$2, 17, 8, 445);
-    			attr_dev(p0, "class", "svelte-1oew10w");
+    			attr_dev(p0, "class", "svelte-c6poiv");
     			add_location(p0, file$2, 18, 8, 478);
-    			attr_dev(p1, "class", "svelte-1oew10w");
+    			attr_dev(p1, "class", "svelte-c6poiv");
     			add_location(p1, file$2, 19, 8, 510);
-    			attr_dev(p2, "class", "svelte-1oew10w");
+    			attr_dev(p2, "class", "svelte-c6poiv");
     			add_location(p2, file$2, 20, 8, 548);
-    			attr_dev(p3, "class", "svelte-1oew10w");
+    			attr_dev(p3, "class", "svelte-c6poiv");
     			add_location(p3, file$2, 21, 8, 572);
-    			attr_dev(div1, "class", "listing-info-container svelte-1oew10w");
+    			attr_dev(div1, "class", "listing-info-container svelte-c6poiv");
     			add_location(div1, file$2, 16, 4, 399);
-    			attr_dev(div2, "class", "listing-container svelte-1oew10w");
+    			attr_dev(div2, "class", "listing-container svelte-c6poiv");
     			add_location(div2, file$2, 12, 0, 242);
     		},
     		l: function claim(nodes) {
@@ -916,7 +916,7 @@ var app = (function () {
     			create_component(pizzerialisting16.$$.fragment);
     			t16 = space();
     			create_component(pizzerialisting17.$$.fragment);
-    			attr_dev(div, "class", "search-results-container svelte-1dl4i7q");
+    			attr_dev(div, "class", "search-results-container svelte-1jzirss");
     			add_location(div, file$1, 4, 0, 84);
     		},
     		l: function claim(nodes) {
@@ -1079,9 +1079,9 @@ var app = (function () {
     			div = element("div");
     			h2 = element("h2");
     			h2.textContent = "Loading map...";
-    			attr_dev(h2, "class", "map__loading-message svelte-1vx6nxw");
+    			attr_dev(h2, "class", "map__loading-message svelte-u8k1bo");
     			add_location(h2, file, 22, 4, 663);
-    			attr_dev(div, "class", "map__loading-container svelte-1vx6nxw");
+    			attr_dev(div, "class", "map__loading-container svelte-u8k1bo");
     			add_location(div, file, 21, 3, 621);
     		},
     		m: function mount(target, anchor) {
@@ -1194,11 +1194,11 @@ var app = (function () {
     			script1.defer = true;
     			if (script1.src !== (script1_src_value = "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js")) attr_dev(script1, "src", script1_src_value);
     			add_location(script1, file, 11, 1, 371);
-    			attr_dev(div0, "class", "map svelte-1vx6nxw");
+    			attr_dev(div0, "class", "map svelte-u8k1bo");
     			add_location(div0, file, 17, 1, 561);
-    			attr_dev(div1, "class", "search-container svelte-1vx6nxw");
+    			attr_dev(div1, "class", "search-container svelte-u8k1bo");
     			add_location(div1, file, 26, 1, 747);
-    			attr_dev(main, "class", "map-container svelte-1vx6nxw");
+    			attr_dev(main, "class", "map-container svelte-u8k1bo");
     			add_location(main, file, 16, 0, 530);
     		},
     		l: function claim(nodes) {

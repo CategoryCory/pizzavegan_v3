@@ -19,7 +19,7 @@
         <p>{streetAddress}</p>
         <p>{city}, {state} {zip}</p>
         <p>{phone}</p>
-        <p>This is another line.</p>
+        <p>Dine In | Pickup | Delivery</p>
     </div>
 </div>
 
@@ -28,9 +28,9 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        border: 1px solid rgb(230, 226, 222);
+        /*border: 1px solid rgb(230, 226, 222);*/
         border-radius: 0.5rem;
-        box-shadow: 0 0.125rem 0.5rem 0 rgb(230, 226, 222);
+        box-shadow: 0 0.125rem 0.5rem 0 rgba(0, 0, 0, 0.15);
         font-family: "Jost", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
@@ -55,8 +55,7 @@
 
     .listing-info-container {
         height: 100%;
-        margin-left: 1rem;
-        padding: 0.75rem 0;
+        padding: 0.75rem 1rem;
     }
 
     .listing-info-container h2 {

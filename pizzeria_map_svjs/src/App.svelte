@@ -55,6 +55,12 @@
 		padding-top: 0.75em;
 	}
 
+	@media screen and (min-width: 640px) {
+		.map {
+			height: 350px;
+		}
+	}
+
 	@media screen and (min-width: 1024px) {
 		.map-container {
 			height: 750px;
