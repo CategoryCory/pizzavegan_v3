@@ -68,6 +68,17 @@
         object-fit: cover;
     }
 
+    .post__featured-image {
+        margin: 1.75rem 0;
+    }
+
+    .responsive-image {
+        width: 100%;
+        max-height: calc(375px + 20vw);
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
+
     h1,
     h2,
     h3,
