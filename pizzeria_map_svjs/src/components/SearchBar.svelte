@@ -1,5 +1,6 @@
 <script>
-    import { currentZip } from "../stores";
+    import { currentZip, searchResultsList } from "../stores";
+    import { fly } from "svelte/transition";
 
     let zipCode;
     let showError = false;
@@ -13,6 +14,9 @@
             $currentZip = "";
             showError = true;
         }
+
+        $searchResultsList = [...$searchResultsList, {logo: "/static/images/pizza-slice.png"}];
+        console.log($searchResultsList.length);
     }
 </script>
 
@@ -31,7 +35,7 @@
         </button>
     </form>
     {#if showError}
-        <div class="sb-error">
+        <div class="sb-error" transition:fly={ { x:50, duration:300 } }>
             <p>Please enter a valid 5 or 9 digit ZIP code.</p>
         </div>
     {/if}

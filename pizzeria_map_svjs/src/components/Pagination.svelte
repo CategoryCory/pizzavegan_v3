@@ -25,6 +25,7 @@
         line-height: 2.5rem;
         border-radius: 9999px;
         text-align: center;
+        transition: background-color 150ms ease-in-out;
     }
 
     .pagination-container a:hover {
@@ -43,6 +44,7 @@
 
     .pagination-container a.active {
         background-color: #B45A7E;
+        font-weight: 800;
         color: white;
     }
 

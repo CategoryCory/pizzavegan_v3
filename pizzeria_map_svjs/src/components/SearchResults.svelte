@@ -1,46 +1,26 @@
 <script>
+    import { currentZip, searchResultsList } from "../stores";
     import PizzeriaListing from "./PizzeriaListing.svelte";
     import Pagination from "./Pagination.svelte";
 </script>
 
 <div class="search-results-container">
-    <div class="search-results-listings">
-        <PizzeriaListing logo="/static/images/pizza-slice.png" />
-        <PizzeriaListing logo="/static/images/Pizza-Hut-Logo.png" />
-        <PizzeriaListing logo="/static/images/slices.png" />
-        <PizzeriaListing logo="/static/images/pizza-slice.png" />
-        <PizzeriaListing logo="/static/images/Pizza-Hut-Logo.png" />
-        <PizzeriaListing logo="/static/images/slices.png" />
-        <PizzeriaListing logo="/static/images/pizza-slice.png" />
-        <PizzeriaListing logo="/static/images/Pizza-Hut-Logo.png" />
-        <PizzeriaListing logo="/static/images/slices.png" />
-        <PizzeriaListing logo="/static/images/pizza-slice.png" />
-        <PizzeriaListing logo="/static/images/Pizza-Hut-Logo.png" />
-        <PizzeriaListing logo="/static/images/slices.png" />
-        <PizzeriaListing logo="/static/images/pizza-slice.png" />
-        <PizzeriaListing logo="/static/images/Pizza-Hut-Logo.png" />
-        <PizzeriaListing logo="/static/images/slices.png" />
-        <PizzeriaListing logo="/static/images/pizza-slice.png" />
-        <PizzeriaListing logo="/static/images/Pizza-Hut-Logo.png" />
-<!--    <PizzeriaListing logo="/static/images/slices.png" />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-<!--    <PizzeriaListing />-->
-    </div>
-
-    <Pagination />
+    {#if $searchResultsList.length > 0}
+        <div class="search-results-listings">
+            {#each $searchResultsList as listing}
+                <PizzeriaListing logo="{listing.logo}" />
+            {/each}
+        </div>
+<!--        <Pagination />-->
+    {:else}
+        <div class="no-results">
+            {#if $currentZip.length === 0}
+                <p>Enter your ZIP code to search for vegan pizza near you!</p>
+            {:else}
+                <p>No results found.</p>
+            {/if}
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -53,6 +33,12 @@
         grid-auto-rows: 1fr;
         grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
         gap: 0.75rem;
+    }
+
+    .no-results {
+        background-color: bisque;
+        display: grid;
+        place-items: center;
     }
 
     @media screen and (min-width: 1024px) {

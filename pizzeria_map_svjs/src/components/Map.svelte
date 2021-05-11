@@ -1,22 +1,22 @@
 <script>
     let container;
     let map;
-    let zoom = 8;
-    let center = { lat: 34.3668, lng: -89.5186 };
-    const mapOptions = { zoom, center };
+    let defaultZoom = 4;
+    let defaultCenter = { lat: 39.8283, lng: -98.5795 };
+    const mapOptions = { zoom: defaultZoom, center: defaultCenter };
 
-    const mapMarkerCenter = center;
-    const title = "This is a marker";
+    // const mapMarkerCenter = center;
+    // const title = "This is a marker";
 
     import { onMount } from 'svelte';
 
     onMount(async () => {
         map = new google.maps.Map(container, mapOptions);
-        new google.maps.Marker({
-            position: mapMarkerCenter,
-            map,
-            title
-        });
+        //new google.maps.Marker({
+        //    position: mapMarkerCenter,
+        //    map,
+        //    title
+        //});
     });
 </script>
 

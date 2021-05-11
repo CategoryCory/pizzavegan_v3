@@ -1,4 +1,6 @@
 <script>
+    import { scale } from "svelte/transition";
+
     let pizzeriaName = "Bob's Pizza";
     let streetAddress = "123 Main Street";
     let city = "Oxford";
@@ -10,7 +12,7 @@
     
 </script>
 
-<div class="listing-container">
+<div class="listing-container" transition:scale="{{duration: 300}}">
     <div class="listing-image-container">
         <img src={logo} alt="Pizza Logo" class="listing-image">
     </div>
@@ -28,7 +30,6 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        /*border: 1px solid rgb(230, 226, 222);*/
         border-radius: 0.5rem;
         box-shadow: 0 0.125rem 0.5rem 0 rgba(0, 0, 0, 0.15);
         font-family: "Jost", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
