@@ -1,6 +1,7 @@
 <script>
     import { currentZip, searchResultsList, hasValidZip, isLoading } from "../stores";
     import PizzeriaListing from "./PizzeriaListing.svelte";
+    import Alert from "./Alert.svelte";
     import Pagination from "./Pagination.svelte";
 </script>
 
@@ -26,7 +27,7 @@
         {:else}
             <div class="no-results">
                 {#if $currentZip.length > 0}
-                    <p>Zip code {$currentZip} was not found.</p>
+                    <Alert message="Zip code {$currentZip} was not found." />
                 {:else}
                     <p>Enter your ZIP code to find vegan pizza near you!</p>
                 {/if}

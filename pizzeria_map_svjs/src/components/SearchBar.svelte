@@ -1,9 +1,9 @@
 <script>
     import {currentLatLng, currentZip, hasValidZip, isLoading, searchResultsList} from "../stores";
-    import { fly } from "svelte/transition";
+    import Alert from "./Alert.svelte";
 
     let zipCode;
-    let showError = false;
+    let zipFormatError = false;
 
     async function buttonClicked(e) {
         $isLoading = true;
@@ -11,7 +11,7 @@
         const zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/;
         if (zipRegex.test(zipCode)) {
             $currentZip = zipCode;
-            showError = false;
+            zipFormatError = false;
 
             try {
                 const response = await fetch(`/api/v1/signups/?zip=${$currentZip}`);
@@ -32,7 +32,7 @@
         } else {
             $currentZip = "";
             $hasValidZip = false;
-            showError = true;
+            zipFormatError = true;
         }
         $isLoading = false;
     }
@@ -52,10 +52,8 @@
             <img src="/static/images/magnifying-glass.svg" alt="Search">
         </button>
     </form>
-    {#if showError}
-        <div class="sb-error" transition:fly={ { x:50, duration:300 } }>
-            <p>Please enter a valid 5 or 9 digit ZIP code.</p>
-        </div>
+    {#if zipFormatError}
+        <Alert message="Please enter a valid 5 or 9 digit ZIP code." />
     {/if}
 </div>
 
@@ -72,8 +70,6 @@
     }
 
     .sb-form {
-        /*width: 95%;*/
-        /*margin: 0 auto;*/
         padding: 0.2rem 0.5rem;
         display: flex;
         justify-content: space-between;
@@ -100,25 +96,12 @@
         width: 1.75rem;
     }
 
-    .sb-error {
-        margin-top: 0.75em;
-        padding: 0.75em 1em;
-        border: 1px solid #D6D3D1;
-        border-left: 4px solid #EF4444;
-        border-radius: 0.25rem;
-    }
-
-    .sb-error p {
-        color: #EF4444;
-    }
-
     @media screen and (min-width: 640px) {
         .sb-container {
             width: 75%;
         }
 
         .sb-form {
-            /*width: 75%;*/
             padding: 0.5em 0.75em;
         }
     }
