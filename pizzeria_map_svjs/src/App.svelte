@@ -7,7 +7,7 @@
 
 <svelte:head>
 	<script defer async
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIIbGAPSDhXreX1zK_WoOXZSGR1ktxw6I&callback=initMap">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtCwMX4StPEEWhjUJ-yfWyPwSwe-YD0kU&callback=initMap">
 	</script>
 	<script defer
 		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">

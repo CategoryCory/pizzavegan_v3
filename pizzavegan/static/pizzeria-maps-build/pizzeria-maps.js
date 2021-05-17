@@ -712,7 +712,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "gmap svelte-fzboti");
-    			add_location(div, file$6, 45, 0, 1463);
+    			add_location(div, file$6, 202, 0, 4702);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -758,7 +758,97 @@ var app = (function () {
     	let markers = [];
     	let defaultZoom = 4;
     	let defaultCenter = { lat: 39.8283, lng: -98.5795 };
-    	const mapOptions = { zoom: defaultZoom, center: defaultCenter };
+
+    	const mapStyles = [
+    		{
+    			"elementType": "geometry",
+    			"stylers": [{ "color": "#f5f5f5" }]
+    		},
+    		{
+    			"elementType": "labels.text.fill",
+    			"stylers": [{ "color": "#616161" }]
+    		},
+    		{
+    			"elementType": "labels.text.stroke",
+    			"stylers": [{ "color": "#f5f5f5" }]
+    		},
+    		{
+    			"featureType": "administrative.land_parcel",
+    			"elementType": "labels.text.fill",
+    			"stylers": [{ "color": "#bdbdbd" }]
+    		},
+    		{
+    			"featureType": "poi",
+    			"elementType": "geometry",
+    			"stylers": [{ "color": "#eeeeee" }]
+    		},
+    		{
+    			"featureType": "poi",
+    			"elementType": "labels.text.fill",
+    			"stylers": [{ "color": "#757575" }]
+    		},
+    		{
+    			"featureType": "poi.park",
+    			"elementType": "geometry",
+    			"stylers": [{ "color": "#e5e5e5" }]
+    		},
+    		{
+    			"featureType": "poi.park",
+    			"elementType": "labels.text.fill",
+    			"stylers": [{ "color": "#9e9e9e" }]
+    		},
+    		{
+    			"featureType": "road",
+    			"elementType": "geometry",
+    			"stylers": [{ "color": "#ffffff" }]
+    		},
+    		{
+    			"featureType": "road.arterial",
+    			"elementType": "labels.text.fill",
+    			"stylers": [{ "color": "#757575" }]
+    		},
+    		{
+    			"featureType": "road.highway",
+    			"elementType": "geometry",
+    			"stylers": [{ "color": "#dadada" }]
+    		},
+    		{
+    			"featureType": "road.highway",
+    			"elementType": "labels.text.fill",
+    			"stylers": [{ "color": "#616161" }]
+    		},
+    		{
+    			"featureType": "road.local",
+    			"elementType": "labels.text.fill",
+    			"stylers": [{ "color": "#9e9e9e" }]
+    		},
+    		{
+    			"featureType": "transit.line",
+    			"elementType": "geometry",
+    			"stylers": [{ "color": "#e5e5e5" }]
+    		},
+    		{
+    			"featureType": "transit.station",
+    			"elementType": "geometry",
+    			"stylers": [{ "color": "#eeeeee" }]
+    		},
+    		{
+    			"featureType": "water",
+    			"elementType": "geometry",
+    			"stylers": [{ "color": "#ccdbf2" }]
+    		},
+    		{
+    			"featureType": "water",
+    			"elementType": "labels.text.fill",
+    			"stylers": [{ "color": "#9e9e9e" }]
+    		}
+    	];
+
+    	const mapOptions = {
+    		zoom: defaultZoom,
+    		center: defaultCenter,
+    		styles: mapStyles
+    	};
 
     	onMount(async () => {
     		$$invalidate(1, map = new google.maps.Map(container, mapOptions));
@@ -786,6 +876,7 @@ var app = (function () {
     		markers,
     		defaultZoom,
     		defaultCenter,
+    		mapStyles,
     		mapOptions,
     		onMount,
     		$hasValidZip,
@@ -824,7 +915,8 @@ var app = (function () {
     							const pizzeriaMarker = new google.maps.Marker({
     									position,
     									map,
-    									title: $searchResultsList[i].restaurant_name
+    									title: $searchResultsList[i].restaurant_name,
+    									icon: "/static/images/pizzavegan-map-icon.png"
     								});
 
     							markers.push(pizzeriaMarker);
@@ -2343,7 +2435,7 @@ var app = (function () {
     			create_component(searchresults.$$.fragment);
     			script0.defer = true;
     			script0.async = true;
-    			if (script0.src !== (script0_src_value = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBIIbGAPSDhXreX1zK_WoOXZSGR1ktxw6I&callback=initMap")) attr_dev(script0, "src", script0_src_value);
+    			if (script0.src !== (script0_src_value = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAtCwMX4StPEEWhjUJ-yfWyPwSwe-YD0kU&callback=initMap")) attr_dev(script0, "src", script0_src_value);
     			add_location(script0, file, 8, 1, 226);
     			script1.defer = true;
     			if (script1.src !== (script1_src_value = "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js")) attr_dev(script1, "src", script1_src_value);
