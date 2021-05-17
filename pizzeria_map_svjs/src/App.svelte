@@ -1,13 +1,8 @@
 <script>
-	import { currentZip } from "./stores";
 	import Map from './components/Map.svelte';
 	import SearchBar from './components/SearchBar.svelte';
 	import SearchResults from './components/SearchResults.svelte';
 	export let ready;
-
-	// fetch("/api/v1/signups/")
-	// 	.then(res => res.json())
-	// 	.then(data => console.log(data));
 </script>
 
 <svelte:head>

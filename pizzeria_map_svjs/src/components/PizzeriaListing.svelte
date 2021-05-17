@@ -1,14 +1,9 @@
 <script>
     import { scale } from "svelte/transition";
 
-    let pizzeriaName = "Bob's Pizza";
-    let streetAddress = "123 Main Street";
-    let city = "Oxford";
-    let state = "MS";
-    let zip = "38655";
-    let phone = "662-555-1234";
+    let logo = "";
 
-    export let logo;
+    export let restaurantData;
     
 </script>
 
@@ -17,10 +12,10 @@
         <img src={logo} alt="Pizza Logo" class="listing-image">
     </div>
     <div class="listing-info-container">
-        <h2>{pizzeriaName}</h2>
-        <p>{streetAddress}</p>
-        <p>{city}, {state} {zip}</p>
-        <p>{phone}</p>
+        <h2>{restaurantData.restaurant_name}</h2>
+        <p>{restaurantData.street_address1}</p>
+        <p>{restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}</p>
+        <!-- p>{phone}</p -->
         <p>Dine In | Pickup | Delivery</p>
     </div>
 </div>
@@ -60,8 +55,9 @@
     }
 
     .listing-info-container h2 {
+        margin-bottom: 0.75rem;
         font-size: 1.2rem;
-        line-height: 1.5;
+        line-height: 1.2;
     }
 
     .listing-info-container p {

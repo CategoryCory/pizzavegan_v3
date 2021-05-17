@@ -1,22 +1,40 @@
 <script>
-    import { currentZip, searchResultsList } from "../stores";
+    import {currentLatLng, currentZip, hasValidZip, isLoading, searchResultsList} from "../stores";
     import { fly } from "svelte/transition";
 
     let zipCode;
     let showError = false;
 
-    function buttonClicked(e) {
+    async function buttonClicked(e) {
+        $isLoading = true;
+        $searchResultsList = {};
         const zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/;
         if (zipRegex.test(zipCode)) {
             $currentZip = zipCode;
             showError = false;
+
+            try {
+                const response = await fetch(`/api/v1/signups/?zip=${$currentZip}`);
+                const data = await response.json();
+
+                if (data["origin_status"] === "NOT_FOUND")  {
+                    $hasValidZip = false;
+                    $isLoading = false;
+                    return;
+                }
+
+                $searchResultsList = [...data.locations];
+                $currentLatLng = [...data.origin_latlng];
+                $hasValidZip = true;
+            } catch (error) {
+                console.log(error.message);
+            }
         } else {
             $currentZip = "";
+            $hasValidZip = false;
             showError = true;
         }
-
-        $searchResultsList = [...$searchResultsList, {logo: "/static/images/pizza-slice.png"}];
-        console.log($searchResultsList.length);
+        $isLoading = false;
     }
 </script>
 
