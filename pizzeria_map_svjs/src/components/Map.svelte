@@ -59,11 +59,28 @@
         ]
       },
       {
+        "featureType": "poi.business",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
         "featureType": "poi.park",
         "elementType": "geometry",
         "stylers": [
           {
             "color": "#e5e5e5"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "off"
           }
         ]
       },
@@ -144,7 +161,7 @@
         "elementType": "geometry",
         "stylers": [
           {
-            "color": "#ccdbf2"
+            "color": "#bad9f8"
           }
         ]
       },
@@ -178,6 +195,8 @@
             }
 
             if ($searchResultsList.length > 0) {
+                const bounds = new google.maps.LatLngBounds();
+
                 for (let i = 0; i < $searchResultsList.length; i++) {
                     const position = {
                         lat: Number($searchResultsList[i].latitude),
@@ -190,12 +209,22 @@
                         icon: "/static/images/pizzavegan-map-icon.png"
                     });
                     markers.push(pizzeriaMarker);
+                    bounds.extend(pizzeriaMarker.getPosition());
                 }
-            }
 
-            // set map to focus on current location
-            map.setCenter({ lat: $currentLatLng[0], lng: $currentLatLng[1] });
-            map.setZoom(12);
+                map.setCenter(bounds.getCenter());
+                map.fitBounds(bounds);
+
+                if (map.getZoom() > 15) {
+                    map.setZoom(15);
+                } else {
+                    map.setZoom(map.getZoom() - 1);
+                }
+            } else {
+                // set map to focus on current location
+                map.setCenter({ lat: $currentLatLng[0], lng: $currentLatLng[1] });
+                map.setZoom(13);
+            }
         }
     }
 </script>

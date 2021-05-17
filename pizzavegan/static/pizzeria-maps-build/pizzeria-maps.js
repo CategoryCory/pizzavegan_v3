@@ -712,7 +712,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "gmap svelte-fzboti");
-    			add_location(div, file$6, 202, 0, 4702);
+    			add_location(div, file$6, 231, 0, 5478);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -788,9 +788,18 @@ var app = (function () {
     			"stylers": [{ "color": "#757575" }]
     		},
     		{
+    			"featureType": "poi.business",
+    			"stylers": [{ "visibility": "off" }]
+    		},
+    		{
     			"featureType": "poi.park",
     			"elementType": "geometry",
     			"stylers": [{ "color": "#e5e5e5" }]
+    		},
+    		{
+    			"featureType": "poi.park",
+    			"elementType": "labels.text",
+    			"stylers": [{ "visibility": "off" }]
     		},
     		{
     			"featureType": "poi.park",
@@ -835,7 +844,7 @@ var app = (function () {
     		{
     			"featureType": "water",
     			"elementType": "geometry",
-    			"stylers": [{ "color": "#ccdbf2" }]
+    			"stylers": [{ "color": "#bad9f8" }]
     		},
     		{
     			"featureType": "water",
@@ -906,6 +915,8 @@ var app = (function () {
     					}
 
     					if ($searchResultsList.length > 0) {
+    						const bounds = new google.maps.LatLngBounds();
+
     						for (let i = 0; i < $searchResultsList.length; i++) {
     							const position = {
     								lat: Number($searchResultsList[i].latitude),
@@ -920,16 +931,26 @@ var app = (function () {
     								});
 
     							markers.push(pizzeriaMarker);
+    							bounds.extend(pizzeriaMarker.getPosition());
     						}
+
+    						map.setCenter(bounds.getCenter());
+    						map.fitBounds(bounds);
+
+    						if (map.getZoom() > 15) {
+    							map.setZoom(15);
+    						} else {
+    							map.setZoom(map.getZoom() - 1);
+    						}
+    					} else {
+    						// set map to focus on current location
+    						map.setCenter({
+    							lat: $currentLatLng[0],
+    							lng: $currentLatLng[1]
+    						});
+
+    						map.setZoom(13);
     					}
-
-    					// set map to focus on current location
-    					map.setCenter({
-    						lat: $currentLatLng[0],
-    						lng: $currentLatLng[1]
-    					});
-
-    					map.setZoom(12);
     				}
     			}
     		}
