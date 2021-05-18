@@ -1,37 +1,31 @@
 <script>
     import { currentZip, searchResultsList, hasValidZip, isLoading } from "../stores";
     import PizzeriaListing from "./PizzeriaListing.svelte";
-    import Alert from "./Alert.svelte";
-    import Pagination from "./Pagination.svelte";
+
+    let resultsPluralized;
+    $: {
+        if ($searchResultsList.length === 1)
+            resultsPluralized = "result";
+        else
+            resultsPluralized = "results";
+    }
 </script>
 
 <div class="search-results-container">
-    {#if $isLoading}
-        <div class="no-results">
-            <p>Loading...</p>
-        </div>
-    {:else}
+    {#if !$isLoading}
         {#if $hasValidZip}
+            <p class="search-results-message">{$searchResultsList.length} {resultsPluralized} found</p>
             <div class="search-results-listings">
                 {#if $searchResultsList.length > 0}
                     {#each $searchResultsList as listing}
                         <PizzeriaListing restaurantData="{listing}" />
                     {/each}
-                {:else}
-                    <div class="no-results">
-                        <p>No results found!</p>
-                    </div>
                 {/if}
-    <!--            <Pagination />-->
             </div>
         {:else}
-            <div class="no-results">
-                {#if $currentZip.length > 0}
-                    <Alert message="Zip code {$currentZip} was not found." />
-                {:else}
-                    <p>Enter your ZIP code to find vegan pizza near you!</p>
-                {/if}
-            </div>
+            {#if $currentZip.length > 0}
+                <p class="search-results-message">Zip code {$currentZip} not found.</p>
+            {/if}
         {/if}
     {/if}
 </div>
@@ -41,24 +35,21 @@
         padding: 0.5rem 1rem;
     }
 
+    .search-results-message {
+        padding: 0.5rem 1.25rem;
+        margin-bottom: 1.5rem;
+        background-color: #D6D3D1;
+        border-radius: 0.5rem;
+        font-family: "Jost", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #57534E;
+        text-align: right;
+    }
+
     .search-results-listings {
         display: grid;
         grid-auto-rows: 1fr;
         grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
         gap: 0.75rem;
-    }
-
-    .no-results {
-        display: grid;
-        place-items: center;
-    }
-
-    .no-results p {
-        padding: 2rem 0;
-        font-family: "Jost", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 1.75rem;
-        font-weight: 800;
-        color: #D6D3D1;
     }
 
     @media screen and (min-width: 1024px) {
@@ -70,10 +61,6 @@
 
         .search-results-listings {
             gap: 1.5rem;
-        }
-
-        .no-results p {
-            font-size: 3rem;
         }
     }
 </style>

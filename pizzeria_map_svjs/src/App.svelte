@@ -2,6 +2,8 @@
 	import Map from './components/Map.svelte';
 	import SearchBar from './components/SearchBar.svelte';
 	import SearchResults from './components/SearchResults.svelte';
+	import { isLoading } from "./stores";
+
 	export let ready;
 </script>
 
@@ -55,6 +57,19 @@
 		padding-top: 0.75em;
 	}
 
+	.loading-results {
+        display: grid;
+        place-items: center;
+    }
+
+    .loading-results p {
+        padding: 2rem 0;
+        font-family: "Jost", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #D6D3D1;
+    }
+
 	@media screen and (min-width: 640px) {
 		.map {
 			height: 350px;
@@ -75,5 +90,9 @@
 		.search-container {
 			max-height: 100%;
 		}
+
+		.loading-results p {
+            font-size: 3rem;
+        }
 	}
 </style>

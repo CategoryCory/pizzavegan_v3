@@ -1,13 +1,24 @@
 <script>
     import {currentLatLng, currentZip, hasValidZip, isLoading, searchResultsList} from "../stores";
     import Alert from "./Alert.svelte";
+    import { beforeUpdate, afterUpdate } from "svelte";
 
     let zipCode;
     let zipFormatError = false;
 
+    beforeUpdate(() => {
+        // $searchResultsList.length = 0;
+        // $isLoading = true;
+    });
+
+    // afterUpdate(() => {
+    //     $isLoading = false;
+    // })
+
     async function buttonClicked(e) {
         $isLoading = true;
-        $searchResultsList = {};
+        // $hasValidZip = false;
+        $searchResultsList.length = 0;
         const zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/;
         if (zipRegex.test(zipCode)) {
             $currentZip = zipCode;
@@ -19,21 +30,24 @@
 
                 if (data["origin_status"] === "NOT_FOUND")  {
                     $hasValidZip = false;
-                    $isLoading = false;
-                    return;
+                    // $isLoading = false;
+                    // return;
+                } else {
+                    $hasValidZip = true;
+                    $searchResultsList = [...data.locations];
+                    $currentLatLng = [...data.origin_latlng];
                 }
-
-                $searchResultsList = [...data.locations];
-                $currentLatLng = [...data.origin_latlng];
-                $hasValidZip = true;
             } catch (error) {
                 console.log(error.message);
+            } finally {
+                // $isLoading = false;
             }
         } else {
             $currentZip = "";
             $hasValidZip = false;
             zipFormatError = true;
         }
+
         $isLoading = false;
     }
 </script>
@@ -48,9 +62,15 @@
             placeholder="Search by ZIP"
             aria-label="Search by ZIP"
         >
-        <button type="submit" class="sb-form__button" on:click|preventDefault={buttonClicked}>
-            <img src="/static/images/magnifying-glass.svg" alt="Search">
-        </button>
+        {#if $isLoading}
+            <div class="sb-form__wait-icon">
+                <img src="/static/images/wait-icon.svg" alt="Wait...">
+            </div>
+        {:else}
+            <button type="submit" class="sb-form__button" on:click|preventDefault={buttonClicked}>
+                <img src="/static/images/magnifying-glass.svg" alt="Search">
+            </button>
+        {/if}
     </form>
     {#if zipFormatError}
         <Alert message="Please enter a valid 5 or 9 digit ZIP code." />
@@ -87,13 +107,24 @@
         box-shadow: none;
     }
 
-    .sb-form__button {
+    .sb-form__button,
+    .sb-form__wait-icon {
         padding: 0.5em 0.75rem;
     }
 
-    .sb-form__button img {
+    .sb-form__button img,
+    .sb-form__wait-icon img {
         height: 1.75rem;
         width: 1.75rem;
+    }
+
+    .sb-form__wait-icon img {
+        animation: wait-icon-spin 1s linear infinite;
+    }
+
+    @keyframes wait-icon-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(359deg); }
     }
 
     @media screen and (min-width: 640px) {
