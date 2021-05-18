@@ -13,9 +13,7 @@ from contacts.forms import ContactUsForm, SurveyResponseForm, PizzeriaSignupResp
 def homepage_view(request):
     articles_list = ArticleSinglePage.objects.live().order_by('-first_published_at')[:4]
     recipes_list = RecipeSinglePage.objects.live().order_by('-first_published_at')[:2]
-    featured_product = ProductSinglePage.objects.live().filter(is_featured=True)[0]
-
-    print(featured_product.title)
+    featured_product = ProductSinglePage.objects.live().filter(is_featured=True)[:1]
 
     context = {
         'articles_list': articles_list,
