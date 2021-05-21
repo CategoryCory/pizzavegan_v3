@@ -7,7 +7,7 @@
 {% block body_class %}template-blogpage{% endblock %}
 
 {% block content %}
-    <main class="mx-auto max-w-4xl px-5 py-8">
+    <main class="mx-auto max-w-5xl px-5 py-8">
         <h1 class="mb-4 text-4xl lg:text-6xl lg:leading-tight">{{ page.title }}</h1>
         <p class="mb-2 lg:mb-6 font-sans font-extralight text-xl lg:text-2xl leading-relaxed lg:leading-10 text-gray-700">{{ page.subtitle }}</p>
         <p class="mb-6 font-sans text-gray-500 lg:text-lg">Posted on {{ page.first_published_at|date:'F j, Y' }}</p>
@@ -16,30 +16,34 @@
             <broadstreet-zone zone-id="83144"></broadstreet-zone>
         </div>
         <section class="relative mt-10 flex flex-col-reverse md:items-start md:flex-row">
-            <div class="flex mt-6 justify-center space-x-12 md:mt-0 md:pl-5 md:pr-8 md:flex-col md:items-center md:space-x-0 md:space-y-7 md:sticky md:top-32">
+            <div class="flex mt-6 justify-center space-x-12 md:mt-0 md:pl-5 md:pr-7 md:flex-col md:items-center md:space-x-0 md:space-y-10 md:sticky md:top-36">
                 <a
                     href="https://www.facebook.com/sharer/sharer.php?display=page&u=https://pizzavegan.com{{ request.path }}"
                     target="_blank"
+                    class="md:grid md:place-items-center md:h-14 md:w-14 md:rounded-full md:shadow-md"
                 >
-                    <i class="fab fa-facebook text-3xl md:text-4xl md:hover:text-brand duration-300"></i>
+                    <i class="fab fa-facebook text-3xl md:text-2xl md:hover:text-brand duration-300"></i>
                 </a>
                 <a
                     href="https://twitter.com/intent/tweet?text={{ page.title|urlencode }}&url=https://pizzavegan.com{{ request.path }}"
                     target="_blank"
+                    class="md:grid md:place-items-center md:h-14 md:w-14 md:rounded-full md:shadow-md"
                 >
-                    <i class="fab fa-twitter text-3xl md:text-4xl md:hover:text-brand duration-300"></i>
+                    <i class="fab fa-twitter text-3xl md:text-2xl md:hover:text-brand duration-300"></i>
                 </a>
                 <a
                     href="https://pinterest.com/pin/create/button/?url=https://pizzavegan.com{{ request.path }}&description={{ page.title|urlencode }}"
                     target="_blank"
+                    class="md:grid md:place-items-center md:h-14 md:w-14 md:rounded-full md:shadow-md"
                 >
-                    <i class="fab fa-pinterest text-3xl md:text-4xl md:hover:text-brand duration-300"></i>
+                    <i class="fab fa-pinterest text-3xl md:text-2xl md:hover:text-brand duration-300"></i>
                 </a>
                 <a
                     href="mailto:?subject={{ page.title }}&body=https://pizzavegan.com{{ request.path }}"
                     target="_blank"
+                    class="md:grid md:place-items-center md:h-14 md:w-14 md:rounded-full md:shadow-md"
                 >
-                    <i class="fas fa-envelope text-3xl md:text-4xl md:hover:text-brand duration-300"></i>
+                    <i class="fas fa-envelope text-3xl md:text-2xl md:hover:text-brand duration-300"></i>
                 </a>
             </div>
             <article class="prose md:prose-lg lg:prose-xl max-w-none prose-brand">
