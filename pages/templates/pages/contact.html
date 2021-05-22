@@ -13,12 +13,13 @@
             >
         </div>
         <div class="px-6 md:px-10 lg:px-12 py-8 lg:flex lg:flex-col lg:justify-center">
+            {% include 'partials/_alerts.html' %}
             <p class="font-sans font-extralight text-lg md:text-xl lg:text-2xl">Have a message for the PizzaVegan staff?</p>
             <p class="font-sans font-extrabold text-xl md:text-2xl lg:text-3xl md:mt-2">Fill out the form below!</p>
             <form method="post" class="flex flex-col my-5">
                 {% csrf_token %}
                 {% for field in form %}
-                    <p>
+                    <p class="font-sans">
                         <label for="{{ field.auto_id }}" class="font-sans text-gray-600">{{ field.label }}</label>
                         {{ field }}
                     </p>
