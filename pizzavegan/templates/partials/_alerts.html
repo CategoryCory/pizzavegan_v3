@@ -1,16 +1,16 @@
 {% if messages %}
     {% for message in messages %}
-        <div id="message" class="w-full mb-6">
+        <div id="message" class="w-full my-5">
             <sl-alert type="{{ message.tags }}" open closable class="alert-closable">
                 <sl-icon
-                        slot="icon"
-                        {% if message.tags == 'success' %}
-                            name="check2-circle"
-                        {% elif message.tags == 'danger' %}
-                            name="exclamation-octagon"
-                        {% else %}
-                            name="info-circle"
-                        {% endif %}
+                    slot="icon"
+                    {% if message.tags == 'success' %}
+                        name="check2-circle"
+                    {% elif message.tags == 'danger' %}
+                        name="exclamation-octagon"
+                    {% else %}
+                        name="info-circle"
+                    {% endif %}
                 ></sl-icon>
                 <strong>{{ message }}</strong>
             </sl-alert>

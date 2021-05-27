@@ -1,0 +1,82 @@
+{% extends "account/base.html" %}
+
+{% load i18n static %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans " | Sign In" %}{% endblock head_title %}
+
+{% block content %}
+    <div class="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 2xl:w-1/3 px-10 py-8 bg-white sm:rounded-lg shadow-xl">
+        <img 
+            src="{% static 'images/pizzavegan-icon-resized.png' %}"
+            alt="PizzaVegan Logo"
+            class="-ml-2 w-14 h-14"
+        >
+        <p class="mt-4 font-sans text-xl text-gray-600 font-extralight">
+            Welcome to <span class="text-brand font-extrabold">PizzaVegan</span>
+        </p>
+        <h1 class="text-2xl md:text-3xl text-gray-600">Log In</h1>
+        {% comment %} {% get_providers as socialaccount_providers %}
+
+        {% if socialaccount_providers %}
+            <p>{% blocktrans with site.name as site_name %}Please sign in with one
+            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+            for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+            <div class="socialaccount_ballot">
+
+                <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
+
+                <div class="login-or">{% trans 'or' %}</div>
+
+            </div>
+
+            {% include "socialaccount/snippets/login_extra.html" %}
+
+        {% else %}
+            <p>{% blocktrans %}If you have not created an account yet, then please
+            <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+        {% endif %} {% endcomment %}
+
+        {% include 'partials/_alerts.html' %}
+
+        <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {% comment %} {{ form.as_p }} {% endcomment %}
+            {% for field in form %}
+                <p class="flex flex-col mt-5 font-sans">
+                    <label for="{{ field.auto_id }}" class="font-sans text-gray-500">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                </p>
+            {% endfor %}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <div class="my-6">
+                    <button 
+                        type="submit"
+                        class="inline-block mr-2 px-6 py-2 rounded text-white tracking-wide bg-brand 
+                            hover:bg-brand-dark focus:ring-2 focus:ring-offset-2 focus:ring-brand-light"
+                    >
+                        {% trans "Log In" %}
+                    </button>
+                    <a href="{% url 'account_signup' %}" class="text-gray-500 hover:text-brand-dark">
+                        {% trans "Create an account" %}
+                    </a>
+                </div>
+                <a 
+                    href="{% url 'account_reset_password' %}" 
+                    class="inline-block mb-3 sm:mb-0 text-gray-500 hover:text-brand-dark"
+                >
+                    {% trans "Forgot password?" %}
+                </a>
+            </div>
+        </form>
+        <a href="{% url 'pages:home' %}" class="text-gray-500 hover:text-brand-dark">Return to home page</a>
+    </div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PizzaVegan{% block head_title %}{% endblock head_title %}</title>
+    
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;800&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.37/dist/themes/base.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    {% block extra_head %}{% endblock extra_head %}
+</head>
+<body class="grid place-items-center bg-gradient-to-br from-green-300 to-yellow-200">
+    {% comment %} {% block body %} {% endcomment %}
+
+        {% comment %} {% if messages %}
+            <div>
+                <strong>Messages:</strong>
+                <ul>
+                    {% for message in messages %}
+                        <li>{{message}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %} {% endcomment %}
+
+        {% comment %} <div>
+            <strong>Menu:</strong>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+                    <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'account_login' %}">Sign In</a></li>
+                    <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div> {% endcomment %}
+        {% block content %}{% endblock content %}
+    {% comment %} {% endblock body %} {% endcomment %}
+    {% block extra_body %}{% endblock %}
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.37/dist/shoelace.js"
+    ></script>
+</body>
+</html>
