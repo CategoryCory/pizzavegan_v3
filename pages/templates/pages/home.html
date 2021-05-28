@@ -61,25 +61,26 @@
                 <hr class="my-5 border-gray-300">
             {% endif %}
 
-            <h3 class="mb-4 text-gray-700 text-2xl lg:text-3xl">Latest Recipes</h3>
-            {% for recipe in recipes_list %}
-                <div class="mb-6">
-                    <a href="{% pageurl recipe %}">
-                        {% image recipe.featured_image width-450 class="w-full rounded" %}
-                        <h3 class="mt-5 mb-2 text-gray-700 text-lg lg:text-xl">{{ recipe.title }}</h3>
-                    </a>
-                    {% if recipe.provided_by %}
-                        <p class="text-lg">
-                            Provided by {{ recipe.provided_by }}
-                        </p>
-                    {% endif %}
+            {% if recipes_list %}
+                <h3 class="mb-4 text-gray-700 text-2xl lg:text-3xl">Latest Recipes</h3>
+                {% for recipe in recipes_list %}
+                    <div class="mb-6">
+                        <a href="{% pageurl recipe %}">
+                            {% image recipe.featured_image width-450 class="w-full rounded" %}
+                            <h3 class="mt-5 mb-2 text-gray-700 text-lg lg:text-xl">{{ recipe.title }}</h3>
+                        </a>
+                        {% if recipe.provided_by %}
+                            <p class="text-lg">
+                                Provided by {{ recipe.provided_by }}
+                            </p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="mt-4 px-3 py-2 flex justify-end rounded bg-gray-200">
+                    <a href="/recipes/" class="font-sans text-gray-600 uppercase hover:text-brand duration-300">More Recipes</a>
+                    <span class="text-brand">&nbsp;&rarr;</span>
                 </div>
-            {% endfor %}
-            <div class="mt-4 px-3 py-2 flex justify-end rounded bg-gray-200">
-                <a href="/recipes/" class="font-sans text-gray-600 uppercase hover:text-brand duration-300">More Recipes</a>
-                <span class="text-brand">&nbsp;&rarr;</span>
-            </div>
-            
+            {% endif %}
         </aside>
     </main>
 {% endblock content %}
