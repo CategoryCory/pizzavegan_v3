@@ -79,7 +79,7 @@
                 <a href="/recipes/" class="font-sans text-gray-600 uppercase hover:text-brand duration-300">More Recipes</a>
                 <span class="text-brand">&nbsp;&rarr;</span>
             </div>
-            <hr class="my-5 border-gray-300">
+            {% comment %} <hr class="my-5 border-gray-300">
             <p class="text-base"><span class="text-gray-700 font-extrabold font-sans text-lg">Looking for vegan pizza near you?</span> Enter your ZIP code below!</p>
             <form action="{% url 'pizzerias:pizzeria_list' %}" id="searchZipCodeForm" class="flex flex-col my-3 space-y-3">
                 <input
@@ -96,7 +96,7 @@
                 >
                     Search
                 </button>
-            </form>
+            </form> {% endcomment %}
         </aside>
     </main>
 {% endblock content %}
