@@ -18,14 +18,14 @@
   },
   "homepage": "https://github.com/CategoryCory/pizzavegan_v3#readme",
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
+    "autoprefixer": "^10.2.6",
     "cssnano": "^5.0.1",
-    "postcss": "^8.2.10",
+    "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
-    "tailwindcss": "^2.1.1"
+    "tailwindcss": "^2.1.2"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.3.2",
-    "@tailwindcss/typography": "^0.4.0"
+    "@tailwindcss/typography": "^0.4.1"
   }
 }

@@ -4,6 +4,7 @@ module.exports = {
   purge: [
       "{articles,home,pages,pizzavegan,pizzerias,products,recipes,search,templates}/**/*.html",
       "contacts/forms.py",
+      "users/forms.py",
       "pizzeria_map_svjs/src/**/*.{js,svelte}"
   ],
   darkMode: false, // or 'media' or 'class'
