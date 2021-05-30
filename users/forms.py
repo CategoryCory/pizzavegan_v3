@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.users.forms import UserEditForm, UserCreationForm
 
-from allauth.account.forms import PasswordField, LoginForm, SignupForm
+from allauth.account.forms import ChangePasswordForm, PasswordField, LoginForm, SignupForm, ResetPasswordForm, ResetPasswordKeyForm
 
 
 class CustomUserEditForm(UserEditForm):
@@ -32,6 +32,29 @@ class CustomSignupForm(SignupForm):
         self.fields['password2'] = PasswordField(label='Confirm password')
         self.fields['email'].widget.attrs['placeholder'] = 'Email'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm password'
+        for fieldname, field in self.fields.items():
+            field.widget.attrs.update({
+                'class': 'w-full rounded border-gray-400 focus:border-brand focus:ring-0 transition my-1'
+            })
+
+
+class CustomResetPasswordForm(ResetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomResetPasswordForm, self).__init__(*args, **kwargs)
+        self.fields['email'] = forms.EmailField(label='Email Address')
+        self.fields['email'].widget.attrs['placeholder'] = 'Email'
+        self.fields['email'].widget.attrs.update({
+            'class': 'w-full rounded border-gray-400 focus:border-brand focus:ring-0 transition my-1'
+        })
+
+
+class CustomResetPasswordKeyForm(ResetPasswordKeyForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomResetPasswordKeyForm, self).__init__(*args, **kwargs)
+        self.fields['password1'] = PasswordField(label='Enter new password')
+        self.fields['password2'] = PasswordField(label='Confirm new password')
+        self.fields['password1'].widget.attrs['placeholder'] = ''
+        self.fields['password2'].widget.attrs['placeholder'] = ''
         for fieldname, field in self.fields.items():
             field.widget.attrs.update({
                 'class': 'w-full rounded border-gray-400 focus:border-brand focus:ring-0 transition my-1'

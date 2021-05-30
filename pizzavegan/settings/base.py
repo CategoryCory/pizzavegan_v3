@@ -213,10 +213,10 @@ ACCOUNT_FORMS = {
     'login': 'users.forms.CustomLoginForm',
     'signup': 'users.forms.CustomSignupForm',
     'add_email': 'allauth.account.forms.AddEmailForm',
-    'change_password': 'allauth.account.forms.ChangePasswordForm',
+    'change_password': 'allauth.account.forms.CustomChangePasswordForm',
     'set_password': 'allauth.account.forms.SetPasswordForm',
-    'reset_password': 'allauth.account.forms.ResetPasswordForm',
-    'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
+    'reset_password': 'users.forms.CustomResetPasswordForm',
+    'reset_password_from_key': 'users.forms.CustomResetPasswordKeyForm',
     'disconnect': 'allauth.socialaccount.forms.DisconnectForm',
 }
 

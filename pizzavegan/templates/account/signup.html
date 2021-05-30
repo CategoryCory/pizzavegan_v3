@@ -22,7 +22,6 @@
 
         <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
-            {% comment %} {{ form.as_p }} {% endcomment %}
             {% for field in form %}
                 <p class="flex flex-col mt-5 font-sans">
                     <label for="{{ field.auto_id }}" class="font-sans text-gray-500">
@@ -48,6 +47,7 @@
         <p class="font-sans text-gray-500">
             By creating an account, you accept PizzaVegan's <a href="#" class="underline hover:text-brand-dark">privacy policy</a>
         </p>
+        <a href="{% url 'pages:home' %}" class="underline text-gray-500 hover:text-brand-dark">Return to home page</a>
     </div>
 
 {% endblock content %}
