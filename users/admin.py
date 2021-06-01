@@ -8,7 +8,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     list_filter = ['is_active', ]
     list_per_page = 20
     fieldsets = (
-        ('Account Information', {'fields': ('username', 'email', 'first_name', 'last_name', )}),
+        ('Account Information', {'fields': ('username', 'email', 'first_name', 'last_name', 'company_name', )}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions', )}),
         ('Important Dates', {'fields': ('last_login', 'date_joined', )}),
     )
