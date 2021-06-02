@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('api/v1/', include('api_v1.urls')),
     path('pizzerias/', include('pizzerias.urls')),
+    path('dashboard/', include('dashboard.urls')),
     # path('signups/', include('contacts.urls')),
     path('site-admin/', admin.site.urls),
     path('admin/', include(wagtailadmin_urls)),

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'pizzerias.apps.PizzeriasConfig',
     'search',
     'users.apps.UsersConfig',
+    'dashboard.apps.DashboardConfig',
     'api_v1.apps.ApiV1Config',
 
     'wagtail.contrib.forms',
@@ -206,7 +207,7 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 ACCOUNT_FORMS = {
