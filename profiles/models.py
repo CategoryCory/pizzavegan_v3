@@ -22,7 +22,7 @@ class PizzeriaProfile(models.Model):
         return self.user_account.company_name
 
 
-class PizzeriaLocations(models.Model):
+class PizzeriaLocation(models.Model):
     street_address1 = models.CharField(max_length=100, blank=True, verbose_name='Street Address 1')
     street_address2 = models.CharField(max_length=100, blank=True, verbose_name='Street Address 2')
     city = models.CharField(max_length=50, blank=True)
@@ -41,11 +41,11 @@ class PizzeriaLocations(models.Model):
             self.latitude = lat_lng['lat']
             self.longitude = lat_lng['lng']
         except Exception as e:
-            logger.error(f'Geocoding failed for {self.restaurant_name}')
-        super(PizzeriaLocations, self).save(*args, **kwargs)
+            logger.error(f'Geocoding failed for {self}')
+        super(PizzeriaLocation, self).save(*args, **kwargs)
 
 
-class MenuItems(models.Model):
+class MenuItem(models.Model):
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField(blank=False)
     photo = models.ImageField(upload_to='images/menu_items/', blank=True)
@@ -55,7 +55,7 @@ class MenuItems(models.Model):
         return self.title
 
 
-class Promotions(models.Model):
+class Promotion(models.Model):
     title = models.CharField(max_length=150, blank=False)
     description = models.TextField(blank=False)
     begin_date = models.DateField(blank=False, default=date.today)

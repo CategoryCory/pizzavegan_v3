@@ -1,19 +1,19 @@
 from django.contrib import admin
-from .models import PizzeriaProfile, PizzeriaLocations, MenuItems, Promotions
+from .models import PizzeriaProfile, PizzeriaLocation, MenuItem, Promotion
 
 
-class PizzeriaLocationsInline(admin.TabularInline):
-    model = PizzeriaLocations
+class PizzeriaLocationInline(admin.TabularInline):
+    model = PizzeriaLocation
     extra = 0
 
 
-class MenuItemsInline(admin.TabularInline):
-    model = MenuItems
+class MenuItemInline(admin.TabularInline):
+    model = MenuItem
     extra = 0
 
 
-class PromotionsInline(admin.TabularInline):
-    model = Promotions
+class PromotionInline(admin.TabularInline):
+    model = Promotion
     extra = 0
 
 
@@ -21,9 +21,9 @@ class PizzeriaProfileAdmin(admin.ModelAdmin):
     list_display = ['user_account', ]
     list_per_page = 25
     inlines = [
-        PizzeriaLocationsInline,
-        MenuItemsInline,
-        PromotionsInline
+        PizzeriaLocationInline,
+        MenuItemInline,
+        PromotionInline
     ]
 
 
