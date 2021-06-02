@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'search',
     'users.apps.UsersConfig',
     'dashboard.apps.DashboardConfig',
+    'profiles.apps.ProfilesConfig',
     'api_v1.apps.ApiV1Config',
 
     'wagtail.contrib.forms',
