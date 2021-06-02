@@ -10,11 +10,11 @@ logger = logging.getLogger(__name__)
 
 class PizzeriaProfile(models.Model):
     description = models.TextField(blank=True)
-    facebook = models.URLField(max_length=200)
-    twitter = models.URLField(max_length=200)
-    instagram = models.URLField(max_length=200)
-    linkedin = models.URLField(max_length=200)
-    online_ordering = models.URLField(max_length=200)
+    facebook = models.URLField(max_length=200, blank=True)
+    twitter = models.URLField(max_length=200, blank=True)
+    instagram = models.URLField(max_length=200, blank=True)
+    linkedin = models.URLField(max_length=200, blank=True)
+    online_ordering = models.URLField(max_length=200, blank=True)
     pizzeria_logo = models.ImageField(upload_to='images/pizzeria_logos/', blank=True)
     user_account = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
