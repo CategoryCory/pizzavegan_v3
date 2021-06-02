@@ -26,16 +26,25 @@ class CustomLoginForm(LoginForm):
 
 
 class CustomSignupForm(SignupForm):
+    company_name = forms.CharField(max_length=100, label='Pizzeria Name')
+
     def __init__(self, *args, **kwargs):
         super(CustomSignupForm, self).__init__(*args, **kwargs)
         self.fields['email'] = forms.EmailField(label='Email Address')
         self.fields['password2'] = PasswordField(label='Confirm password')
         self.fields['email'].widget.attrs['placeholder'] = 'Email'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm password'
+        self.fields['company_name'].widget.attrs['placeholder'] = 'Pizzeria Name'
         for fieldname, field in self.fields.items():
             field.widget.attrs.update({
                 'class': 'w-full rounded border-gray-400 focus:border-brand focus:ring-0 transition my-1'
             })
+    
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
+        user.company_name = self.cleaned_data['company_name']
+        user.save()
+        return user
 
 
 class CustomResetPasswordForm(ResetPasswordForm):
