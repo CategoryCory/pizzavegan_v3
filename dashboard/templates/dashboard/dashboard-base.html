@@ -18,7 +18,7 @@
 <body class="flex flex-row h-full">
     <div class="w-1/6 min-w-max h-full bg-gray-700">
         <div class="h-20 px-6 flex items-center border-b border-gray-500">
-            <img src="{% static 'images/pizza-slice.png' %}" alt="PizzaVegan logo" class="h-10">
+            <img src="{% static 'images/pizza-slice.png' %}" alt="PizzaVegan logo" class="h-10 mr-2">
             <div class="flex flex-col justify-center">
                 <p class="font-sans font-extrabold text-white text-xl">Pizzeria Name</p>
                 <p class="font-sans font-extralight text-white text-sm uppercase ">Dashboard</p>
@@ -30,28 +30,28 @@
                 class="pl-6 py-3 rounded-tl-full rounded-bl-full text-white transition-colors duration-200 
                     {% if request.path == '/dashboard/' %}bg-brand{% else %}hover:bg-gray-800{% endif %}"
             >
-                <i class="far fa-user mr-3"></i>Profile
+                <i class="far fa-user inline-block w-8 mr-1 text-center"></i><span>Profile</span>
             </a>
             <a 
                 href="{% url 'dashboard:dashboard_store_locations' %}" 
                 class="pl-6 py-3 rounded-tl-full rounded-bl-full text-white transition-colors duration-200
                     {% if request.path == '/dashboard/locations/' %}bg-brand{% else %}hover:bg-gray-800{% endif %}"
             >
-                <i class="fas fa-map-marker-alt mr-3"></i>Store Locations
+                <i class="fas fa-map-marker-alt inline-block w-8 mr-1 text-center"></i>Store Locations
             </a>
             <a 
                 href="{% url 'dashboard:dashboard_menu_items' %}" 
                 class="pl-6 py-3 rounded-tl-full rounded-bl-full text-white transition-colors duration-200
                     {% if request.path == '/dashboard/menu-items/' %}bg-brand{% else %}hover:bg-gray-800{% endif %}"
             >
-                <i class="fas fa-pizza-slice mr-3"></i>Menu Items
+                <i class="fas fa-pizza-slice inline-block w-8 mr-1 text-center"></i>Menu Items
             </a>
             <a 
                 href="{% url 'dashboard:dashboard_promotions' %}" 
                 class="pl-6 py-3 rounded-tl-full rounded-bl-full text-white transition-colors duration-200
                     {% if request.path == '/dashboard/promotions/' %}bg-brand{% else %}hover:bg-gray-800{% endif %}"
             >
-                <i class="fas fa-tags mr-3"></i>Current Promotions
+                <i class="fas fa-tags inline-block w-8 mr-1 text-center"></i>Current Promotions
             </a>
         </nav>
     </div>
@@ -59,10 +59,10 @@
         <div class="h-20 px-8 flex flex-row justify-end items-center bg-gray-200">
             <a 
                 href="{% url 'account_logout' %}"
-                class="px-4 py-2 bg-white text-brand rounded-lg tracking-wide border-2 border-brand
+                class="px-6 py-2 bg-white text-brand rounded-full tracking-wide border-2 border-brand
                     hover:bg-brand hover:text-white transition-colors duration-200"
             >
-                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                <i class="fas fa-sign-out-alt inline-block w-8"></i>Logout
             </a>
         </div>
         <div class="w-full px-12">
