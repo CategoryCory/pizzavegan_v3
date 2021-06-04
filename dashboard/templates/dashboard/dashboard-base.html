@@ -9,18 +9,18 @@
     <title>Dashboard{% block dashboard_title %}{% endblock dashboard_title %}</title>
     <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;800&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    {% comment %} <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;800&family=Lora:wght@400;600&display=swap" rel="stylesheet"> {% endcomment %}
     <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.37/dist/themes/base.css">
     {% block extra_css %}{% endblock extra_css %}
 </head>
-<body class="flex flex-row h-full">
-    <div class="w-1/6 min-w-max h-full bg-gray-700">
-        <div class="h-20 px-6 flex items-center border-b border-gray-500">
+<body class="relative h-full bg-coolgray-200">
+    <div class="fixed inset-0 z-10 w-72 bg-coolgray-800">
+        <div class="h-20 px-6 flex items-center">
             <img src="{% static 'images/pizza-slice.png' %}" alt="PizzaVegan logo" class="h-10 mr-2">
             <div class="flex flex-col justify-center">
-                <p class="font-sans font-extrabold text-white text-xl">Pizzeria Name</p>
+                <p class="font-sans font-extrabold text-white text-xl">{{ company_name }}</p>
                 <p class="font-sans font-extralight text-white text-sm uppercase ">Dashboard</p>
             </div>
         </div>
@@ -28,39 +28,39 @@
             <a 
                 href="{% url 'dashboard:dashboard_home' %}" 
                 class="pl-6 py-3 rounded-tl-full rounded-bl-full text-white transition-colors duration-200 
-                    {% if request.path == '/dashboard/' %}bg-brand{% else %}hover:bg-gray-800{% endif %}"
+                    {% if request.path == '/dashboard/' %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
             >
                 <i class="far fa-user inline-block w-8 mr-1 text-center"></i><span>Profile</span>
             </a>
             <a 
                 href="{% url 'dashboard:dashboard_store_locations' %}" 
                 class="pl-6 py-3 rounded-tl-full rounded-bl-full text-white transition-colors duration-200
-                    {% if request.path == '/dashboard/locations/' %}bg-brand{% else %}hover:bg-gray-800{% endif %}"
+                    {% if request.path == '/dashboard/locations/' %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
             >
                 <i class="fas fa-map-marker-alt inline-block w-8 mr-1 text-center"></i>Store Locations
             </a>
             <a 
                 href="{% url 'dashboard:dashboard_menu_items' %}" 
                 class="pl-6 py-3 rounded-tl-full rounded-bl-full text-white transition-colors duration-200
-                    {% if request.path == '/dashboard/menu-items/' %}bg-brand{% else %}hover:bg-gray-800{% endif %}"
+                    {% if request.path == '/dashboard/menu-items/' %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
             >
                 <i class="fas fa-pizza-slice inline-block w-8 mr-1 text-center"></i>Menu Items
             </a>
             <a 
                 href="{% url 'dashboard:dashboard_promotions' %}" 
                 class="pl-6 py-3 rounded-tl-full rounded-bl-full text-white transition-colors duration-200
-                    {% if request.path == '/dashboard/promotions/' %}bg-brand{% else %}hover:bg-gray-800{% endif %}"
+                    {% if request.path == '/dashboard/promotions/' %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
             >
                 <i class="fas fa-tags inline-block w-8 mr-1 text-center"></i>Current Promotions
             </a>
         </nav>
     </div>
-    <main class="w-5/6">
-        <div class="h-20 px-8 flex flex-row justify-end items-center bg-gray-200">
+    <div class="pl-72">
+        <div class="h-20 px-8 flex flex-row justify-end items-center sticky top-0 bg-white shadow-md">
             <a 
                 href="{% url 'account_logout' %}"
-                class="px-6 py-2 bg-white text-brand rounded-full tracking-wide border-2 border-brand
-                    hover:bg-brand hover:text-white transition-colors duration-200"
+                class="px-6 py-2 rounded-full outline-none text-white bg-brand hover:bg-brand-dark focus:ring-2 
+                    focus:ring-offset-2 focus:ring-brand-light focus:outline-none transition-colors duration-200"
             >
                 <i class="fas fa-sign-out-alt inline-block w-8"></i>Logout
             </a>
@@ -68,8 +68,10 @@
         <div class="w-full px-12">
             {% include 'partials/_alerts.html' %}
         </div>
-        {% block content %}{% endblock content %}
-    </main>
+        <main class="px-10 py-8">
+            {% block content %}{% endblock content %}
+        </main>
+    </div>
 
     <script
         type="module"

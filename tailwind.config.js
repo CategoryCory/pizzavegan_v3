@@ -16,12 +16,6 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          // DEFAULT: "#5eae46",
-          // light: "#72c25a",
-          // dark: "#4a9a32"
-          // DEFAULT: "#BC150C",
-          // light: "#D62F26",
-          // dark: "#980B09"
           DEFAULT: "#B45A7E",
           light: "#CE7498",
           dark: "#9B4165",
@@ -33,6 +27,7 @@ module.exports = {
           dark: "#2B9235"
         },
         gray: colors.warmGray,
+        coolgray: colors.coolGray
       },
       typography: {
         brand: {
