@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+from django.views.generic import DetailView
 
-from profiles.models import PizzeriaProfile
+from profiles.models import CustomUser, PizzeriaProfile
+
+CustomUser = get_user_model()
 
 
 @login_required
@@ -24,6 +28,20 @@ def dashboard_home_view(request):
         'profile_logo': profile.pizzeria_logo
     }
     return render(request, 'dashboard/dashboard-home.html', context)
+
+
+class DashboardHomeView(DetailView):
+    model = CustomUser
+    template_name = 'dashboard/dashboard-home.html'
+
+    def get_object(self):
+        return self.request.user
+    
+    def get_context_data(self, **kwargs):
+        context = super(DashboardHomeView, self).get_context_data(**kwargs)
+        profile = PizzeriaProfile.objects.get(user_account=self.request.user)
+        context['profile'] = profile
+        return context
 
 
 @login_required
