@@ -1,0 +1,35 @@
+{% extends 'dashboard/dashboard-base.html' %}
+
+{% block dashboard_title %} | Update Profile{% endblock dashboard_title %}
+
+{% block content %}
+<section class="max-w-4xl px-4 pt-2 pb-10 lg:px-10 lg:py-8 bg-white lg:border lg:border-coolgray-200 lg:rounded-lg lg:shadow-lg">
+    {% comment %} <p class="font-sans font-extralight uppercase text-gray-600">Edit profile</p>
+    <h2 class="text-4xl text-gray-700">Company Name</h2>
+    <p class="mt-4 font-sans text-sm text-gray-500">If you'd like to change your email address, please visit the email address change page.</p>
+    <form method="post" enctype="multipart/form-data" class="flex flex-col mt-8 mb-6">
+        {% csrf_token %}
+        {% for field in form %}
+            <p class="font-sans">
+                <label for="{{ field.auto_id }}" class="font-sans text-gray-600">{{ field.label }}</label>
+                {{ field }}
+            </p>
+        {% endfor %}
+        <div class="mt-8 mb-2 flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-6 sm:space-y-0">
+            <button
+                type="submit"
+                class="w-max px-6 py-2 rounded-full outline-none text-white bg-brand hover:bg-brand-dark focus:ring-2 
+                            focus:ring-offset-2 focus:ring-brand-light focus:outline-none transition-colors duration-200"
+            >
+                <i class="fas fa-edit inline-block w-8"></i>Update Profile
+            </button>
+            <a 
+                href="{% url 'dashboard:dashboard_home' %}" 
+                class="font-sans text-gray-500 hover:text-brand hover:underline"
+            >
+                Cancel and return to profile
+            </a>
+        </div>
+    </form> {% endcomment %}
+</section>
+{% endblock content %}
