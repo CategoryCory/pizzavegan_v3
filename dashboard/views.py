@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
 from profiles.models import PizzeriaLocation
 
@@ -58,6 +58,16 @@ class PizzeriaLocationEditView(LoginRequiredMixin, UserPassesTestMixin, SuccessM
         context = super(PizzeriaLocationEditView, self).get_context_data(**kwargs)
         context['customuser'] = self.request.user
         return context
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.profile == self.request.user
+
+
+class PizzeriaLocationDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+    model = PizzeriaLocation
+    success_url = reverse_lazy('dashboard:dashboard_store_locations')
+    success_message = 'Store location successfully deleted.'
 
     def test_func(self):
         obj = self.get_object()

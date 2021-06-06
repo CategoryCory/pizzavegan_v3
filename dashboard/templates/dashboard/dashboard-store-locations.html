@@ -12,16 +12,23 @@
                 <div class="group px-4 py-3 flex flex-col justify-between items-center space-y-3 md:flex-row md:space-y-0
                             hover:shadow-md">
                     <p class="font-sans text-gray-600">{{ location.full_address }}</p>
-                    <div class="opacity-0 space-x-4 md:space-x-6 group-hover:opacity-100">
+                    <div class="space-x-4 md:space-x-6 md:opacity-0 md:group-hover:opacity-100">
                         <a 
                             href="{% url 'dashboard:dashboard_edit_store_location' pk=location.id %}" 
                             class="text-gray-600 text-lg transition hover:text-brand"
+                            aria-label="Edit"
                         >
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-                        <a href="#" class="text-gray-600 text-lg transition hover:text-brand">
+                        <button
+                            class="text-gray-600 text-lg transition hover:text-brand"
+                            aria-label="Delete"
+                            data-type="delete"
+                            data-address="{{ location.full_address }}"
+                            data-id="{{ location.id }}"
+                        >
                             <i class="far fa-trash-alt"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             {% endfor %}
@@ -30,4 +37,59 @@
         <p class="mt-6 font-sans text-gray-500">You don't currently have any store locations.</p>
     {% endif %}
 </section>
+<div 
+    id="delete-modal"
+    class="min-w-screen h-screen px-4 fixed inset-0 hidden justify-center items-center bg-coolgray-700 bg-opacity-60
+            z-50 outline-none focus:outline-none"
+>
+    <div class="w-full max-w-xl mx-auto my-auto px-5 py-7 relative flex flex-col items-center space-y-4 rounded-lg shadow-lg bg-white">
+        <h2 class="text-2xl text-coolgray-700"><i class="far fa-trash-alt mr-4"></i>Confirm Delete</h2>
+        <p id="confirm-message" class="font-sans text-coolgray-500 text-center">
+            Are you sure you want to delete this store address? This action cannot be undone.
+        </p>
+        <form 
+            action="" 
+            method="post" 
+            id="delete-form"
+            class="pt-2 flex flex-col md:flex-row items-center space-y-8 md:space-x-3 md:space-y-0"
+        >
+            {% csrf_token %}
+            <button 
+                type="submit"
+                class="px-6 py-2 rounded-full outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-2 
+                        focus:ring-offset-2 focus:ring-red-600 focus:outline-none transition-colors duration-200"
+            >
+                Yes, Delete
+            </button>
+            <button type="button" id="cancel-delete" class="font-sans text-coolgray-500 text-sm hover:text-brand hover:underline">
+                Cancel and return to store locations
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+    const deleteButtons = document.querySelectorAll("[data-type='delete']");
+    const deleteModal = document.getElementById("delete-modal");
+    const cancelDeleteButton = document.getElementById("cancel-delete");
+    const deleteConfirmMessage = document.getElementById("confirm-message");
+    const deleteForm = document.getElementById("delete-form");
+
+    deleteButtons.forEach(btn => {
+        btn.addEventListener("click", function() {
+            // alert(this.getAttribute("data-id"));
+            deleteModal.classList.remove("hidden");
+            deleteModal.classList.add("flex");
+            deleteConfirmMessage.innerText = `Are you sure you want to delete ${this.getAttribute("data-address")}? This action cannot be undone.`;
+            deleteForm.action = `/dashboard/locations/delete/${this.getAttribute("data-id")}/`;
+        });
+    });
+
+    cancelDeleteButton.addEventListener("click", function() {
+        deleteModal.classList.remove("flex");
+        deleteModal.classList.add("hidden");
+    });
+</script>
+{% endblock extra_js %}
