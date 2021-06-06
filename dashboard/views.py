@@ -50,7 +50,7 @@ class PizzeriaLocationListView(LoginRequiredMixin, ListView):
 class PizzeriaLocationEditView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = PizzeriaLocation
     form_class = LocationUpdateForm
-    template_name = 'dashboard/dashboard-store-location-edit.html'
+    template_name = 'dashboard/dashboard-update-store-location.html'
     success_url = reverse_lazy('dashboard:dashboard_store_locations')
     success_message = 'The store location has been successfully updated.'
 
