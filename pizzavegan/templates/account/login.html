@@ -51,7 +51,17 @@
                     </label>
                     {{ field }}
                 </p>
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <p class="mt-2 mb-4 px-4 py-2 rounded font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">{{ field.label }}:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
+            {% if form.non_field_errors %}
+                {{ form.non_field_errors }}
+            {% endif %}
             {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}

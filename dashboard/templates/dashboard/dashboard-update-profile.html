@@ -16,7 +16,7 @@
             </p>
             {% if field.errors %}
                 {% for error in field.errors %}
-                    <p class="mb-4 mx-5 px-4 py-2 rounded-md bg-red-800 font-sans text-white">
+                    <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
                         <span class="font-bold">{{ field.label }}:</span> {{ error|escape }}
                     </p>
                 {% endfor %}
