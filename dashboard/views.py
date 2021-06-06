@@ -1,8 +1,9 @@
-from typing import List
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView
 
 from profiles.models import PizzeriaLocation
@@ -20,10 +21,12 @@ class DashboardHomeView(LoginRequiredMixin, DetailView):
         return self.request.user
 
 
-class UpdateProfileView(LoginRequiredMixin, UpdateView):
+class UpdateProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = CustomUser
     form_class = ProfileUpdateForm
     template_name = 'dashboard/dashboard-update-profile.html'
+    success_url = reverse_lazy('dashboard:dashboard_home')
+    success_message = 'Your profile has been successfully updated.'
 
     def get_object(self):
         return self.request.user
@@ -44,10 +47,12 @@ class PizzeriaLocationListView(LoginRequiredMixin, ListView):
         return context
 
 
-class PizzeriaLocationEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class PizzeriaLocationEditView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = PizzeriaLocation
     form_class = LocationUpdateForm
     template_name = 'dashboard/dashboard-store-location-edit.html'
+    success_url = reverse_lazy('dashboard:dashboard_store_locations')
+    success_message = 'The store location has been successfully updated.'
 
     def get_context_data(self, **kwargs):
         context = super(PizzeriaLocationEditView, self).get_context_data(**kwargs)

@@ -5,7 +5,7 @@
 {% block content %}
 <section class="max-w-4xl px-4 pt-2 pb-10 lg:px-10 lg:py-8 bg-white lg:border lg:border-coolgray-200 lg:rounded-lg lg:shadow-lg">
     <p class="font-sans font-extralight uppercase text-gray-600">Edit profile</p>
-    <h2 class="text-4xl text-gray-700">{{ customuser.company_name }}</h2>
+    <h2 class="text-4xl text-gray-700 border-b border-gray-300">{{ customuser.company_name }}</h2>
     <form method="post" enctype="multipart/form-data" class="flex flex-col mt-8 mb-6">
         {% csrf_token %}
         {% for field in form %}
