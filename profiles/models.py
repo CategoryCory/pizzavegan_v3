@@ -9,11 +9,11 @@ logger = logging.getLogger(__name__)
 
 
 class PizzeriaLocation(models.Model):
-    street_address1 = models.CharField(max_length=100, blank=True, verbose_name='Street Address 1')
+    street_address1 = models.CharField(max_length=100, blank=False, verbose_name='Street Address 1')
     street_address2 = models.CharField(max_length=100, blank=True, verbose_name='Street Address 2')
-    city = models.CharField(max_length=50, blank=True)
-    state = models.CharField(max_length=30, blank=True)
-    zip_code = models.CharField(max_length=15, blank=True)
+    city = models.CharField(max_length=50, blank=False)
+    state = models.CharField(max_length=30, blank=False)
+    zip_code = models.CharField(max_length=15, blank=False)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, default=0)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, default=0)
     profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
