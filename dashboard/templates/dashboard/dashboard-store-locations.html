@@ -9,10 +9,14 @@
     {% if locations %}
         <div class="mt-6 space-y-0 border border-gray-300 rounded divide-y divide-gray-300">
             {% for location in locations %}
-                <div class="group px-4 py-3 flex flex-col justify-between items-center space-y-3 md:flex-row md:space-y-0">
+                <div class="group px-4 py-3 flex flex-col justify-between items-center space-y-3 md:flex-row md:space-y-0
+                            hover:shadow-md">
                     <p class="font-sans text-gray-600">{{ location.full_address }}</p>
                     <div class="opacity-0 space-x-4 md:space-x-6 group-hover:opacity-100">
-                        <a href="#" class="text-gray-600 text-lg transition hover:text-brand">
+                        <a 
+                            href="{% url 'dashboard:dashboard_edit_store_location' pk=location.id %}" 
+                            class="text-gray-600 text-lg transition hover:text-brand"
+                        >
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                         <a href="#" class="text-gray-600 text-lg transition hover:text-brand">

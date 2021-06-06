@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import widgets
 
+from profiles.models import PizzeriaLocation
+
 CustomUser = get_user_model()
 
 field_classes = 'w-full rounded border-gray-300 focus:border-brand focus:ring-0 transition mt-1 mb-4'
@@ -37,4 +39,19 @@ class ProfileUpdateForm(forms.ModelForm):
             'online_ordering': forms.URLInput(
                 attrs={'class': field_classes, 'placeholder': 'https://sample-online-ordering.com'}
             ),
+        }
+
+
+class LocationUpdateForm(forms.ModelForm):
+    class Meta:
+        model = PizzeriaLocation
+        fields = (
+            'street_address1', 'street_address2', 'city', 'state', 'zip_code',
+        )
+        widgets = {
+            'street_address1': forms.TextInput(attrs={'class': field_classes}),
+            'street_address2': forms.TextInput(attrs={'class': field_classes}),
+            'city': forms.TextInput(attrs={'class': field_classes}),
+            'state': forms.TextInput(attrs={'class': field_classes}),
+            'zip_code': forms.TextInput(attrs={'class': field_classes}),
         }

@@ -1,13 +1,13 @@
 from typing import List
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
 from django.views.generic import ListView, DetailView, UpdateView
 
 from profiles.models import PizzeriaLocation
 
-from .forms import ProfileUpdateForm
+from .forms import ProfileUpdateForm, LocationUpdateForm
 
 CustomUser = get_user_model()
 
@@ -44,9 +44,19 @@ class PizzeriaLocationListView(LoginRequiredMixin, ListView):
         return context
 
 
-@login_required
-def dashboard_store_locations_view(request):
-    return render(request, 'dashboard/dashboard-store-locations.html')
+class PizzeriaLocationEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = PizzeriaLocation
+    form_class = LocationUpdateForm
+    template_name = 'dashboard/dashboard-store-location-edit.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PizzeriaLocationEditView, self).get_context_data(**kwargs)
+        context['customuser'] = self.request.user
+        return context
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.profile == self.request.user
 
 
 @login_required
