@@ -4,17 +4,27 @@
 
 {% block content %}
 <section class="max-w-4xl px-4 pt-2 pb-10 lg:px-10 lg:py-8 bg-white lg:border lg:border-coolgray-200 lg:rounded-lg lg:shadow-lg">
-    {% comment %} <p class="font-sans font-extralight uppercase text-gray-600">Edit profile</p>
-    <h2 class="text-4xl text-gray-700">Company Name</h2>
+    <p class="font-sans font-extralight uppercase text-gray-600">Edit profile</p>
+    <h2 class="text-4xl text-gray-700">{{ customuser.company_name }}</h2>
     <p class="mt-4 font-sans text-sm text-gray-500">If you'd like to change your email address, please visit the email address change page.</p>
     <form method="post" enctype="multipart/form-data" class="flex flex-col mt-8 mb-6">
         {% csrf_token %}
         {% for field in form %}
             <p class="font-sans">
-                <label for="{{ field.auto_id }}" class="font-sans text-gray-600">{{ field.label }}</label>
+                <label for="{{ field.auto_id }}" class="font-sans text-gray-600">{{ field.label }}</label><br>
                 {{ field }}
             </p>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <p class="mb-4 mx-5 px-4 py-2 rounded-md bg-red-800 font-sans text-white">
+                        <span class="font-bold">{{ field.label }}:</span> {{ error|escape }}
+                    </p>
+                {% endfor %}
+            {% endif %}
         {% endfor %}
+        {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+        {% endif %}
         <div class="mt-8 mb-2 flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-6 sm:space-y-0">
             <button
                 type="submit"
@@ -30,6 +40,6 @@
                 Cancel and return to profile
             </a>
         </div>
-    </form> {% endcomment %}
+    </form>
 </section>
 {% endblock content %}

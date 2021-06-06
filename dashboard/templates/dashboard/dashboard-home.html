@@ -4,11 +4,11 @@
 
 {% block content %}
 <section class="max-w-6xl px-4 pt-2 pb-10 lg:px-10 lg:py-8 space-y-10 bg-white lg:border lg:border-coolgray-200 lg:rounded-lg lg:shadow-lg">
-    {% comment %} <div class="flex flex-row justify-center lg:justify-between items-center">
+    <div class="flex flex-row justify-center lg:justify-between items-center">
         <div class="flex flex-col lg:flex-row items-center">
-            {% if profile.pizzeria_logo %}
+            {% if customuser.pizzeria_logo %}
                 <img 
-                    src="{{ profile.pizzeria_logo.url }}" 
+                    src="{{ customuser.pizzeria_logo.url }}" 
                     alt="{{ customuser.company_name }} logo" 
                     class="max-w-xs mb-4 lg:mb-0 lg:max-w-sm lg:mr-12"
                 >
@@ -41,8 +41,8 @@
     <div>
         <p class="mt-6 font-sans font-extralight text-sm text-gray-700 uppercase">Pizzeria Bio/Description</p>
         <p class="font-sans lg:text-lg xl:text-xl text-gray-700">
-            {% if profile.description %}
-                {{ profile.description }}
+            {% if customuser.description %}
+                {{ customuser.description }}
             {% else %}
                 No description entered
             {% endif %}
@@ -51,8 +51,8 @@
     <div>
         <p class="mt-6 font-sans font-extralight text-sm text-gray-700 uppercase">Online Ordering Link</p>
         <p class="font-sans lg:text-lg xl:text-xl text-gray-700">
-            {% if profile.online_ordering %}
-                {{ profile.online_ordering }}
+            {% if customuser.online_ordering %}
+                {{ customuser.online_ordering }}
             {% else %}
                 No online ordering link entered
             {% endif %}
@@ -64,40 +64,40 @@
         <div class="mt-4 mb-12 flex flex-col space-y-3">
             <div class="flex flex-row items-center">
                 <i class="fab fa-facebook inline-block w-12 text-center text-gray-700 text-2xl"></i>
-                {% if profile.facebook %}
-                    <p class="font-sans text-gray-700">{{ profile.facebook }}</p>
+                {% if customuser.facebook %}
+                    <p class="font-sans text-gray-700">{{ customuser.facebook }}</p>
                 {% else %}
                     <p class="font-sans text-gray-500">No Facebook link entered</p>
                 {% endif %}
             </div>
             <div class="flex flex-row items-center">
                 <i class="fab fa-twitter inline-block w-12 text-center text-gray-700 text-2xl"></i>
-                {% if profile.twitter %}
-                    <p class="font-sans text-gray-700">{{ profile.twitter }}</p>
+                {% if customuser.twitter %}
+                    <p class="font-sans text-gray-700">{{ customuser.twitter }}</p>
                 {% else %}
                     <p class="font-sans text-gray-500">No Twitter link entered</p>
                 {% endif %}
             </div>
             <div class="flex flex-row items-center">
                 <i class="fab fa-instagram inline-block w-12 text-center text-gray-700 text-2xl"></i>
-                {% if profile.instagram %}
-                    <p class="font-sans text-gray-700">{{ profile.instagram }}</p>
+                {% if customuser.instagram %}
+                    <p class="font-sans text-gray-700">{{ customuser.instagram }}</p>
                 {% else %}
                     <p class="font-sans text-gray-500">No Instagram link entered</p>
                 {% endif %}
             </div>
             <div class="flex flex-row items-center">
                 <i class="fab fa-tiktok inline-block w-12 text-center text-gray-700 text-2xl"></i>
-                {% if profile.tiktok %}
-                    <p class="font-sans text-gray-700">{{ profile.tiktok }}</p>
+                {% if customuser.tiktok %}
+                    <p class="font-sans text-gray-700">{{ customuser.tiktok }}</p>
                 {% else %}
                     <p class="font-sans text-gray-500">No Tiktok link entered</p>
                 {% endif %}
             </div>
             <div class="flex flex-row items-center">
                 <i class="fab fa-youtube inline-block w-12 text-center text-gray-700 text-2xl"></i>
-                {% if profile.youtube %}
-                    <p class="font-sans text-gray-700">{{ profile.youtube }}</p>
+                {% if customuser.youtube %}
+                    <p class="font-sans text-gray-700">{{ customuser.youtube }}</p>
                 {% else %}
                     <p class="font-sans text-gray-500">No Youtube link entered</p>
                 {% endif %}
@@ -110,6 +110,6 @@
                     focus:ring-offset-2 focus:ring-brand-light focus:outline-none transition-colors duration-200"
     >
         <i class="fas fa-edit inline-block w-8"></i>Edit Profile
-    </a> {% endcomment %}
+    </a>
 </section>
 {% endblock content %}
