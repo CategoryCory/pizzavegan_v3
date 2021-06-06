@@ -1,5 +1,21 @@
 from django.contrib import admin
 from .models import CustomUser
+from profiles.models import PizzeriaLocation, MenuItem, Promotion
+
+
+class PizzeriaLocationInline(admin.TabularInline):
+    model = PizzeriaLocation
+    extra = 0
+
+
+class MenuItemInline(admin.TabularInline):
+    model = MenuItem
+    extra = 0
+
+
+class PromotionInline(admin.TabularInline):
+    model = Promotion
+    extra = 0
 
 
 class CustomUserAdmin(admin.ModelAdmin):
@@ -17,6 +33,11 @@ class CustomUserAdmin(admin.ModelAdmin):
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions', )}),
         ('Important Dates', {'fields': ('last_login', 'date_joined', )}),
     )
+    inlines = [
+        PizzeriaLocationInline,
+        MenuItemInline,
+        PromotionInline
+    ]
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

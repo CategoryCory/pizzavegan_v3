@@ -8,21 +8,6 @@ CustomUser = get_user_model()
 logger = logging.getLogger(__name__)
 
 
-# class PizzeriaProfile(models.Model):
-#     description = models.TextField(blank=True)
-#     facebook = models.URLField(max_length=200, blank=True)
-#     twitter = models.URLField(max_length=200, blank=True)
-#     instagram = models.URLField(max_length=200, blank=True)
-#     tiktok = models.URLField(max_length=200, blank=True)
-#     youtube = models.URLField(max_length=200, blank=True)
-#     online_ordering = models.URLField(max_length=200, blank=True)
-#     pizzeria_logo = models.ImageField(upload_to='images/pizzeria_logos/', blank=True)
-#     user_account = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
-#     def __str__(self) -> str:
-#         return self.user_account.company_name
-
-
 class PizzeriaLocation(models.Model):
     street_address1 = models.CharField(max_length=100, blank=True, verbose_name='Street Address 1')
     street_address2 = models.CharField(max_length=100, blank=True, verbose_name='Street Address 2')
@@ -32,7 +17,17 @@ class PizzeriaLocation(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=6, default=0)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, default=0)
     profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    
+
+    @property
+    def full_address(self):
+        address_components = [self.street_address1]
+        if self.street_address2 is not None and len(self.street_address2) > 0:
+            address_components.append(self.street_address2)
+        address_components.append(self.city)
+        address_components.append(self.state)
+        address_components.append(self.zip_code)
+        return ', '.join(address_components)
+            
     def __str__(self) -> str:
         return f'{self.street_address1}, {self.city}, {self.state} {self.zip_code}'
 
