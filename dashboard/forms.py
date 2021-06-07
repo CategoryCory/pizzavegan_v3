@@ -1,12 +1,13 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.forms import widgets
+from django.forms import widgets, inlineformset_factory
 
 from profiles.models import PizzeriaLocation
 
 CustomUser = get_user_model()
 
 field_classes = 'w-full rounded border-gray-300 focus:border-brand focus:ring-0 transition mt-1 mb-4'
+formset_classes = 'w-full border-0 border-b border-coolgray-300 focus:ring-0 focus:border-brand transition'
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -40,6 +41,35 @@ class ProfileUpdateForm(forms.ModelForm):
                 attrs={'class': field_classes, 'placeholder': 'https://sample-online-ordering.com'}
             ),
         }
+
+
+class LocationCreateForm(forms.ModelForm):
+    class Meta:
+        model = PizzeriaLocation
+        fields = (
+            'street_address1', 'street_address2', 'city', 'state', 'zip_code',
+        )
+        use_required_attribute = True
+
+
+LocationFormSet = inlineformset_factory(
+    CustomUser,
+    PizzeriaLocation,
+    form=LocationCreateForm,
+    fields=(
+        'street_address1', 'street_address2', 'city', 'state', 'zip_code',
+    ),
+    extra=3,
+    max_num=5,
+    absolute_max=5,
+    widgets={
+        'street_address1': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
+        'street_address2': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' '}),
+        'city': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
+        'state': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
+        'zip_code': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
+    }
+)
 
 
 class LocationUpdateForm(forms.ModelForm):

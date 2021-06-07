@@ -1,0 +1,105 @@
+{% extends 'dashboard/dashboard-base.html' %}
+
+{% block dashboard_title %} | Edit Store Location{% endblock dashboard_title %}
+
+{% block extra_css %}
+<style>
+    .formset {
+        margin-top: 1rem;
+    }
+
+    .form {
+        margin: 0;
+        padding: 1rem 1rem 1.75rem;
+    }
+
+    /*
+    .form:not(:last-child) {
+        border-bottom: 3px solid #D1D5DB;
+    }
+    */
+
+    .form-item {
+        position: relative;
+        background-color: transparent;
+    }
+
+    .form-label {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        top: 0;
+        bottom: 0;
+        left: 0.75rem;
+        color: #6B7280;
+        pointer-events: none;
+        transition: all 250ms ease-in-out;
+    }
+
+    input:not(:placeholder-shown) + .form-label,
+    input:focus + .form-label {
+        transform: translate(-1rem, -1.5rem) scale(0.8);
+    }
+
+    .errorlist {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0.75rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .errorlist li {
+        color: #DC2626;
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<section class="w-full px-4 pt-2 pb-10 lg:px-10 lg:py-8 bg-white lg:border lg:border-coolgray-200 lg:rounded-lg lg:shadow-lg">
+<h2>Add store location</h2>
+<form method="post" class="formset" novalidate>
+    {% csrf_token %}
+    {{ formset.management_form }}
+    {% for form in formset %}
+        <div class="form">
+            {{ form.non_field_errors }}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div class="form-item">
+                    {{ form.street_address1 }}
+                    <label for="{{ form.street_address1.id_for_label }}" class="form-label">Street Address 1</label>
+                    {{ form.street_address1.errors }}
+                </div>
+                <div class="form-item">
+                    {{ form.street_address2 }}
+                    <label for="{{ form.street_address2.id_for_label }}" class="form-label">Street Address 2</label>
+                    {{ form.street_address2.errors }}
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="form-item">
+                    {{ form.city }}
+                    <label for="{{ form.city.id_for_label }}" class="form-label">City</label>
+                    {{ form.city.errors }}
+                </div>
+                <div class="form-item">
+                    {{ form.state }}
+                    <label for="{{ form.state.id_for_label }}" class="form-label">State</label>
+                    {{ form.state.errors }}
+                </div>
+                <div class="form-item">
+                    {{ form.zip_code }}
+                    <label for="{{ form.zip_code.id_for_label }}" class="form-label">Zip Code</label>
+                    {{ form.zip_code.errors }}
+                </div>
+            </div>
+            {% if form.non_field_errors %}
+                {{ form.non_field_errors|escape }}
+            {% endif %}
+        </div>
+    {% endfor %}
+    <button type="submit">Add</button>
+</form>
+</section>
+{% endblock content %}

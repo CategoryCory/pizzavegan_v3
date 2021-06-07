@@ -11,7 +11,14 @@
             {% for location in locations %}
                 <div class="group px-4 py-3 flex flex-col justify-between items-center space-y-3 md:flex-row md:space-y-0
                             hover:shadow-md">
-                    <p class="font-sans text-gray-600">{{ location.full_address }}</p>
+                    <div class="flex flex-col justify-center items-start">
+                        <p class="font-sans text-gray-600">{{ location.full_address }}</p>
+                        {% if location.latitude == 0 or location.longitude == 0 %}
+                            <p class="font-sans text-sm text-coolgray-500">
+                                There was an error geolocating this address. Please check to make sure it is correct.
+                            </p>
+                        {% endif %}
+                    </div>
                     <div class="space-x-4 md:space-x-6 md:opacity-0 md:group-hover:opacity-100">
                         <a 
                             href="{% url 'dashboard:dashboard_edit_store_location' pk=location.id %}" 
@@ -44,9 +51,7 @@
 >
     <div class="w-full max-w-xl mx-auto my-auto px-5 py-7 relative flex flex-col items-center space-y-4 rounded-lg shadow-lg bg-white">
         <h2 class="text-2xl text-coolgray-700"><i class="far fa-trash-alt mr-4"></i>Confirm Delete</h2>
-        <p id="confirm-message" class="font-sans text-coolgray-500 text-center">
-            Are you sure you want to delete this store address? This action cannot be undone.
-        </p>
+        <p id="confirm-message" class="font-sans text-coolgray-500 text-center"></p>
         <form 
             action="" 
             method="post" 
@@ -79,7 +84,6 @@
 
     deleteButtons.forEach(btn => {
         btn.addEventListener("click", function() {
-            // alert(this.getAttribute("data-id"));
             deleteModal.classList.remove("hidden");
             deleteModal.classList.add("flex");
             deleteConfirmMessage.innerText = `Are you sure you want to delete ${this.getAttribute("data-address")}? This action cannot be undone.`;
