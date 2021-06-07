@@ -1,12 +1,11 @@
-from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView, TemplateView
 
 from profiles.models import PizzeriaLocation
 
@@ -72,12 +71,12 @@ class PizzeriaLocationCreateView(LoginRequiredMixin, SuccessMessageMixin, Templa
 @login_required
 def pizzeria_location_create_view(request):
     customuser = request.user
-    # LocationFormSet = inlineformset_factory(CustomUser, PizzeriaLocation)
     context = { 'customuser': customuser }
     if request.method == 'POST':
         formset = LocationFormSet(request.POST, instance=customuser, queryset=PizzeriaLocation.objects.none())
         if formset.is_valid():
             formset.save()
+            messages.add_message(request, messages.SUCCESS, 'Store locations successfully added.')
             return redirect(reverse_lazy('dashboard:dashboard_store_locations'))
         else:
             context['formset'] = formset

@@ -59,9 +59,9 @@ LocationFormSet = inlineformset_factory(
     fields=(
         'street_address1', 'street_address2', 'city', 'state', 'zip_code',
     ),
-    extra=3,
-    max_num=5,
-    absolute_max=5,
+    extra=1,
+    max_num=10,
+    absolute_max=10,
     widgets={
         'street_address1': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
         'street_address2': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' '}),

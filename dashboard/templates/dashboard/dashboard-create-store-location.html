@@ -60,7 +60,11 @@
 <section class="w-full px-4 pt-2 pb-10 lg:px-10 lg:py-8 bg-white lg:border lg:border-coolgray-200 lg:rounded-lg lg:shadow-lg">
 <p class="font-sans font-extralight uppercase text-gray-600">Add Store locations</p>
 <h2 class="pb-2 text-4xl text-gray-700 border-b border-gray-300">{{ customuser.company_name }}</h2>
-<form method="post" class="formset" novalidate>
+<p class="mt-2 font-sans text-coolgray-600 text-sm">
+    Your profile can have as many pizzeria locations as you'd like. The form below will allow you to add up to 
+    <span id="max-number"></span> locations at a time.
+</p>
+<form method="post" id="formset" class="formset">
     {% csrf_token %}
     {{ formset.management_form }}
     {% for form in formset %}
@@ -100,9 +104,20 @@
             {% endif %}
         </div>
     {% endfor %}
-    <div class="mt-8 mb-2 flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-5 sm:space-y-0">
+    <div id="add-new-row" class="flex justify-end">
+        <button 
+            type="button" 
+            id="add-new-row-button"
+            class="px-2 py-1 text-coolgray-600 text-sm rounded focus:outline-none focus:ring focus:ring-coolgray-300
+                    transition duration-100"
+        >
+            <i class="fas fa-plus inline-block w-6 text-center"></i>Add new row
+        </button>
+    </div>
+    <div id="submit-container" class="mt-8 mb-2 flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-5 sm:space-y-0">
         <button 
             type="submit"
+            id="submit-forms-button"
             class="w-max px-6 py-2 rounded-full outline-none text-white text-sm bg-brand hover:bg-brand-dark focus:ring-2 
                     focus:ring-offset-2 focus:ring-brand-light focus:outline-none transition-colors duration-200"
         >
@@ -118,3 +133,59 @@
 </form>
 </section>
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+    const submitContainer = document.querySelector("#submit-container");
+    const submitFormsButton = document.querySelector("#submit-forms-button");
+    const addNewRowContainer = document.querySelector("#add-new-row");
+    const addNewRowBtn = document.querySelector("#add-new-row-button");
+    const locationForms = document.getElementsByClassName("form");
+    const locationFormSet = document.querySelector("#formset");
+    const totalForms = document.querySelector("#id_pizzerialocation_set-TOTAL_FORMS");
+    const maxForms = document.querySelector("#id_pizzerialocation_set-MAX_NUM_FORMS").getAttribute("value");
+    const maxNumMessage = document.querySelector("#max-number");
+    let formCount = locationForms.length - 1;
+    let canAddForms = true;
+
+    maxNumMessage.innerText = `${maxForms} `;
+
+    addNewRowBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+
+        const newLocationForm = locationForms[0].cloneNode(true);
+        const formRegex = RegExp(`pizzerialocation_set-(\\d){1}-`, 'g');
+
+        formCount++;
+
+        newLocationForm.innerHTML = newLocationForm.innerHTML.replace(formRegex, `pizzerialocation_set-${formCount}-`);
+        locationFormSet.insertBefore(newLocationForm, addNewRowContainer);
+        totalForms.setAttribute("value", `${formCount + 1}`);
+
+        if (locationForms.length >= maxForms) {
+            canAddForms = false;
+            addNewRowBtn.disabled = true;
+            addNewRowBtn.style.opacity = 0.5;
+            addNewRowBtn.style.cursor = "default";
+        }
+    });
+
+    addNewRowBtn.addEventListener("mouseover", function(e) {
+        if (canAddForms) {
+            addNewRowBtn.style.backgroundColor = "#E5E7EB";
+        } 
+    });
+
+    addNewRowBtn.addEventListener("mouseout", function(e) {
+        if (canAddForms) {
+            addNewRowBtn.style.backgroundColor = "#FFFFFF";
+        } 
+    });
+
+    submitFormsButton.addEventListener("click", function(e) {
+        this.disabled = true;
+        this.innerText = "Please wait...";
+        this.style.opacity = 0.5;
+    });
+</script>
+{% endblock extra_js %}
