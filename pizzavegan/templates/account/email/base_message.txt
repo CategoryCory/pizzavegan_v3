@@ -1,0 +1,7 @@
+{% load i18n %}{% autoescape off %}{% blocktrans %}Hello from PizzaVegan!{% endblocktrans %}
+
+{% block content %}{% endblock %}
+
+{% blocktrans with site_domain=current_site.domain %}Thank you from the PizzaVegan staff!
+{{ site_domain }}{% endblocktrans %}
+{% endautoescape %}
