@@ -7,6 +7,8 @@
 {% block content %}
 <div class="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 px-10 py-8 bg-white sm:rounded-lg shadow-xl">
 
+    {% include 'partials/_alerts.html' %}
+
     <h1 class="text-2xl md:text-3xl text-gray-600">{% trans "Verify Your E-mail Address" %}</h1>
     <p class="mt-4 font-sans text-gray-600">
         We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. 
