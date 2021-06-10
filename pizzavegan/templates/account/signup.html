@@ -20,7 +20,7 @@
 
         {% include 'partials/_alerts.html' %}
 
-        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}" novalidate>
             {% csrf_token %}
             {% for field in form %}
                 <p class="flex flex-col mt-5 font-sans">
@@ -45,6 +45,7 @@
             {% endif %}
             <button 
                 type="submit"
+                id="submit-button"
                 class="my-5 mr-2 px-6 py-2 rounded text-white tracking-wide bg-brand 
                         hover:bg-brand-dark focus:ring-2 focus:ring-offset-2 focus:ring-brand-light"
             >
@@ -61,3 +62,14 @@
     </div>
 
 {% endblock content %}
+
+{% block extra_body %}
+<script>
+    const submitButton = document.getElementById("submit-button");
+    submitButton.addEventListener("click", function(e) {
+        this.disabled = true;
+        this.style.opacity = 0.5;
+        this.style.cursor = "default";
+    });
+</script>
+{% endblock extra_body %}
