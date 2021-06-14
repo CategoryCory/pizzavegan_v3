@@ -41,7 +41,7 @@
             >
                 <i class="fas fa-map-marker-alt inline-block xl:w-8 xl:mr-1 xl:text-center"></i><span class="hidden xl:inline">Store Locations</span>
             </a>
-            <a 
+            {% comment %} <a 
                 href="{% url 'dashboard:dashboard_menu_items' %}" 
                 class="w-14 h-14 flex justify-center items-center rounded-full xl:block xl:w-full xl:h-auto 
                     xl:pl-6 xl:py-3 xl:rounded-tl-full xl:rounded-bl-full xl:rounded-tr-none xl:rounded-br-none 
@@ -58,7 +58,7 @@
                     {% if request.path == '/dashboard/promotions/' %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
             >
                 <i class="fas fa-tags inline-block xl:w-8 xl:mr-1 xl:text-center"></i><span class="hidden xl:inline">Current Promotions</span>
-            </a>
+            </a> {% endcomment %}
         </nav>
     </div>
     <div class="md:pl-24 xl:pl-72">
@@ -96,8 +96,8 @@
         <div class="flex flex-col space-y-6 px-6">
             <a href="{% url 'dashboard:dashboard_home' %}" class="text-gray-600 text-xl">Profile</a>
             <a href="{% url 'dashboard:dashboard_store_locations' %}" class="text-gray-600 text-xl">Store Locations</a>
-            <a href="{% url 'dashboard:dashboard_menu_items' %}" class="text-gray-600 text-xl">Menu Items</a>
-            <a href="{% url 'dashboard:dashboard_promotions' %}" class="text-gray-600 text-xl">Promotions</a>
+            {% comment %} <a href="{% url 'dashboard:dashboard_menu_items' %}" class="text-gray-600 text-xl">Menu Items</a>
+            <a href="{% url 'dashboard:dashboard_promotions' %}" class="text-gray-600 text-xl">Promotions</a> {% endcomment %}
         </div>
         <button slot="footer" class="fixed bottom-6 right-6 h-16 w-16 flex justify-center items-center
             rounded-full bg-white border border-gray-100 shadow-md focus:outline-none focus:ring-2
