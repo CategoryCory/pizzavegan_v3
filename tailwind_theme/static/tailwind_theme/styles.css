@@ -55,10 +55,15 @@
     }
 
     .nav__dropdown {
-        @apply absolute top-full left-0 w-max px-5 py-4 space-y-3 bg-gray-600 z-50;
+        @apply absolute top-full left-0 w-max px-3 py-4 space-y-3 bg-white border border-gray-200 rounded shadow-md z-50;
     }
 
-    nav li:hover > .nav__dropdown {
+    .nav__dropdown-right {
+        @apply absolute top-full right-0 w-max px-3 py-4 space-y-3 bg-white border border-gray-200 rounded shadow-md z-50;
+    }
+
+    nav li:hover > .nav__dropdown,
+    nav li:hover > .nav__dropdown-right {
         @apply block;
     }
 
