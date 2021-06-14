@@ -56,7 +56,9 @@
             </a>
         </form>
         <p class="font-sans text-gray-500">
-            By creating an account, you accept PizzaVegan's <a href="#" class="underline hover:text-brand-dark">privacy policy</a>
+            By creating an account, you accept PizzaVegan's 
+            <a href="{% url 'pages:privacy' %}" class="underline hover:text-brand-dark">privacy policy</a>
+            and <a href="{% url 'pages:terms_of_service' %}" class="underline hover:text-brand-dark">terms of service</a>
         </p>
         <a href="{% url 'pages:home' %}" class="underline text-gray-500 hover:text-brand-dark">Return to home page</a>
     </div>

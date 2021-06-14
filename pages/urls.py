@@ -8,6 +8,8 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     # path('meet-the-editor/', views.MeetTheEditorView.as_view(), name='meet_the_editor'),
     path('contact/', views.ContactUsView.as_view(), name='contact_us'),
+    path('privacy/', views.PrivacyPolicyView.as_view(), name='privacy'),
+    path('terms-of-service/', views.TermsOfServiceView.as_view(), name='terms_of_service'),
     # path('pizzavegan-signup/', views.pizzavegan_signup_view, name='pizzavegan_signup'),
     # path('register/', views.RegisterPizzeriaView.as_view(), name='register_pizzeria'),
 ]

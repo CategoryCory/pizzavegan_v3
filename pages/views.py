@@ -42,6 +42,14 @@ class ContactUsView(SuccessMessageMixin, CreateView):
     success_message = 'Thank you for contacting us! We will read your message and respond soon!'
 
 
+class PrivacyPolicyView(TemplateView):
+    template_name = 'pages/privacy.html'
+
+
+class TermsOfServiceView(TemplateView):
+    template_name = 'pages/terms-of-service.html'
+
+
 class RegisterPizzeriaView(SuccessMessageMixin, CreateView):
     form_class = PizzeriaSignupResponseForm
     template_name = 'pages/register-pizzeria.html'
