@@ -88,6 +88,7 @@ class LocationUpdateForm(forms.ModelForm):
 
 
 class MenuItemForm(forms.ModelForm):
+
     class Meta:
         model = MenuItem
         fields = (
@@ -96,5 +97,8 @@ class MenuItemForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': field_classes}),
             'description': forms.Textarea(attrs={'rows': 5, 'class': field_classes}),
-            'price': forms.NumberInput(attrs={'class': field_classes, 'min': 0, 'max': 999.99, 'step': 1.0}),
+            'price': forms.NumberInput(attrs={'class': field_classes, 'min': 0, 'max': 999.99}),
+        }
+        labels = {
+            'price': 'Price (omit dollar sign)'
         }

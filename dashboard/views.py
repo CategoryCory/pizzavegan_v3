@@ -90,7 +90,7 @@ class MenuItemListView(LoginRequiredMixin, ListView):
     context_object_name = 'menu_items'
 
     def get_queryset(self):
-        return MenuItem.objects.filter(profile=self.request.user)
+        return MenuItem.objects.filter(profile=self.request.user).order_by('-price')
 
 
 class MenuItemCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
