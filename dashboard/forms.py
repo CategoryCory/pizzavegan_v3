@@ -2,11 +2,11 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import widgets, inlineformset_factory
 
-from profiles.models import PizzeriaLocation
+from profiles.models import PizzeriaLocation, MenuItem
 
 CustomUser = get_user_model()
 
-field_classes = 'w-full rounded border-gray-300 focus:border-brand focus:ring-0 transition mt-1 mb-4'
+field_classes = 'w-full rounded border-coolgray-300 focus:border-brand focus:ring-0 transition mt-1 mb-4'
 formset_classes = 'w-full border-0 border-b border-coolgray-300 focus:ring-0 focus:border-brand transition'
 
 
@@ -84,4 +84,16 @@ class LocationUpdateForm(forms.ModelForm):
             'city': forms.TextInput(attrs={'class': field_classes}),
             'state': forms.TextInput(attrs={'class': field_classes}),
             'zip_code': forms.TextInput(attrs={'class': field_classes}),
+        }
+
+
+class MenuItemForm(forms.ModelForm):
+    class Meta:
+        model = MenuItem
+        fields = (
+            'title', 'description', 'photo', 
+        )
+        widgets = {
+            'title': forms.TextInput(attrs={'class': field_classes}),
+            'description': forms.Textarea(attrs={'rows': 5, 'class': field_classes})
         }

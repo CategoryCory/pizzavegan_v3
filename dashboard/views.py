@@ -1,3 +1,4 @@
+from typing import List
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -5,11 +6,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from profiles.models import PizzeriaLocation
+from profiles.models import MenuItem, PizzeriaLocation
 
-from .forms import ProfileUpdateForm, LocationCreateForm, LocationUpdateForm, LocationFormSet
+from .forms import ProfileUpdateForm, LocationUpdateForm, LocationFormSet, MenuItemForm
 
 CustomUser = get_user_model()
 
@@ -39,39 +40,13 @@ class PizzeriaLocationListView(LoginRequiredMixin, ListView):
     context_object_name = 'locations'
 
     def get_queryset(self):
-        current_user = self.request.user
-        return PizzeriaLocation.objects.filter(profile=current_user)
+        return PizzeriaLocation.objects.filter(profile=self.request.user)
     
-    def get_context_data(self, **kwargs):
-        context = super(PizzeriaLocationListView, self).get_context_data(**kwargs)
-        context['customuser'] = self.request.user
-        return context
-
-
-class PizzeriaLocationCreateView(LoginRequiredMixin, SuccessMessageMixin, TemplateView):
-    model = PizzeriaLocation
-    template_name = 'dashboard/dashboard-create-store-location.html'
-    form_class = LocationCreateForm
-    success_url = reverse_lazy('dashboard:dashboard-store-locations')
-    success_message = 'New store location successfully added.'
-
-    def get_context_data(self, **kwargs):
-        context = super(PizzeriaLocationCreateView, self).get_context_data(**kwargs)
-        if self.request.POST:
-            context['formset'] = LocationFormSet(self.request.POST, queryset=PizzeriaLocation.objects.none())
-        else:
-            context['formset'] = LocationFormSet(queryset=PizzeriaLocation.objects.none())
-        context['customuser'] = self.request.user
-        return context
-    
-    def form_valid(self, form):
-        context = self.get_context_data()
-
 
 @login_required
 def pizzeria_location_create_view(request):
     customuser = request.user
-    context = { 'customuser': customuser }
+    context = {}
     if request.method == 'POST':
         formset = LocationFormSet(request.POST, instance=customuser, queryset=PizzeriaLocation.objects.none())
         if formset.is_valid():
@@ -94,11 +69,6 @@ class PizzeriaLocationEditView(LoginRequiredMixin, UserPassesTestMixin, SuccessM
     success_url = reverse_lazy('dashboard:dashboard_store_locations')
     success_message = 'The store location has been successfully updated.'
 
-    def get_context_data(self, **kwargs):
-        context = super(PizzeriaLocationEditView, self).get_context_data(**kwargs)
-        context['customuser'] = self.request.user
-        return context
-
     def test_func(self):
         obj = self.get_object()
         return obj.profile == self.request.user
@@ -114,9 +84,57 @@ class PizzeriaLocationDeleteView(LoginRequiredMixin, UserPassesTestMixin, Succes
         return obj.profile == self.request.user
 
 
-@login_required
-def dashboard_menu_items_view(request):
-    return render(request, 'dashboard/dashboard-menu-items.html')
+class MenuItemListView(LoginRequiredMixin, ListView):
+    model = MenuItem
+    template_name = 'dashboard/dashboard-menu-items.html'
+    context_object_name = 'menu_items'
+
+    def get_queryset(self):
+        return MenuItem.objects.filter(profile=self.request.user)
+
+
+class MenuItemCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = MenuItem
+    form_class = MenuItemForm
+    template_name = 'dashboard/dashboard-menu-item-form.html'
+    success_url = reverse_lazy('dashboard:dashboard_menu_items')
+    success_message = 'Menu item successfully added.'
+
+    def get_context_data(self, **kwargs):
+        context = super(MenuItemCreateView, self).get_context_data(**kwargs)
+        context['page_action'] = 'Add'
+        return context
+
+    def form_valid(self, form):
+        form.instance.profile = self.request.user
+        return super().form_valid(form)
+
+
+class MenuItemEditView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+    model = MenuItem
+    form_class = MenuItemForm
+    template_name = 'dashboard/dashboard-menu-item-form.html'
+    success_url = reverse_lazy('dashboard:dashboard_menu_items')
+    success_message = 'Menu item successfully edited.'
+
+    def get_context_data(self, **kwargs):
+        context = super(MenuItemEditView, self).get_context_data(**kwargs)
+        context['page_action'] = 'Edit'
+        return context
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.profile == self.request.user
+
+
+class MenuItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+    model = MenuItem
+    success_url = reverse_lazy('dashboard:dashboard_menu_items')
+    success_message = 'Menu item successfully deleted.'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.profile == self.request.user
 
 
 @login_required

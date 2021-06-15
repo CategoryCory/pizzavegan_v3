@@ -1,12 +1,12 @@
 {% extends 'dashboard/dashboard-base.html' %}
 
-{% block dashboard_title %} | Edit Store Location{% endblock dashboard_title %}
+{% block dashboard_title %} | {{ page_action }} Menu Item{% endblock dashboard_title %}
 
 {% block content %}
 <section class="max-w-4xl px-4 pt-2 pb-10 lg:px-10 lg:py-8 bg-white lg:border lg:border-coolgray-200 lg:rounded-lg lg:shadow-lg">
-    <p class="font-sans font-extralight uppercase">Edit store location</p>
-    <h2 class="pb-2 text-2xl text-coolgray-700 border-b border-coolgray-300">{{ pizzerialocation.full_address }}</h2>
-    <form method="post" class="flex flex-col mt-8 mb-6">
+    <p class="font-sans font-extralight uppercase">{{ page_action }} Menu Item</p>
+    <h2 class="pb-2 text-2xl text-gray-700 border-b border-gray-300">{{ user.company_name }}</h2>
+    <form method="post" class="flex flex-col mt-8 mb-6" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         {% for field in form %}
             <p class="font-sans">
@@ -24,32 +24,22 @@
         {% if form.non_field_errors %}
             {{ form.non_field_errors }}
         {% endif %}
-        <div class="mt-5 mb-2 flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-5 sm:space-y-0">
+        <div class="mt-8 flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-5 sm:space-y-0">
             <button
                 type="submit"
-                id="update-submit"
+                id="create-submit"
                 class="w-max px-6 py-2 rounded-full outline-none text-white text-sm bg-brand hover:bg-brand-dark focus:ring-2 
                         focus:ring-offset-2 focus:ring-brand-light focus:outline-none transition-colors duration-200"
             >
-                <i class="fas fa-edit inline-block w-8"></i>Update Store Location
+                <i class="fas fa-plus inline-block mr-2"></i>{{ page_action }} Menu Item
             </button>
             <a 
-                href="{% url 'dashboard:dashboard_store_locations' %}" 
+                href="{% url 'dashboard:dashboard_menu_items' %}" 
                 class="font-sans text-coolgray-500 text-sm hover:text-brand hover:underline"
             >
-                Cancel and return to store locations
+                Cancel and return to menu items
             </a>
         </div>
     </form>
 </section>
-{% endblock content %}
-
-{% block extra_js %}
-<script>
-    const submitButton = document.getElementById("update-submit");
-    submitButton.addEventListener("click", e => {
-        submitButton.disabled = true;
-        submitButton.innerText = "Please wait...";
-    });
-</script>
-{% endblock extra_js %}
+{% endblock %}

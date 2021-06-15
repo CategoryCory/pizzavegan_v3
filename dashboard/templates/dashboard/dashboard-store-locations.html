@@ -7,7 +7,7 @@
     <div class="flex flex-col md:flex-row items-start md:justify-between md:items-center space-y-4">
         <div>
             <p class="font-sans font-extralight uppercase text-gray-600">Store locations</p>
-            <h2 class="text-4xl text-gray-700">{{ customuser.company_name }}</h2>
+            <h2 class="text-4xl text-gray-700">{{ user.company_name }}</h2>
         </div>
         <a 
             href="{% url 'dashboard:dashboard_create_store_location' %}"
@@ -18,12 +18,12 @@
         </a>
     </div>
     {% if locations %}
-        <div class="mt-6 space-y-0 border border-gray-300 rounded divide-y divide-gray-300">
+        <div class="mt-6 space-y-0 border border-coolgray-300 rounded divide-y divide-coolgray-300">
             {% for location in locations %}
                 <div class="group px-4 py-3 flex flex-col justify-between items-center space-y-3 md:flex-row md:space-y-0
                             hover:shadow-md">
                     <div class="flex flex-col justify-center items-start">
-                        <p class="font-sans text-gray-600">{{ location.full_address }}</p>
+                        <p class="font-sans text-coolgray-600">{{ location.full_address }}</p>
                         {% if location.latitude == 0 or location.longitude == 0 %}
                             <p class="font-sans text-sm text-coolgray-500">
                                 There was an error geolocating this address. Please check to make sure it is correct.
@@ -33,13 +33,13 @@
                     <div class="space-x-4 md:space-x-6 md:opacity-0 md:group-hover:opacity-100">
                         <a 
                             href="{% url 'dashboard:dashboard_edit_store_location' pk=location.id %}" 
-                            class="text-gray-600 text-lg transition hover:text-brand"
+                            class="text-coolgray-600 text-lg transition hover:text-brand"
                             aria-label="Edit"
                         >
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                         <button
-                            class="text-gray-600 text-lg transition hover:text-brand"
+                            class="text-coolgray-600 text-lg transition hover:text-brand"
                             aria-label="Delete"
                             data-type="delete"
                             data-address="{{ location.full_address }}"
@@ -52,7 +52,7 @@
             {% endfor %}
         </div>
     {% else %}
-        <p class="mt-6 font-sans text-gray-500">You don't currently have any store locations.</p>
+        <p class="mt-6 font-sans text-coolgray-500">You don't currently have any store locations.</p>
     {% endif %}
 </section>
 <div 

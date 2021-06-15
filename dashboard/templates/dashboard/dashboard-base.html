@@ -19,7 +19,7 @@
             <img src="{% static 'images/pizza-slice.png' %}" alt="PizzaVegan logo" class="h-10 xl:mr-2">
             <div class="hidden xl:flex flex-col justify-center">
                 <p class="font-sans font-extralight text-white text-sm uppercase ">Dashboard</p>
-                <p class="font-sans font-extrabold text-white text-xl">{{ customuser.company_name }}</p>
+                <p class="font-sans font-extrabold text-white text-xl">{{ user.company_name }}</p>
             </div>
         </div>
         <nav class="xl:pl-6 pt-12 flex flex-col items-center space-y-4">
@@ -28,7 +28,11 @@
                 class="w-14 h-14 flex justify-center items-center rounded-full xl:block xl:w-full xl:h-auto 
                     xl:pl-6 xl:py-3 xl:rounded-tl-full xl:rounded-bl-full xl:rounded-tr-none xl:rounded-br-none 
                     text-white transition-colors duration-200 
-                    {% if request.path == '/dashboard/' %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
+                    {% if request.path == '/dashboard/' or request.path == '/dashboard/edit/' %}
+                        bg-brand
+                    {% else %}
+                        hover:bg-coolgray-900
+                    {% endif %}"
             >
                 <i class="far fa-user inline-block xl:w-8 xl:mr-1 xl:text-center"></i><span class="hidden xl:inline">Profile</span>
             </a>
@@ -37,20 +41,20 @@
                 class="w-14 h-14 flex justify-center items-center rounded-full xl:block xl:w-full xl:h-auto 
                     xl:pl-6 xl:py-3 xl:rounded-tl-full xl:rounded-bl-full xl:rounded-tr-none xl:rounded-br-none 
                     text-white transition-colors duration-200
-                    {% if request.path == '/dashboard/locations/' %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
+                    {% if '/dashboard/locations/' in request.path %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
             >
                 <i class="fas fa-map-marker-alt inline-block xl:w-8 xl:mr-1 xl:text-center"></i><span class="hidden xl:inline">Store Locations</span>
             </a>
-            {% comment %} <a 
+            <a 
                 href="{% url 'dashboard:dashboard_menu_items' %}" 
                 class="w-14 h-14 flex justify-center items-center rounded-full xl:block xl:w-full xl:h-auto 
                     xl:pl-6 xl:py-3 xl:rounded-tl-full xl:rounded-bl-full xl:rounded-tr-none xl:rounded-br-none 
                     text-white transition-colors duration-200
-                    {% if request.path == '/dashboard/menu-items/' %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
+                    {% if '/dashboard/menu-items/' in request.path %}bg-brand{% else %}hover:bg-coolgray-900{% endif %}"
             >
                 <i class="fas fa-pizza-slice inline-block xl:w-8 xl:mr-1 xl:text-center"></i><span class="hidden xl:inline">Menu Items</span>
             </a>
-            <a 
+            {% comment %} <a 
                 href="{% url 'dashboard:dashboard_promotions' %}" 
                 class="w-14 h-14 flex justify-center items-center rounded-full xl:block xl:w-full xl:h-auto 
                     xl:pl-6 xl:py-3 xl:rounded-tl-full xl:rounded-bl-full xl:rounded-tr-none xl:rounded-br-none 
@@ -96,8 +100,8 @@
         <div class="flex flex-col space-y-6 px-6">
             <a href="{% url 'dashboard:dashboard_home' %}" class="text-gray-600 text-xl">Profile</a>
             <a href="{% url 'dashboard:dashboard_store_locations' %}" class="text-gray-600 text-xl">Store Locations</a>
-            {% comment %} <a href="{% url 'dashboard:dashboard_menu_items' %}" class="text-gray-600 text-xl">Menu Items</a>
-            <a href="{% url 'dashboard:dashboard_promotions' %}" class="text-gray-600 text-xl">Promotions</a> {% endcomment %}
+            <a href="{% url 'dashboard:dashboard_menu_items' %}" class="text-gray-600 text-xl">Menu Items</a>
+            {% comment %} <a href="{% url 'dashboard:dashboard_promotions' %}" class="text-gray-600 text-xl">Promotions</a> {% endcomment %}
         </div>
         <button slot="footer" class="fixed bottom-6 right-6 h-16 w-16 flex justify-center items-center
             rounded-full bg-white border border-gray-100 shadow-md focus:outline-none focus:ring-2
