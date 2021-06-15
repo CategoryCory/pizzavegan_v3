@@ -44,6 +44,7 @@ class PizzeriaLocation(models.Model):
 class MenuItem(models.Model):
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField(blank=False)
+    price = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=False)
     photo = models.ImageField(upload_to='images/menu_items/', blank=True)
     profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
