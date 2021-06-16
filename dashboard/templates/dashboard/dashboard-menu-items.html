@@ -24,10 +24,12 @@
             {% for item in menu_items %}
                 <div class="group px-4 py-3 flex flex-col justify-between items-center space-y-3 md:flex-row md:space-y-0
                             hover:shadow-md">
-                    <div class="flex flex-col justify-center items-start">
+                    <div class="flex flex-col justify-center items-center md:items-start">
                         <p class="font-sans text-coolgray-600">
                             {{ item.title }}
-                            <span class="ml-3 text-coolgray-500 text-sm">(${{ item.price|floatformat:2|intcomma }})</span>
+                            <span class="inline-block ml-3 p-1 rounded bg-coolgray-500 text-white text-xs">
+                                ${{ item.price|floatformat:2|intcomma }}
+                            </span>
                         </p>
                         <p class="font-sans text-coolgray-500 text-sm">
                             {{ item.description|truncatewords:10 }}
