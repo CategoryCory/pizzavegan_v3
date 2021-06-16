@@ -13,11 +13,11 @@
                     class="max-w-xs mb-4 lg:mb-0 lg:max-w-sm lg:mr-12"
                 >
             {% else %}
-                <h3 class="ml-6 mr-10 px-4 py-3 text-gray-500 rounded-md border border-gray-400">No logo selected</h3>
+                <h3 class="ml-6 mr-10 px-4 py-3 text-coolgray-500 rounded-md border border-coolgray-400">No logo selected</h3>
             {% endif %}
             <div class="text-center">
-                <h2 class="text-4xl text-gray-700">{{ user.company_name }}</h2>
-                <p class="font-sans font-extralight text-lg text-gray-700">{{ user.email }}</p>
+                <h2 class="text-4xl text-coolgray-700">{{ user.company_name }}</h2>
+                <p class="font-sans font-extralight text-lg text-coolgray-700">{{ user.email }}</p>
             </div>
         </div>
         <a 
@@ -29,8 +29,8 @@
         </a>
     </div>
     <div>
-        <p class="font-sans font-extralight text-sm text-gray-700 uppercase">Contact Name</p>
-        <p class="font-sans lg:text-lg xl:text-xl text-gray-700">
+        <p class="font-sans font-extralight text-sm text-coolgray-700 uppercase">Contact Name</p>
+        <p class="font-sans lg:text-lg xl:text-xl text-coolgray-700">
             {% if user.first_name or user.last_name %}
                 {{ user.first_name }} {{ user.last_name }}
             {% else %}
@@ -39,8 +39,8 @@
         </p>
     </div>
     <div>
-        <p class="mt-6 font-sans font-extralight text-sm text-gray-700 uppercase">Pizzeria Bio/Description</p>
-        <p class="font-sans lg:text-lg xl:text-xl text-gray-700">
+        <p class="mt-6 font-sans font-extralight text-sm text-coolgray-700 uppercase">Pizzeria Bio/Description</p>
+        <p class="font-sans lg:text-lg xl:text-xl text-coolgray-700">
             {% if user.description %}
                 {{ user.description }}
             {% else %}
@@ -49,8 +49,8 @@
         </p>
     </div>
     <div>
-        <p class="mt-6 font-sans font-extralight text-sm text-gray-700 uppercase">Online Ordering Link</p>
-        <p class="font-sans lg:text-lg xl:text-xl text-gray-700">
+        <p class="mt-6 font-sans font-extralight text-sm text-coolgray-700 uppercase">Online Ordering Link</p>
+        <p class="font-sans lg:text-lg xl:text-xl text-coolgray-700">
             {% if user.online_ordering %}
                 {{ user.online_ordering }}
             {% else %}
@@ -60,46 +60,46 @@
     </div>
 
     <div>
-        <p class="mt-6 font-sans font-extralight text-sm text-gray-700 uppercase">Social Media Links</p>
+        <p class="mt-6 font-sans font-extralight text-sm text-coolgray-700 uppercase">Social Media Links</p>
         <div class="mt-4 mb-12 flex flex-col space-y-3">
             <div class="flex flex-row items-center">
-                <i class="fab fa-facebook inline-block w-12 text-center text-gray-700 text-2xl"></i>
+                <i class="fab fa-facebook inline-block w-12 text-center text-coolgray-700 text-2xl"></i>
                 {% if user.facebook %}
-                    <p class="font-sans text-gray-700">{{ user.facebook }}</p>
+                    <p class="font-sans text-coolgray-700">{{ user.facebook }}</p>
                 {% else %}
-                    <p class="font-sans text-gray-500">No Facebook link entered</p>
+                    <p class="font-sans text-coolgray-500">No Facebook link entered</p>
                 {% endif %}
             </div>
             <div class="flex flex-row items-center">
-                <i class="fab fa-twitter inline-block w-12 text-center text-gray-700 text-2xl"></i>
+                <i class="fab fa-twitter inline-block w-12 text-center text-coolgray-700 text-2xl"></i>
                 {% if user.twitter %}
-                    <p class="font-sans text-gray-700">{{ user.twitter }}</p>
+                    <p class="font-sans text-coolgray-700">{{ user.twitter }}</p>
                 {% else %}
-                    <p class="font-sans text-gray-500">No Twitter link entered</p>
+                    <p class="font-sans text-coolgray-500">No Twitter link entered</p>
                 {% endif %}
             </div>
             <div class="flex flex-row items-center">
-                <i class="fab fa-instagram inline-block w-12 text-center text-gray-700 text-2xl"></i>
+                <i class="fab fa-instagram inline-block w-12 text-center text-coolgray-700 text-2xl"></i>
                 {% if user.instagram %}
-                    <p class="font-sans text-gray-700">{{ user.instagram }}</p>
+                    <p class="font-sans text-coolgray-700">{{ user.instagram }}</p>
                 {% else %}
-                    <p class="font-sans text-gray-500">No Instagram link entered</p>
+                    <p class="font-sans text-coolgray-500">No Instagram link entered</p>
                 {% endif %}
             </div>
             <div class="flex flex-row items-center">
-                <i class="fab fa-tiktok inline-block w-12 text-center text-gray-700 text-2xl"></i>
+                <i class="fab fa-tiktok inline-block w-12 text-center text-coolgray-700 text-2xl"></i>
                 {% if user.tiktok %}
-                    <p class="font-sans text-gray-700">{{ user.tiktok }}</p>
+                    <p class="font-sans text-coolgray-700">{{ user.tiktok }}</p>
                 {% else %}
-                    <p class="font-sans text-gray-500">No Tiktok link entered</p>
+                    <p class="font-sans text-coolgray-500">No Tiktok link entered</p>
                 {% endif %}
             </div>
             <div class="flex flex-row items-center">
-                <i class="fab fa-youtube inline-block w-12 text-center text-gray-700 text-2xl"></i>
+                <i class="fab fa-youtube inline-block w-12 text-center text-coolgray-700 text-2xl"></i>
                 {% if user.youtube %}
-                    <p class="font-sans text-gray-700">{{ user.youtube }}</p>
+                    <p class="font-sans text-coolgray-700">{{ user.youtube }}</p>
                 {% else %}
-                    <p class="font-sans text-gray-500">No Youtube link entered</p>
+                    <p class="font-sans text-coolgray-500">No Youtube link entered</p>
                 {% endif %}
             </div>
         </div>

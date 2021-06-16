@@ -85,9 +85,9 @@
 
     <!-- HAMBURGER TOGGLE -->
     <button class="fixed bottom-6 right-6 h-16 w-16 flex justify-center items-center
-        md:hidden bg-white rounded-full border border-gray-100 shadow-md mobile-menu-open
-        focus:outline-none focus:ring-2 focus:ring-gray-300 z-20">
-        <i class="fas fa-bars text-3xl text-gray-600"></i>
+        md:hidden bg-white rounded-full border border-coolgray-100 shadow-md mobile-menu-open
+        focus:outline-none focus:ring-2 focus:ring-coolgray-300 z-20">
+        <i class="fas fa-bars text-3xl text-coolgray-600"></i>
     </button>
 
     <!-- MOBILE MENU -->
@@ -98,15 +98,15 @@
             </a>
         </div>
         <div class="flex flex-col space-y-6 px-6">
-            <a href="{% url 'dashboard:dashboard_home' %}" class="text-gray-600 text-xl">Profile</a>
-            <a href="{% url 'dashboard:dashboard_store_locations' %}" class="text-gray-600 text-xl">Store Locations</a>
-            <a href="{% url 'dashboard:dashboard_menu_items' %}" class="text-gray-600 text-xl">Menu Items</a>
-            {% comment %} <a href="{% url 'dashboard:dashboard_promotions' %}" class="text-gray-600 text-xl">Promotions</a> {% endcomment %}
+            <a href="{% url 'dashboard:dashboard_home' %}" class="text-coolgray-600 text-xl">Profile</a>
+            <a href="{% url 'dashboard:dashboard_store_locations' %}" class="text-coolgray-600 text-xl">Store Locations</a>
+            <a href="{% url 'dashboard:dashboard_menu_items' %}" class="text-coolgray-600 text-xl">Menu Items</a>
+            {% comment %} <a href="{% url 'dashboard:dashboard_promotions' %}" class="text-coolgray-600 text-xl">Promotions</a> {% endcomment %}
         </div>
         <button slot="footer" class="fixed bottom-6 right-6 h-16 w-16 flex justify-center items-center
-            rounded-full bg-white border border-gray-100 shadow-md focus:outline-none focus:ring-2
-            focus:ring-gray-300 mobile-menu-close">
-            <i class="fas fa-arrow-left text-3xl text-gray-600"></i>
+            rounded-full bg-white border border-coolgray-100 shadow-md focus:outline-none focus:ring-2
+            focus:ring-coolgray-300 mobile-menu-close">
+            <i class="fas fa-arrow-left text-3xl text-coolgray-600"></i>
         </button>
     </sl-drawer>
 
