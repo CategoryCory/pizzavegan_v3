@@ -8,9 +8,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from profiles.models import MenuItem, PizzeriaLocation
+from profiles.models import MenuItem, PizzeriaLocation, Promotion
 
-from .forms import ProfileUpdateForm, LocationUpdateForm, LocationFormSet, MenuItemForm
+from .forms import ProfileUpdateForm, LocationUpdateForm, LocationFormSet, MenuItemForm, PromotionForm
 
 CustomUser = get_user_model()
 
@@ -137,6 +137,54 @@ class MenuItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessage
         return obj.profile == self.request.user
 
 
-@login_required
-def dashboard_promotions_view(request):
-    return render(request, 'dashboard/dashboard-promotions.html')
+class PromotionListView(LoginRequiredMixin, ListView):
+    model = Promotion
+    template_name = 'dashboard/dashboard-promotions.html'
+    context_object_name = 'promotions'
+
+    def get_queryset(self):
+        return Promotion.objects.filter(profile=self.request.user).order_by('begin_date')
+
+
+class PromotionCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Promotion
+    form_class = PromotionForm
+    template_name = 'dashboard/dashboard-promotion-form.html'
+    success_url = reverse_lazy('dashboard:dashboard_promotions')
+    success_message = 'Promotion successfully added.'
+
+    def get_context_data(self, **kwargs):
+        context = super(PromotionCreateView, self).get_context_data(**kwargs)
+        context['page_action'] = 'Add'
+        return context
+
+    def form_valid(self, form):
+        form.instance.profile = self.request.user
+        return super().form_valid(form)
+
+
+class PromotionEditView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+    model = Promotion
+    form_class = PromotionForm
+    template_name = 'dashboard/dashboard-promotion-form.html'
+    success_url = reverse_lazy('dashboard:dashboard_promotions')
+    success_message = 'Promotion successfully edited.'
+
+    def get_context_data(self, **kwargs):
+        context = super(PromotionEditView, self).get_context_data(**kwargs)
+        context['page_action'] = 'Edit'
+        return context
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.profile == self.request.user
+
+
+class PromotionDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+    model = Promotion
+    success_url = reverse_lazy('dashboard:dashboard_promotions')
+    success_message = 'Promotion successfully deleted.'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.profile == self.request.user

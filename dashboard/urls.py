@@ -14,5 +14,8 @@ urlpatterns = [
     path('menu-items/add/', views.MenuItemCreateView.as_view(), name='dashboard_create_menu_item'),
     path('menu-items/edit/<int:pk>/', views.MenuItemEditView.as_view(), name='dashboard_edit_menu_item'),
     path('menu-items/delete/<int:pk>/', views.MenuItemDeleteView.as_view(), name='dashboard_delete_menu_item'),
-    path('promotions/', views.dashboard_promotions_view, name='dashboard_promotions'),
+    path('promotions/', views.PromotionListView.as_view(), name='dashboard_promotions'),
+    path('promotions/add/', views.PromotionCreateView.as_view(), name='dashboard_create_promotion'),
+    path('promotions/edit/<int:pk>/', views.PromotionEditView.as_view(), name='dashboard_edit_promotion'),
+    path('promotions/delete/<int:pk>/', views.PromotionDeleteView.as_view(), name='dashboard_delete_promotion'),
 ]

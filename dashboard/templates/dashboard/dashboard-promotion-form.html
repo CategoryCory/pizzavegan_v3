@@ -1,0 +1,45 @@
+{% extends 'dashboard/dashboard-base.html' %}
+
+{% block dashboard_title %} | {{ page_action }} Promotion{% endblock dashboard_title %}
+
+{% block content %}
+<section class="max-w-4xl px-4 pt-2 pb-10 lg:px-10 lg:py-8 bg-white lg:border lg:border-coolgray-200 lg:rounded-lg lg:shadow-lg">
+    <p class="font-sans font-extralight uppercase">{{ page_action }} Promotion</p>
+    <h2 class="pb-2 text-2xl text-coolgray-700 border-b border-coolgray-300">{{ user.company_name }}</h2>
+    <form method="post" class="flex flex-col mt-8 mb-6">
+        {% csrf_token %}
+        {% for field in form %}
+            <p class="font-sans">
+                <label for="{{ field.auto_id }}" class="font-sans text-coolgray-600">{{ field.label }}</label><br>
+                {{ field }}
+            </p>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                        <span class="font-bold">{{ field.label }}:</span> {{ error|escape }}
+                    </p>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+        {% endif %}
+        <div class="mt-8 flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-5 sm:space-y-0">
+            <button
+                type="submit"
+                id="create-submit"
+                class="w-max px-6 py-2 rounded-full outline-none text-white text-sm bg-brand hover:bg-brand-dark focus:ring-2 
+                        focus:ring-offset-2 focus:ring-brand-light focus:outline-none transition-colors duration-200"
+            >
+                <i class="fas fa-plus inline-block mr-2"></i>{{ page_action }} Promotion
+            </button>
+            <a 
+                href="{% url 'dashboard:dashboard_promotions' %}" 
+                class="font-sans text-coolgray-500 text-sm hover:text-brand hover:underline"
+            >
+                Cancel and return to promotions
+            </a>
+        </div>
+    </form>
+</section>
+{% endblock %}

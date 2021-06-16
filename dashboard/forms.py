@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import widgets, inlineformset_factory
 
-from profiles.models import PizzeriaLocation, MenuItem
+from profiles.models import PizzeriaLocation, MenuItem, Promotion
 
 CustomUser = get_user_model()
 
@@ -101,4 +101,18 @@ class MenuItemForm(forms.ModelForm):
         }
         labels = {
             'price': 'Price (omit dollar sign)'
+        }
+
+
+class PromotionForm(forms.ModelForm):
+    class Meta:
+        model = Promotion
+        fields = (
+            'title', 'begin_date', 'end_date', 'description',
+        )
+        widgets = {
+            'title': forms.TextInput(attrs={'class': field_classes}),
+            'begin_date': forms.DateInput(attrs={'class': field_classes, 'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'class': field_classes, 'type': 'date'}),
+            'description': forms.Textarea(attrs={'rows': 5, 'class': field_classes}),
         }
