@@ -64,7 +64,7 @@
     Your profile can have as many pizzeria locations as you'd like. The form below will allow you to add up to 
     <span id="max-number"></span> locations at a time.
 </p>
-<form method="post" id="formset" class="formset">
+<form method="post" id="formset" class="formset" novalidate>
     {% csrf_token %}
     {{ formset.management_form }}
     {% for form in formset %}
@@ -73,7 +73,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div class="form-item">
                     {{ form.street_address1 }}
-                    <label for="{{ form.street_address1.id_for_label }}" class="form-label">Street Address 1</label>
+                    <label for="{{ form.street_address1.id_for_label }}" class="form-label font-semibold">Street Address (required)</label>
                     {{ form.street_address1.errors }}
                 </div>
                 <div class="form-item">
@@ -85,17 +85,17 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="form-item">
                     {{ form.city }}
-                    <label for="{{ form.city.id_for_label }}" class="form-label">City</label>
+                    <label for="{{ form.city.id_for_label }}" class="form-label font-semibold">City (required)</label>
                     {{ form.city.errors }}
                 </div>
                 <div class="form-item">
                     {{ form.state }}
-                    <label for="{{ form.state.id_for_label }}" class="form-label">State</label>
+                    <label for="{{ form.state.id_for_label }}" class="form-label font-semibold">State (required)</label>
                     {{ form.state.errors }}
                 </div>
                 <div class="form-item">
                     {{ form.zip_code }}
-                    <label for="{{ form.zip_code.id_for_label }}" class="form-label">Zip Code</label>
+                    <label for="{{ form.zip_code.id_for_label }}" class="form-label font-semibold">Zip Code (required)</label>
                     {{ form.zip_code.errors }}
                 </div>
             </div>
