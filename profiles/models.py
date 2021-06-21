@@ -16,7 +16,7 @@ class PizzeriaLocation(models.Model):
     zip_code = models.CharField(max_length=15, blank=False)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, default=0)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, default=0)
-    profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='locations')
 
     @property
     def full_address(self):
