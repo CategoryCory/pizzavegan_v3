@@ -1,6 +1,6 @@
 from django.db import models
 
-from .helpers import geocode_address
+from profiles.helpers import geocode_address
 
 
 class ContactUsResponse(models.Model):

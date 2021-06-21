@@ -1,6 +1,6 @@
-from contacts.models import PizzeriaSignupResponse
-from contacts.serializers import SignupResponseSerializer
-from contacts.helpers import geocode_zip
+from profiles.helpers import geocode_zip
+from profiles.models import PizzeriaLocation
+from profiles.serializers import PizzeriaLocationSerializer
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -8,8 +8,8 @@ from rest_framework.response import Response
 
 @api_view()
 @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
-def signup_response_list(request):
-    pizzeria_list = PizzeriaSignupResponse.objects.filter(is_approved=True)
+def pizzeria_list(request):
+    pizzeria_list = PizzeriaLocation.objects.all()
     source_zip = request.query_params.get('zip')
     radius = request.query_params.get('radius') if request.query_params.get('radius') is not None else 25
     return_dict: dict = {}
@@ -29,6 +29,6 @@ def signup_response_list(request):
             return_dict['origin_status'] = 'OK'
             return_dict['origin_zip'] = source_zip
             return_dict['origin_latlng'] = [zip_latlng['lat'], zip_latlng['lng']]
-    serializer = SignupResponseSerializer(pizzeria_list, context={'origin': [1, 2]}, many=True)
+    serializer = PizzeriaLocationSerializer(pizzeria_list, many=True, context={'request': request})
     return_dict['locations'] = serializer.data
     return Response(return_dict)

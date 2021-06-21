@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.conf import settings
 # from geopy import distance
 
-from contacts.helpers import geocode_zip
+from profiles.helpers import geocode_zip
 from contacts.models import PizzeriaSignupResponse
 
 

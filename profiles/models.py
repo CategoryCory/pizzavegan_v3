@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import date
-from contacts.helpers import geocode_address
+from .helpers import geocode_address
 import logging
 
 CustomUser = get_user_model()
