@@ -46,7 +46,7 @@ class MenuItem(models.Model):
     description = models.TextField(blank=False)
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=False)
     photo = models.ImageField(upload_to='images/menu_items/', blank=True)
-    profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='menuitems')
 
     def __str__(self) -> str:
         return self.title
@@ -57,7 +57,7 @@ class Promotion(models.Model):
     description = models.TextField(blank=False)
     begin_date = models.DateField(blank=False, default=date.today)
     end_date = models.DateField(blank=False, default=date.today)
-    profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    profile = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='promotions')
 
     def __str__(self) -> str:
         return self.title
