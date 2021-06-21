@@ -25,7 +25,7 @@
             zipFormatError = false;
 
             try {
-                const response = await fetch(`/api/v1/signups/?zip=${$currentZip}`);
+                const response = await fetch(`/api/v1/pizzerias/?zip=${$currentZip}`);
                 const data = await response.json();
 
                 if (data["origin_status"] === "NOT_FOUND")  {

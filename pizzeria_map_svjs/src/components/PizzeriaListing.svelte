@@ -1,22 +1,49 @@
 <script>
     import { scale } from "svelte/transition";
-
-    let logo = "";
-
+    import Fa from "svelte-fa";
+    import { faFacebook, faTwitter, faInstagram, faTiktok, faYoutube } from "@fortawesome/free-brands-svg-icons";
     export let restaurantData;
-    
 </script>
 
 <div class="listing-container" transition:scale="{{duration: 300}}">
     <div class="listing-image-container">
-        <img src={logo} alt="Pizza Logo" class="listing-image">
+        <img src={restaurantData.profile.pizzeria_logo} alt="Pizza Logo" class="listing-image">
     </div>
     <div class="listing-info-container">
-        <h2>{restaurantData.restaurant_name}</h2>
+        <h2>{restaurantData.profile.company_name}</h2>
         <p>{restaurantData.street_address1}</p>
         <p>{restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}</p>
         <!-- p>{phone}</p -->
-        <p>Dine In | Pickup | Delivery</p>
+        <div class="listing-social-media">
+            {#if restaurantData.profile.facebook}
+                <a href={restaurantData.profile.facebook}>
+                    <Fa icon={faFacebook} fw color="#69625C" size="lg" />
+                </a>
+            {/if}
+            {#if restaurantData.profile.twitter}
+                <a href={restaurantData.profile.twitter}>
+                    <Fa icon={faTwitter} fw color="#69625C" size="lg" />
+                </a>
+            {/if}
+            {#if restaurantData.profile.instagram}
+                <a href={restaurantData.profile.instagram}>
+                    <Fa icon={faInstagram} fw color="#69625C" size="lg" />
+                </a>
+            {/if}
+            {#if restaurantData.profile.tiktok}
+                <a href={restaurantData.profile.tiktok}>
+                    <Fa icon={faTiktok} fw color="#69625C" size="lg" />
+                </a>
+            {/if}
+            {#if restaurantData.profile.youtube}
+                <a href={restaurantData.profile.youtube}>
+                    <Fa icon={faYoutube} fw color="#69625C" size="lg" />
+                </a>
+            {/if}
+        </div>
+        {#if restaurantData.profile.online_ordering }
+            <a href={restaurantData.profile.online_ordering} class="listing-online-ordering">Order online!</a>
+        {/if}
     </div>
 </div>
 
@@ -51,7 +78,7 @@
 
     .listing-info-container {
         height: 100%;
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 1rem 1.25rem;
     }
 
     .listing-info-container h2 {
@@ -64,6 +91,27 @@
         font-size: 0.875rem;
         line-height: 1.375;
         color: rgb(105, 98, 92);
+    }
+
+    .listing-social-media {
+        margin: 0.75em 0 1.5em;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    .listing-online-ordering {
+        padding: 0.2em 0.6em;
+        border: 2px solid rgb(105, 98, 92);
+        border-radius: 0.4em;
+        color: rgb(105, 98, 92);
+        transition: all 150ms ease-in-out;
+    }
+
+    .listing-online-ordering:hover {
+        background-color: rgb(105, 98, 92);
+        color: rgb(255, 255, 255);
     }
 
     @media screen and (min-width: 640px) {
