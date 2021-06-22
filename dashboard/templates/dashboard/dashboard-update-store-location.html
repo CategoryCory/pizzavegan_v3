@@ -8,19 +8,111 @@
     <h2 class="pb-2 text-2xl text-coolgray-700 border-b border-coolgray-300">{{ pizzerialocation.full_address }}</h2>
     <form method="post" class="flex flex-col mt-8 mb-6">
         {% csrf_token %}
-        {% for field in form %}
-            <p class="font-sans">
-                <label for="{{ field.auto_id }}" class="font-sans text-coolgray-600">{{ field.label }}</label><br>
-                {{ field }}
-            </p>
-            {% if field.errors %}
-                {% for error in field.errors %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <div>
+                <label for="{{ form.street_address1.id_for_label }}" class="font-sans text-coolgray-600">Street Address</label>
+                {{ form.street_address1 }}
+                {% if form.street_address1.errors %}
+                    {% for error in form.street_address1.errors %}
+                        <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">Street Address:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div>
+                <label for="{{ form.street_address2.id_for_label }}" class="font-sans text-coolgray-600">Street Address 2</label>
+                {{ form.street_address2 }}
+                {% if form.street_address2.errors %}
+                    {% for error in form.street_address2.errors %}
+                        <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">Street Address 2:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div>
+                <label for="{{ form.city.id_for_label }}" class="font-sans text-coolgray-600">City</label>
+                {{ form.city }}
+                {% if form.city.errors %}
+                    {% for error in form.city.errors %}
+                        <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">City:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div>
+                <label for="{{ form.state.id_for_label }}" class="font-sans text-coolgray-600">State</label>
+                {{ form.state }}
+                {% if form.state.errors %}
+                    {% for error in form.state.errors %}
+                        <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">State:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div>
+                <label for="{{ form.zip_code.id_for_label }}" class="font-sans text-coolgray-600">Zip Code</label>
+                {{ form.zip_code }}
+                {% if form.zip_code.errors %}
+                    {% for error in form.zip_code.errors %}
+                        <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">Zip Code:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <label for="{{ form.phone.id_for_label }}" class="font-sans text-coolgray-600">Phone</label>
+            {{ form.phone }}
+            {% if form.phone.errors %}
+                {% for error in form.phone.errors %}
                     <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
-                        <span class="font-bold">{{ field.label }}:</span> {{ error|escape }}
+                        <span class="font-bold">Phone:</span> {{ error|escape }}
                     </p>
                 {% endfor %}
             {% endif %}
-        {% endfor %}
+        </div>
+        <div class="my-2 flex flex-row gap-8">
+            <div class="flex flex-row items-center">
+                {{ form.dine_in }}
+                <label for="{{ form.dine_in.id_for_label }}" class="ml-2 font-sans text-coolgray-600">Dine In</label>
+                {% if form.dine_in.errors %}
+                    {% for error in form.dine_in.errors %}
+                        <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">Dine In:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="flex flex-row items-center">
+                {{ form.carry_out }}
+                <label for="{{ form.carry_out.id_for_label }}" class="ml-2 font-sans text-coolgray-600">Carry Out</label>
+                {% if form.carry_out.errors %}
+                    {% for error in form.carry_out.errors %}
+                        <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">Carry Out:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="flex flex-row items-center">
+                {{ form.delivery }}
+                <label for="{{ form.delivery.id_for_label }}" class="ml-2 font-sans text-coolgray-600">Delivery</label>
+                {% if form.delivery.errors %}
+                    {% for error in form.delivery.errors %}
+                        <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                            <span class="font-bold">Delivery:</span> {{ error|escape }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
         {% if form.non_field_errors %}
             {{ form.non_field_errors }}
         {% endif %}

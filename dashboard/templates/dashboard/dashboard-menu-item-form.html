@@ -10,7 +10,7 @@
         {% csrf_token %}
         {% for field in form %}
             <p class="font-sans">
-                <label for="{{ field.auto_id }}" class="font-sans text-coolgray-600">{{ field.label }}</label><br>
+                <label for="{{ field.auto_id }}" class="font-sans text-coolgray-600">{{ field.label }}</label>
                 {{ field }}
             </p>
             {% if field.errors %}

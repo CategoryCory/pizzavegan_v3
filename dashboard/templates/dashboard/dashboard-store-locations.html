@@ -24,6 +24,11 @@
                             hover:shadow-md">
                     <div class="flex flex-col justify-center items-start">
                         <p class="font-sans text-coolgray-600">{{ location.full_address }}</p>
+                        {% if location.phone %}
+                            <p class="font-sans text-coolgray-500 text-sm">{{ location.phone }}</p>
+                        {% else %}
+                            <p class="font-sans text-coolgray-500 text-sm">No phone number listed.</p>
+                        {% endif %}
                         {% if location.latitude == 0 or location.longitude == 0 %}
                             <p class="font-sans text-sm text-coolgray-500">
                                 There was an error geolocating this address. Please check to make sure it is correct.

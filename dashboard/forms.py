@@ -8,6 +8,7 @@ CustomUser = get_user_model()
 
 field_classes = 'w-full rounded border-coolgray-300 focus:border-brand focus:ring-0 transition mt-1 mb-4'
 formset_classes = 'w-full border-0 border-b border-coolgray-300 focus:ring-0 focus:border-brand transition'
+checkbox_classes = 'rounded text-brand focus:ring-brand'
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -43,19 +44,29 @@ class ProfileUpdateForm(forms.ModelForm):
         }
 
 
-class LocationCreateForm(forms.ModelForm):
+class LocationForm(forms.ModelForm):
     class Meta:
         model = PizzeriaLocation
         fields = (
-            'street_address1', 'street_address2', 'city', 'state', 'zip_code',
+            'street_address1', 'street_address2', 'city', 'state', 'zip_code', 'phone', 'dine_in', 'carry_out', 'delivery',
         )
-        use_required_attribute = True
+        widgets = {
+            'street_address1': forms.TextInput(attrs={'class': field_classes}),
+            'street_address2': forms.TextInput(attrs={'class': field_classes}),
+            'city': forms.TextInput(attrs={'class': field_classes}),
+            'state': forms.TextInput(attrs={'class': field_classes}),
+            'zip_code': forms.TextInput(attrs={'class': field_classes}),
+            'phone': forms.TextInput(attrs={'class': field_classes}),
+            'dine_in': forms.CheckboxInput(attrs={'class': checkbox_classes}),
+            'carry_out': forms.CheckboxInput(attrs={'class': checkbox_classes}),
+            'delivery': forms.CheckboxInput(attrs={'class': checkbox_classes}),
+        }
 
 
 LocationFormSet = inlineformset_factory(
     CustomUser,
     PizzeriaLocation,
-    form=LocationCreateForm,
+    form=LocationForm,
     fields=(
         'street_address1', 'street_address2', 'city', 'state', 'zip_code',
     ),
@@ -70,21 +81,6 @@ LocationFormSet = inlineformset_factory(
         'zip_code': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
     }
 )
-
-
-class LocationUpdateForm(forms.ModelForm):
-    class Meta:
-        model = PizzeriaLocation
-        fields = (
-            'street_address1', 'street_address2', 'city', 'state', 'zip_code',
-        )
-        widgets = {
-            'street_address1': forms.TextInput(attrs={'class': field_classes}),
-            'street_address2': forms.TextInput(attrs={'class': field_classes}),
-            'city': forms.TextInput(attrs={'class': field_classes}),
-            'state': forms.TextInput(attrs={'class': field_classes}),
-            'zip_code': forms.TextInput(attrs={'class': field_classes}),
-        }
 
 
 class MenuItemForm(forms.ModelForm):

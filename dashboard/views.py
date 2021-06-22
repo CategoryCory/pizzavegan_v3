@@ -1,4 +1,3 @@
-from typing import List
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,7 +9,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 
 from profiles.models import MenuItem, PizzeriaLocation, Promotion
 
-from .forms import ProfileUpdateForm, LocationUpdateForm, LocationFormSet, MenuItemForm, PromotionForm
+from .forms import ProfileUpdateForm, LocationForm, LocationFormSet, MenuItemForm, PromotionForm
 
 CustomUser = get_user_model()
 
@@ -64,7 +63,7 @@ def pizzeria_location_create_view(request):
 
 class PizzeriaLocationEditView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = PizzeriaLocation
-    form_class = LocationUpdateForm
+    form_class = LocationForm
     template_name = 'dashboard/dashboard-update-store-location.html'
     success_url = reverse_lazy('dashboard:dashboard_store_locations')
     success_message = 'The store location has been successfully updated.'
