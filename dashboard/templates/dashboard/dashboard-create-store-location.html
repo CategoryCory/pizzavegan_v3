@@ -145,8 +145,8 @@
     const addNewRowBtn = document.querySelector("#add-new-row-button");
     const locationForms = document.getElementsByClassName("form");
     const locationFormSet = document.querySelector("#formset");
-    const totalForms = document.querySelector("#id_pizzerialocation_set-TOTAL_FORMS");
-    const maxForms = document.querySelector("#id_pizzerialocation_set-MAX_NUM_FORMS").getAttribute("value");
+    const totalForms = document.querySelector("#id_locations-TOTAL_FORMS");
+    const maxForms = document.querySelector("#id_locations-MAX_NUM_FORMS").getAttribute("value");
     const maxNumMessage = document.querySelector("#max-number");
     let formCount = locationForms.length - 1;
     let canAddForms = true;
@@ -157,11 +157,11 @@
         e.preventDefault();
 
         const newLocationForm = locationForms[0].cloneNode(true);
-        const formRegex = RegExp(`pizzerialocation_set-(\\d){1}-`, 'g');
+        const formRegex = RegExp(`locations-(\\d){1}-`, 'g');
 
         formCount++;
 
-        newLocationForm.innerHTML = newLocationForm.innerHTML.replace(formRegex, `pizzerialocation_set-${formCount}-`);
+        newLocationForm.innerHTML = newLocationForm.innerHTML.replace(formRegex, `locations-${formCount}-`);
         locationFormSet.insertBefore(newLocationForm, addNewRowContainer);
         totalForms.setAttribute("value", `${formCount + 1}`);
 
