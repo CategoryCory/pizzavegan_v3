@@ -9,8 +9,10 @@
     }
 
     .form {
-        margin: 0;
-        padding: 1rem 1rem 1.75rem;
+        margin: 0 0 1rem;
+        padding: 1rem;
+        background-color: #F3F4F6;
+        border-radius: 0.5rem;
     }
 
     /*
@@ -82,7 +84,7 @@
                     {{ form.street_address2.errors }}
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="form-item">
                     {{ form.city }}
                     <label for="{{ form.city.id_for_label }}" class="form-label font-semibold">City (required)</label>
@@ -97,6 +99,28 @@
                     {{ form.zip_code }}
                     <label for="{{ form.zip_code.id_for_label }}" class="form-label font-semibold">Zip Code (required)</label>
                     {{ form.zip_code.errors }}
+                </div>
+                <div class="form-item">
+                    {{ form.phone }}
+                    <label for="{{ form.phone.id_for_label }}" class="form-label">Phone</label>
+                    {{ form.phone.errors }}
+                </div>
+            </div>
+            <div class="mt-5 sm:ml-4 flex flex-row flex-wrap gap-6 sm:gap-8">
+                <div class="flex flex-row items-center flex-shrink-0">
+                    {{ form.dine_in }}
+                    <label for="{{ form.dine_in.id_for_label }}" class="ml-2 font-sans text-coolgray-500">Dine In</label>
+                    {{ form.dine_in.errors }}
+                </div>
+                <div class="flex flex-row items-center flex-shrink-0">
+                    {{ form.carry_out }}
+                    <label for="{{ form.carry_out.id_for_label }}" class="ml-2 font-sans text-coolgray-500">Carry Out</label>
+                    {{ form.carry_out.errors }}
+                </div>
+                <div class="flex flex-row items-center flex-shrink-0">
+                    {{ form.delivery }}
+                    <label for="{{ form.delivery.id_for_label }}" class="ml-2 font-sans text-coolgray-500">Delivery</label>
+                    {{ form.delivery.errors }}
                 </div>
             </div>
             {% if form.non_field_errors %}

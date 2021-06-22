@@ -7,8 +7,8 @@ from profiles.models import PizzeriaLocation, MenuItem, Promotion
 CustomUser = get_user_model()
 
 field_classes = 'w-full rounded border-coolgray-300 focus:border-brand focus:ring-0 transition mt-1 mb-4'
-formset_classes = 'w-full border-0 border-b border-coolgray-300 focus:ring-0 focus:border-brand transition'
-checkbox_classes = 'rounded text-brand focus:ring-brand'
+formset_classes = 'w-full bg-transparent border-0 border-b border-coolgray-300 focus:ring-0 focus:border-brand transition'
+checkbox_classes = 'rounded text-brand border-coolgray-600 focus:ring-brand'
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -68,7 +68,7 @@ LocationFormSet = inlineformset_factory(
     PizzeriaLocation,
     form=LocationForm,
     fields=(
-        'street_address1', 'street_address2', 'city', 'state', 'zip_code',
+        'street_address1', 'street_address2', 'city', 'state', 'zip_code', 'phone', 'dine_in', 'carry_out', 'delivery',
     ),
     extra=1,
     max_num=10,
@@ -79,6 +79,10 @@ LocationFormSet = inlineformset_factory(
         'city': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
         'state': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
         'zip_code': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
+        'phone': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' '}),
+        'dine_in': widgets.CheckboxInput(attrs={'class': checkbox_classes}),
+        'carry_out': widgets.CheckboxInput(attrs={'class': checkbox_classes}),
+        'delivery': widgets.CheckboxInput(attrs={'class': checkbox_classes}),
     }
 )
 
