@@ -1,5 +1,5 @@
 <script>
-    import {currentLatLng, currentZip, hasValidZip, isLoading, searchResultsList} from "../stores";
+    import {currentLatLng, currentPizzeria, currentZip, hasValidZip, isLoading, searchResultsList} from "../stores";
     import Alert from "./Alert.svelte";
     import { beforeUpdate, afterUpdate } from "svelte";
 
@@ -19,6 +19,9 @@
         $isLoading = true;
         // $hasValidZip = false;
         $searchResultsList.length = 0;
+        for (let prop in $currentPizzeria) {
+            delete $currentPizzeria[prop];
+        }
         const zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/;
         if (zipRegex.test(zipCode)) {
             $currentZip = zipCode;

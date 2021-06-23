@@ -1,19 +1,45 @@
 <script>
     import { scale } from "svelte/transition";
+    import { currentPizzeria } from "../stores";
     import Fa from "svelte-fa";
     import { faFacebook, faTwitter, faInstagram, faTiktok, faYoutube } from "@fortawesome/free-brands-svg-icons";
     export let restaurantData;
+
+    const diningOptions = [];
+    if (restaurantData.dine_in) diningOptions.push("Dine In");
+    if (restaurantData.carry_out) diningOptions.push("Carry Out");
+    if (restaurantData.delivery) diningOptions.push("Delivery");
+
+    const handleClick = () => {
+        $currentPizzeria["latitude"] = restaurantData.latitude;
+        $currentPizzeria["longitude"] = restaurantData.longitude;
+        // alert($currentPizzeria.latitude);
+    }
 </script>
 
 <div class="listing-container" transition:scale="{{duration: 300}}">
-    <div class="listing-image-container">
-        <img src={restaurantData.profile.pizzeria_logo} alt="Pizza Logo" class="listing-image">
+    <div class="listing-image-container" on:click={handleClick}>
+        {#if restaurantData.profile.pizzeria_logo}
+            <img src={restaurantData.profile.pizzeria_logo} alt="Pizza Logo" class="listing-image">
+        {:else}
+            <div class="no-logo">
+                <p>No Logo Provided</p>
+            </div>
+        {/if}
     </div>
     <div class="listing-info-container">
-        <h2>{restaurantData.profile.company_name}</h2>
+        <h2 class="listing-pizzeria-name" on:click={handleClick}>{restaurantData.profile.company_name}</h2>
         <p>{restaurantData.street_address1}</p>
         <p>{restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}</p>
-        <!-- p>{phone}</p -->
+        {#if restaurantData.phone}
+            <p>{restaurantData.phone}</p>
+        {/if}
+        {#if diningOptions.length > 0}
+            <p>{diningOptions.join(" | ")}</p>
+        {/if}
+        {#if restaurantData.profile.online_ordering }
+            <a href={restaurantData.profile.online_ordering} class="listing-online-ordering">Order online!</a>
+        {/if}
         <div class="listing-social-media">
             {#if restaurantData.profile.facebook}
                 <a href={restaurantData.profile.facebook}>
@@ -41,14 +67,12 @@
                 </a>
             {/if}
         </div>
-        {#if restaurantData.profile.online_ordering }
-            <a href={restaurantData.profile.online_ordering} class="listing-online-ordering">Order online!</a>
-        {/if}
     </div>
 </div>
 
 <style>
     .listing-container {
+        padding: 0.5rem 0 1rem;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -78,11 +102,11 @@
 
     .listing-info-container {
         height: 100%;
-        padding: 0.75rem 1rem 1.25rem;
+        padding: 0;
     }
 
     .listing-info-container h2 {
-        margin-bottom: 0.75rem;
+        margin-bottom: 0;
         font-size: 1.2rem;
         line-height: 1.2;
     }
@@ -94,7 +118,7 @@
     }
 
     .listing-social-media {
-        margin: 0.75em 0 1.5em;
+        margin-top: 0.75em;
         display: flex;
         justify-content: start;
         align-items: center;
@@ -102,9 +126,11 @@
     }
 
     .listing-online-ordering {
-        padding: 0.2em 0.6em;
+        display: inline-block;
+        margin-top: 0.75em;
+        padding: 0.1em 0.4em;
         border: 2px solid rgb(105, 98, 92);
-        border-radius: 0.4em;
+        border-radius: 0.25em;
         color: rgb(105, 98, 92);
         transition: all 150ms ease-in-out;
     }
@@ -114,8 +140,23 @@
         color: rgb(255, 255, 255);
     }
 
-    @media screen and (min-width: 640px) {
+    .no-logo {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        place-items: center;
+        background-color: #E7E5E4;
+    }
 
+    .no-logo p {
+        color: #57534E;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .listing-image-container,
+    .listing-pizzeria-name {
+        cursor: pointer;
     }
 
     @media screen and (min-width: 1024px) {
@@ -125,8 +166,8 @@
         }
 
         .listing-image {
-            max-height: 10rem;
-            max-width: 10rem;
+            max-height: 8.5rem;
+            max-width: 8.5rem;
         }
 
         .listing-info-container h2 {

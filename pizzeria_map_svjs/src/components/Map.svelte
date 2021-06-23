@@ -1,11 +1,7 @@
 <script>
-    import {currentLatLng, searchResultsList, hasValidZip} from "../stores";
+    import { onMount } from 'svelte';
+    import { currentLatLng, currentPizzeria, searchResultsList, hasValidZip } from "../stores";
 
-    let container;
-    let map;
-    let markers = [];
-    let defaultZoom = 4;
-    let defaultCenter = { lat: 39.8283, lng: -98.5795 };
     const mapStyles = [
       {
         "elementType": "geometry",
@@ -175,17 +171,29 @@
         ]
       }
     ]
+
+    let container;
+    let map;
+    let markers = [];
+    let defaultZoom = 4;
+    let defaultCenter = { lat: 39.8283, lng: -98.5795 };
+
     const mapOptions = {
         zoom: defaultZoom,
         center: defaultCenter,
         styles: mapStyles
     };
 
-    import { onMount } from 'svelte';
-
     onMount(async () => {
         map = new google.maps.Map(container, mapOptions);
     });
+
+    $: {
+      if (Object.keys($currentPizzeria).length !== 0) {
+        map.setCenter({ lat: parseFloat($currentPizzeria.latitude), lng: parseFloat($currentPizzeria.longitude) });
+        map.setZoom(15);
+      }
+    }
 
     $: {
         if ($hasValidZip) {
