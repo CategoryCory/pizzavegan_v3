@@ -49,7 +49,6 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PizzeriaLocationSerializer(serializers.HyperlinkedModelSerializer):
-    # locations = CustomUserSerializer(many=True, read_only=True)
     profile = CustomUserSerializer(read_only=True)
 
     class Meta:
@@ -60,8 +59,11 @@ class PizzeriaLocationSerializer(serializers.HyperlinkedModelSerializer):
             'city',
             'state',
             'zip_code',
+            'phone',
+            'dine_in',
+            'carry_out',
+            'delivery',
             'latitude',
             'longitude',
             'profile',
-            # 'locations',
         ]
