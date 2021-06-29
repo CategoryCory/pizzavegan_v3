@@ -59,6 +59,7 @@ class PizzeriaLocationSerializer(serializers.HyperlinkedModelSerializer):
             'city',
             'state',
             'zip_code',
+            'full_address',
             'phone',
             'dine_in',
             'carry_out',
