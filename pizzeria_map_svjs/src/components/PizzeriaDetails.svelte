@@ -144,12 +144,12 @@
     }
     
     main h2 {
-        font-size: 2.25rem;
+        font-size: 1.5rem;
         color: rgb(50, 45, 42);
     }
 
     main h3 {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         color: rgb(50, 45, 42);
     }
 
@@ -182,7 +182,12 @@
 
     .title-row {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .title-row p {
+        font-size: 0.75rem;
     }
 
     .pizzeria-logo,
@@ -247,12 +252,13 @@
 
     .promotion-title {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .promotion-date-range {
         display: inline-block;
-        margin-left: 0.75rem;
+        margin-bottom: 0.75rem;
         padding: 0 0.5rem;
         background-color: rgb(50, 45, 42);
         font-size: 0.875rem;
@@ -299,6 +305,37 @@
     @media screen and (min-width: 1024px) {
         main {
             height: 100%;
+        }
+
+        main h2 {
+            font-size: 2rem;
+        }
+
+        main h3 {
+            font-size: 1.5rem;
+        }
+
+        main h4 {
+            font-size: 1.125rem;
+        }
+
+        .title-row {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .title-row p {
+            font-size: 1rem;
+        }
+
+        .promotion-title {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .promotion-date-range {
+            margin-left: 0.75rem;
+            margin-bottom: 0;
         }
     }
 </style>
