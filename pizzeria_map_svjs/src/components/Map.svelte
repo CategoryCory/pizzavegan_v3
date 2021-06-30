@@ -189,13 +189,6 @@
     });
 
     $: {
-      if (Object.keys($currentPizzeria).length !== 0) {
-        map.setCenter({ lat: parseFloat($currentPizzeria.latitude), lng: parseFloat($currentPizzeria.longitude) });
-        map.setZoom(15);
-      }
-    }
-
-    $: {
         if ($hasValidZip) {
             // Clear all markers
             for (let i = 0; i < markers.length; i++) {
@@ -234,6 +227,11 @@
                 map.setZoom(13);
             }
         }
+
+        if ($currentPizzeria.isSet === true) {
+            map.setCenter({ lat: parseFloat($currentPizzeria.latitude), lng: parseFloat($currentPizzeria.longitude) });
+            map.setZoom(16);
+        } 
     }
 </script>
 

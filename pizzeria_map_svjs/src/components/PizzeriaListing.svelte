@@ -11,9 +11,8 @@
     if (restaurantData.delivery) diningOptions.push("Delivery");
 
     const handleClick = () => {
-        $currentPizzeria["latitude"] = restaurantData.latitude;
-        $currentPizzeria["longitude"] = restaurantData.longitude;
-        // alert($currentPizzeria.latitude);
+        $currentPizzeria = Object.assign({}, restaurantData);
+        $currentPizzeria.isSet = true;
     }
 </script>
 
@@ -38,7 +37,7 @@
             <p>{diningOptions.join(" | ")}</p>
         {/if}
         {#if restaurantData.profile.online_ordering }
-            <a href={restaurantData.profile.online_ordering} class="listing-online-ordering">Order online!</a>
+            <a href={restaurantData.profile.online_ordering} class="listing-online-ordering">Order online</a>
         {/if}
         <div class="listing-social-media">
             {#if restaurantData.profile.facebook}

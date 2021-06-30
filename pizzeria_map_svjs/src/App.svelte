@@ -2,6 +2,7 @@
   import Map from "./components/Map.svelte";
   import SearchBar from "./components/SearchBar.svelte";
   import SearchResults from "./components/SearchResults.svelte";
+  import PizzeriaDetails from "./components/PizzeriaDetails.svelte";
 
   export let ready;
 </script>
@@ -31,6 +32,7 @@
   <div class="search-container">
     <SearchBar />
     <SearchResults />
+    <PizzeriaDetails />
   </div>
 </main>
 
@@ -55,8 +57,10 @@
   }
 
   .search-container {
+    position: relative;
     height: inherit;
     padding-top: 0.75em;
+    overflow-x: hidden;
   }
 
   @media screen and (min-width: 640px) {

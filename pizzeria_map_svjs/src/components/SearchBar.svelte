@@ -22,6 +22,7 @@
         for (let prop in $currentPizzeria) {
             delete $currentPizzeria[prop];
         }
+        $currentPizzeria.isSet = false;
         const zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/;
         if (zipRegex.test(zipCode)) {
             $currentZip = zipCode;
