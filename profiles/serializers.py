@@ -24,6 +24,7 @@ class PromotionSerializer(serializers.HyperlinkedModelSerializer):
             'description',
             'begin_date',
             'end_date',
+            'date_range',
         ]
 
 

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import date
 from .helpers import geocode_address
-import logging
+import datetime, logging
 
 CustomUser = get_user_model()
 logger = logging.getLogger(__name__)
@@ -65,3 +65,12 @@ class Promotion(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    @property
+    def date_range(self):
+        dates = []
+        if self.begin_date:
+            dates.append(self.begin_date.strftime('%b %d, %Y'))
+        if self.end_date:
+            dates.append(self.end_date.strftime('%b %d, %Y'))
+        return ' - '.join(dates)
