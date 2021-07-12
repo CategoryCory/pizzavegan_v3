@@ -19,8 +19,8 @@ class ArticleListPage(Page):
         context = super().get_context(request, *args, **kwargs)
         all_articles = self.get_children().live().order_by('-first_published_at')
 
-        paginator = Paginator(all_articles, 1)
-        page = request.GET.get('page', 6)
+        paginator = Paginator(all_articles, 6)
+        page = request.GET.get('page', 1)
 
         try:
             article_pages = paginator.page(page)
