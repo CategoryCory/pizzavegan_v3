@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
@@ -16,7 +17,18 @@ class RecipeListPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        recipe_pages = self.get_children().live().order_by('-first_published_at')
+        all_recipes = self.get_children().live().order_by('-first_published_at')
+
+        paginator = Paginator(all_recipes, 6)
+        page = request.GET.get('page', 1)
+
+        try:
+            recipe_pages = paginator.page(page)
+        except PageNotAnInteger:
+            recipe_pages = paginator.page(1)
+        except EmptyPage:
+            recipe_pages = paginator.page(paginator.num_pages)
+
         context['recipe_pages'] = recipe_pages
         return context
 
