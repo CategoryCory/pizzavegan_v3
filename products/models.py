@@ -25,7 +25,11 @@ class ProductListPage(RoutablePageMixin, Page):
         context = super().get_context(request, *args, **kwargs)
         all_products = self.get_children().live().order_by('-first_published_at')
 
-        paginator = Paginator(all_products, 6)
+        featured_products = [pg for pg in all_products if pg.specific.is_featured is True]
+        regular_products = [pg for pg in all_products if pg.specific.is_featured is False]
+        all_products_sorted = featured_products + regular_products
+
+        paginator = Paginator(all_products_sorted, 6)
         page = request.GET.get('page', 1)
 
         try:
@@ -35,9 +39,7 @@ class ProductListPage(RoutablePageMixin, Page):
         except EmptyPage:
             product_pages = paginator.page(paginator.num_pages)
 
-        featured_products = [pg for pg in product_pages if pg.specific.is_featured is True]
-        regular_products = [pg for pg in product_pages if pg.specific.is_featured is False]
-        context['product_pages'] = featured_products + regular_products
+        context['product_pages'] = product_pages
         return context
 
     @route(r'^category/(?P<category_slug>[-\w]*)/$', name='product_category_view')
@@ -51,7 +53,19 @@ class ProductListPage(RoutablePageMixin, Page):
         if category is None:
             raise Http404('The selected category does not exist.')
 
-        context['product_pages'] = ProductSinglePage.objects.live().public().filter(categories__in=[category]).order_by('-first_published_at')
+        all_products = ProductSinglePage.objects.live().public().filter(categories__in=[category]).order_by('-first_published_at')
+        paginator = Paginator(all_products, 6)
+        page = request.GET.get('page', 1)
+
+        try:
+            product_pages = paginator.page(page)
+        except PageNotAnInteger:
+            product_pages = paginator.page(1)
+        except EmptyPage:
+            product_pages = paginator.page(paginator.num_pages)
+
+        # context['product_pages'] = ProductSinglePage.objects.live().public().filter(categories__in=[category]).order_by('-first_published_at')
+        context['product_pages'] = product_pages
         return render(request, 'products/product_list_page.html', context)
 
 
