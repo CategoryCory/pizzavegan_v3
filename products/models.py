@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404
 from django.shortcuts import render
 
@@ -22,7 +23,18 @@ class ProductListPage(RoutablePageMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        product_pages = self.get_children().live().order_by('-first_published_at')
+        all_products = self.get_children().live().order_by('-first_published_at')
+
+        paginator = Paginator(all_products, 6)
+        page = request.GET.get('page', 1)
+
+        try:
+            product_pages = paginator.page(page)
+        except PageNotAnInteger:
+            product_pages = paginator.page(1)
+        except EmptyPage:
+            product_pages = paginator.page(paginator.num_pages)
+
         featured_products = [pg for pg in product_pages if pg.specific.is_featured is True]
         regular_products = [pg for pg in product_pages if pg.specific.is_featured is False]
         context['product_pages'] = featured_products + regular_products

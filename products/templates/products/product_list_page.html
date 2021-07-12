@@ -49,4 +49,43 @@
             {% endfor %}
         </div>
     </main>
+    {% if product_pages.has_other_pages %}
+        <div class="container mx-auto mb-8 flex justify-end">
+                {% if product_pages.has_previous %}
+                    <a 
+                        href="?page={{ product_pages.previous_page_number }}"
+                        class="grid place-items-center mr-2 w-10 h-10 rounded-full transition d-200 
+                            hover:bg-coolgray-300 focus:outline-none focus:bg-coolgray-400"
+                    >
+                        <i class="fas fa-angle-left text-2xl text-coolgray-700"></i>
+                    </a>
+                {% endif %}
+                {% for pg in product_pages.paginator.page_range %}
+                    {% if pg >= product_pages.number|add:'-4' and pg <= product_pages.number|add:4 %}
+                        {% if product_pages.number == pg %}
+                            <span class="grid place-items-center mr-2 w-10 h-10 rounded-full bg-brand-dark text-coolgray-300">
+                                {{ pg }} <span class="sr-only">(Current)</span>
+                            </span>
+                        {% else %}
+                            <a 
+                                href="?page={{ pg }}"
+                                class="grid place-items-center mr-2 w-10 h-10 rounded-full transition d-200 text-coolgray-700
+                                hover:bg-coolgray-300 focus:outline-none focus:bg-coolgray-400"
+                            >
+                                {{ pg }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% if product_pages.has_next %}
+                    <a 
+                        href="?page={{ product_pages.next_page_number }}"
+                        class="grid place-items-center mr-2 w-10 h-10 rounded-full transition d-200 
+                            hover:bg-coolgray-300 focus:outline-none focus:bg-coolgray-400"
+                    >
+                        <i class="fas fa-angle-right text-2xl text-coolgray-700"></i>
+                    </a>
+                {% endif %}
+        </div>
+    {% endif %}
 {% endblock content %}
