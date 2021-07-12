@@ -7,7 +7,7 @@ from articles.models import ArticleSinglePage
 from products.models import ProductSinglePage
 from recipes.models import RecipeSinglePage
 
-from contacts.forms import ContactUsForm, SurveyResponseForm, PizzeriaSignupResponseForm
+from contacts.forms import ContactUsForm
 
 
 def homepage_view(request):
@@ -31,10 +31,6 @@ class AboutView(TemplateView):
     template_name = 'pages/about.html'
 
 
-# class MeetTheEditorView(TemplateView):
-#     template_name = 'pages/meet-the-editor.html'
-
-
 class ContactUsView(SuccessMessageMixin, CreateView):
     form_class = ContactUsForm
     template_name = 'pages/contact.html'
@@ -48,40 +44,3 @@ class PrivacyPolicyView(TemplateView):
 
 class TermsOfServiceView(TemplateView):
     template_name = 'pages/terms-of-service.html'
-
-
-class RegisterPizzeriaView(SuccessMessageMixin, CreateView):
-    form_class = PizzeriaSignupResponseForm
-    template_name = 'pages/register-pizzeria.html'
-    success_url = reverse_lazy('pages:register_pizzeria')
-    success_message = 'Your submission has been received! You will receive an email confirmation with additional ' \
-                      'information and steps.'
-
-
-def pizzavegan_signup_view(request):
-    if request.method == 'POST':
-        form = SurveyResponseForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                'Thank you for signing up! We will let you know when we officially launch!'
-            )
-            return redirect('pages:pizzavegan_signup')
-        else:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                'There was a problem signing up. Please try again later.'
-            )
-            return redirect('pages:pizzavegan_signup')
-    else:
-        form = SurveyResponseForm()
-
-    context = {
-        'form': form,
-    }
-
-    return render(request, 'pages/pizzavegan-signup.html', context)
