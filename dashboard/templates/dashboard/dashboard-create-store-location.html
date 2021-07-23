@@ -209,10 +209,11 @@
         } 
     });
 
-    submitFormsButton.addEventListener("click", function(e) {
-        this.disabled = true;
-        this.innerText = "Please wait...";
-        this.style.opacity = 0.5;
+    locationFormSet.addEventListener("submit", function(e) {
+        submitFormsButton.disabled = true;
+        submitFormsButton.innerText = "Please wait...";
+        submitFormsButton.style.opacity = 0.5;
+        submitFormsButton.style.cursor = "default";
     });
 </script>
 {% endblock extra_js %}

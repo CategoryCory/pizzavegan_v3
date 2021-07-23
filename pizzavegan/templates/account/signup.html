@@ -21,7 +21,7 @@
 
         {% include 'partials/_alerts.html' %}
 
-        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}" novalidate>
+        <form class="signup" id="signup-form" method="post" action="{% url 'account_signup' %}" novalidate>
             {% csrf_token %}
             {% for field in form %}
                 <p class="flex flex-col mt-5 font-sans">
@@ -68,11 +68,14 @@
 
 {% block extra_body %}
 <script>
+    const signupForm = document.getElementById("signup-form");
     const submitButton = document.getElementById("submit-button");
-    submitButton.addEventListener("click", function(e) {
-        this.disabled = true;
-        this.style.opacity = 0.5;
-        this.style.cursor = "default";
+
+    signupForm.addEventListener("submit", function(e) {
+        submitButton.disabled = true;
+        submitButton.innerText = "Please wait...";
+        submitButton.style.opacity = 0.5;
+        submitButton.style.cursor = "default";
     });
 </script>
 {% endblock extra_body %}
