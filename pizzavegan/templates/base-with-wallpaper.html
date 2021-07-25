@@ -94,7 +94,12 @@
                         {% if user.is_authenticated %}
                             <li class="relative">
                                 <a href="#" class="text-gray-600 hover:text-brand transition duration-200">
-                                    Hi, {{ user.username }}!
+                                    Hi,
+                                    {% if user.company_name %}
+                                        {{ user.company_name }}!
+                                    {% else %}
+                                        {{ user.username }}!
+                                    {% endif %}
                                 </a>
                                 <ul class="nav__dropdown-right hidden">
                                     <li class="px-2 hover:bg-gray-200">
