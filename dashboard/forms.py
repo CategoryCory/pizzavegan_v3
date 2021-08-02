@@ -15,13 +15,16 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = (
-            'first_name', 'last_name', 'company_name', 'description', 'facebook', 'twitter',
+            'first_name', 'last_name', 'company_name', 'pizzeria_website', 'description', 'facebook', 'twitter',
             'instagram', 'tiktok', 'youtube', 'online_ordering', 'pizzeria_logo',
         )
         widgets = {
             'first_name': forms.TextInput(attrs={'class': field_classes}),
             'last_name': forms.TextInput(attrs={'class': field_classes}),
             'company_name': forms.TextInput(attrs={'class': field_classes}),
+            'pizzeria_website': forms.URLInput(
+                attrs={'class': field_classes, 'placeholder': 'https://your-pizzeria-website.com/'}
+            ),
             'description': forms.Textarea(attrs={'rows': 5, 'class': field_classes}),
             'facebook': forms.URLInput(
                 attrs={'class': field_classes, 'placeholder': 'https://facebook.com/your-company-page'}
@@ -48,7 +51,8 @@ class LocationForm(forms.ModelForm):
     class Meta:
         model = PizzeriaLocation
         fields = (
-            'street_address1', 'street_address2', 'city', 'state', 'zip_code', 'phone', 'dine_in', 'carry_out', 'delivery',
+            'street_address1', 'street_address2', 'city', 'state', 'zip_code', 'phone', 
+            'location_website', 'dine_in', 'carry_out', 'delivery',
         )
         widgets = {
             'street_address1': forms.TextInput(attrs={'class': field_classes}),
@@ -57,6 +61,7 @@ class LocationForm(forms.ModelForm):
             'state': forms.TextInput(attrs={'class': field_classes}),
             'zip_code': forms.TextInput(attrs={'class': field_classes}),
             'phone': forms.TextInput(attrs={'class': field_classes}),
+            'location_website': forms.URLInput(attrs={'class': field_classes}),
             'dine_in': forms.CheckboxInput(attrs={'class': checkbox_classes}),
             'carry_out': forms.CheckboxInput(attrs={'class': checkbox_classes}),
             'delivery': forms.CheckboxInput(attrs={'class': checkbox_classes}),
@@ -68,7 +73,7 @@ LocationFormSet = inlineformset_factory(
     PizzeriaLocation,
     form=LocationForm,
     fields=(
-        'street_address1', 'street_address2', 'city', 'state', 'zip_code', 'phone', 'dine_in', 'carry_out', 'delivery',
+        'street_address1', 'street_address2', 'city', 'state', 'zip_code', 'phone', 'location_website', 'dine_in', 'carry_out', 'delivery',
     ),
     extra=1,
     max_num=10,
@@ -80,6 +85,7 @@ LocationFormSet = inlineformset_factory(
         'state': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
         'zip_code': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' ', 'required': 'true'}),
         'phone': widgets.TextInput(attrs={'class': formset_classes, 'placeholder': ' '}),
+        'location_website': widgets.URLInput(attrs={'class': formset_classes, 'placeholder': ' '}),
         'dine_in': widgets.CheckboxInput(attrs={'class': checkbox_classes}),
         'carry_out': widgets.CheckboxInput(attrs={'class': checkbox_classes}),
         'delivery': widgets.CheckboxInput(attrs={'class': checkbox_classes}),

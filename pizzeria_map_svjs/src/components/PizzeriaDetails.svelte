@@ -1,7 +1,7 @@
 <script>
     import { currentPizzeria } from "../stores";
     import Fa from "svelte-fa";
-    import { faTimes } from "@fortawesome/free-solid-svg-icons";
+    import { faTimes, faExternalLinkAlt, faPizzaSlice } from "@fortawesome/free-solid-svg-icons";
     import { faFacebook, faTwitter, faInstagram, faTiktok, faYoutube } from "@fortawesome/free-brands-svg-icons";
 
     const diningOptions = [];
@@ -43,33 +43,43 @@
                 {#if diningOptions.length > 0}
                     <p>{diningOptions.join(" | ")}</p>
                 {/if}
+                {#if $currentPizzeria.location_website}
+                    <a href={$currentPizzeria.location_website} class="location-link">
+                        <Fa icon={faExternalLinkAlt} fw color="#69625C" size="sm" style="display: inline-block; margin-right: 0.15rem;" />Visit Store Website
+                    </a>
+                {/if}
                 <div class="online-links">
                     {#if $currentPizzeria.profile.online_ordering}
-                        <a href={$currentPizzeria.profile.online_ordering} class="online-ordering">Order online</a>
+                        <a href={$currentPizzeria.profile.online_ordering} class="online-ordering" target="_blank">Order online</a>
                     {/if}
                     <div class="social-media">
+                        {#if $currentPizzeria.profile.pizzeria_website}
+                        <a href={$currentPizzeria.profile.pizzeria_website} target="_blank">
+                            <Fa icon={faPizzaSlice} fw color="#69625C" size="lg" />
+                        </a>
+                        {/if}
                         {#if $currentPizzeria.profile.facebook}
-                            <a href={$currentPizzeria.profile.facebook}>
+                            <a href={$currentPizzeria.profile.facebook} target="_blank">
                                 <Fa icon={faFacebook} fw color="#69625C" size="lg" />
                             </a>
                         {/if}
                         {#if $currentPizzeria.profile.twitter}
-                            <a href={$currentPizzeria.profile.twitter}>
+                            <a href={$currentPizzeria.profile.twitter} target="_blank">
                                 <Fa icon={faTwitter} fw color="#69625C" size="lg" />
                             </a>
                         {/if}
                         {#if $currentPizzeria.profile.instagram}
-                            <a href={$currentPizzeria.profile.instagram}>
+                            <a href={$currentPizzeria.profile.instagram} target="_blank">
                                 <Fa icon={faInstagram} fw color="#69625C" size="lg" />
                             </a>
                         {/if}
                         {#if $currentPizzeria.profile.tiktok}
-                            <a href={$currentPizzeria.profile.tiktok}>
+                            <a href={$currentPizzeria.profile.tiktok} target="_blank">
                                 <Fa icon={faTiktok} fw color="#69625C" size="lg" />
                             </a>
                         {/if}
                         {#if $currentPizzeria.profile.youtube}
-                            <a href={$currentPizzeria.profile.youtube}>
+                            <a href={$currentPizzeria.profile.youtube} target="_blank">
                                 <Fa icon={faYoutube} fw color="#69625C" size="lg" />
                             </a>
                         {/if}
@@ -206,6 +216,32 @@
         display: grid;
         place-items: center;
         background-color: #E7E5E4;
+    }
+
+    .location-link {
+        position: relative;
+        display: inline-block;
+        margin-top: 0.75rem;
+        color: rgb(105, 98, 92);
+    }
+
+    .location-link::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        background-color: rgba(80, 73, 67, 0);
+        transition: background-color 150ms ease-in-out;
+    }
+
+    .location-link:hover {
+        color: rgb(80, 73, 67);
+    }
+
+    .location-link:hover::after {
+        background-color: rgba(80, 73, 67, 1);
     }
 
     .online-links {

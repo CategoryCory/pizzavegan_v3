@@ -15,6 +15,7 @@ class PizzeriaLocation(models.Model):
     state = models.CharField(max_length=30, blank=False)
     zip_code = models.CharField(max_length=15, blank=False)
     phone = models.CharField(max_length=25, blank=True)
+    location_website = models.URLField(max_length=200, blank=True)
     dine_in = models.BooleanField(default=False, verbose_name='Dine In')
     carry_out = models.BooleanField(default=False, verbose_name='Carry Out')
     delivery = models.BooleanField(default=False, verbose_name='Delivery')

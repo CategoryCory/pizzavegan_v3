@@ -3,6 +3,7 @@
     import { currentPizzeria } from "../stores";
     import Fa from "svelte-fa";
     import { faFacebook, faTwitter, faInstagram, faTiktok, faYoutube } from "@fortawesome/free-brands-svg-icons";
+    import { faExternalLinkAlt, faPizzaSlice } from "@fortawesome/free-solid-svg-icons";
     export let restaurantData;
 
     const diningOptions = [];
@@ -36,32 +37,46 @@
         {#if diningOptions.length > 0}
             <p>{diningOptions.join(" | ")}</p>
         {/if}
-        {#if restaurantData.profile.online_ordering }
-            <a href={restaurantData.profile.online_ordering} class="listing-online-ordering">Order online</a>
-        {/if}
+        <div class="listing-link-container">
+            {#if restaurantData.profile.online_ordering }
+                <a href={restaurantData.profile.online_ordering} class="listing-link" target="_blank">
+                    <Fa icon={faExternalLinkAlt} fw color="#69625C" size="sm" style="display: inline-block; margin-right: 0.15rem;" />Order online
+                </a>
+            {/if}
+            {#if restaurantData.location_website}
+                <a href={restaurantData.location_website} class="listing-link" target="_blank">
+                    <Fa icon={faExternalLinkAlt} fw color="#69625C" size="sm" style="display: inline-block; margin-right: 0.15rem;" />Visit Store Website
+                </a>
+            {/if}
+        </div>
         <div class="listing-social-media">
+            {#if restaurantData.location_website}
+                <a href={restaurantData.location_website} target="_blank">
+                    <Fa icon={faPizzaSlice} fw color="#69625C" size="lg" />
+                </a>
+            {/if}
             {#if restaurantData.profile.facebook}
-                <a href={restaurantData.profile.facebook}>
+                <a href={restaurantData.profile.facebook} target="_blank">
                     <Fa icon={faFacebook} fw color="#69625C" size="lg" />
                 </a>
             {/if}
             {#if restaurantData.profile.twitter}
-                <a href={restaurantData.profile.twitter}>
+                <a href={restaurantData.profile.twitter} target="_blank">
                     <Fa icon={faTwitter} fw color="#69625C" size="lg" />
                 </a>
             {/if}
             {#if restaurantData.profile.instagram}
-                <a href={restaurantData.profile.instagram}>
+                <a href={restaurantData.profile.instagram} target="_blank">
                     <Fa icon={faInstagram} fw color="#69625C" size="lg" />
                 </a>
             {/if}
             {#if restaurantData.profile.tiktok}
-                <a href={restaurantData.profile.tiktok}>
+                <a href={restaurantData.profile.tiktok} target="_blank">
                     <Fa icon={faTiktok} fw color="#69625C" size="lg" />
                 </a>
             {/if}
             {#if restaurantData.profile.youtube}
-                <a href={restaurantData.profile.youtube}>
+                <a href={restaurantData.profile.youtube} target="_blank">
                     <Fa icon={faYoutube} fw color="#69625C" size="lg" />
                 </a>
             {/if}
@@ -101,6 +116,7 @@
 
     .listing-info-container {
         height: 100%;
+        width: 95%;
         padding: 0;
     }
 
@@ -110,8 +126,13 @@
         line-height: 1.2;
     }
 
-    .listing-info-container p {
+    .listing-info-container p,
+    .listing-info-container a {
         font-size: 0.875rem;
+    }
+
+    .listing-info-container p {
+        /* font-size: 0.875rem; */
         line-height: 1.375;
         color: rgb(105, 98, 92);
     }
@@ -124,19 +145,39 @@
         gap: 0.5em;
     }
 
-    .listing-online-ordering {
-        display: inline-block;
-        margin-top: 0.75em;
-        padding: 0.1em 0.4em;
-        border: 2px solid rgb(105, 98, 92);
-        border-radius: 0.25em;
-        color: rgb(105, 98, 92);
-        transition: all 150ms ease-in-out;
+    .listing-link-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
     }
 
-    .listing-online-ordering:hover {
-        background-color: rgb(105, 98, 92);
-        color: rgb(255, 255, 255);
+    .listing-link {
+        position: relative;
+        display: block;
+        margin-top: 0.25rem;
+        color: rgb(105, 98, 92);
+        transition: color 150ms ease-in-out;
+    }
+
+    .listing-link::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        background-color: rgba(80, 73, 67, 0);
+        transition: background-color 150ms ease-in-out;
+    }
+
+    .listing-link:hover {
+        color: rgb(80, 73, 67);
+    }
+
+    .listing-link:hover::after {
+        background-color: rgba(80, 72, 67, 1);
     }
 
     .no-logo {
@@ -173,8 +214,8 @@
             font-size: 1.5rem;
         }
 
-        .listing-info-container p {
+        /* .listing-info-container p {
             font-size: 1rem;
-        }
+        } */
     }
 </style>

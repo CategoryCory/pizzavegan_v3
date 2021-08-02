@@ -78,6 +78,17 @@
                 {% endfor %}
             {% endif %}
         </div>
+        <div>
+            <label for="{{ form.location_website.id_for_label }}" class="font-sans text-coolgray-600">Store Website</label>
+            {{ form.location_website }}
+            {% if form.location_website.errors %}
+                {% for error in form.location_website.errors %}
+                    <p class="mb-4 mx-5 px-4 py-2 rounded-md font-sans border border-red-500 border-l-4 text-red-500">
+                        <span class="font-bold">Store Website:</span> {{ error|escape }}
+                    </p>
+                {% endfor %}
+            {% endif %}
+        </div>
         <div class="my-2 flex flex-row gap-8">
             <div class="flex flex-row items-center">
                 {{ form.dine_in }}

@@ -17,7 +17,9 @@
             {% endif %}
             <div class="text-center">
                 <h2 class="text-4xl text-coolgray-700">{{ user.company_name }}</h2>
-                <p class="font-sans font-extralight text-lg text-coolgray-700">{{ user.email }}</p>
+                {% if user.pizzeria_website %}
+                    <p class="font-sans font-extralight text-lg text-coolgray-700">{{ user.pizzeria_website }}</p>
+                {% endif %}
             </div>
         </div>
         <a 
@@ -36,6 +38,12 @@
             {% else %}
                 No name entered
             {% endif %}
+        </p>
+    </div>
+    <div>
+        <p class="font-sans font-extralight text-sm text-coolgray-700 uppercase">Contact Email</p>
+        <p class="font-sans lg:text-lg xl:text-xl text-coolgray-700">
+            {{ user.email }}
         </p>
     </div>
     <div>

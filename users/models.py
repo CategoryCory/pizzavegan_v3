@@ -11,6 +11,7 @@ class CustomUser(AbstractUser):
     instagram = models.URLField(max_length=200, blank=True)
     tiktok = models.URLField(max_length=200, blank=True)
     youtube = models.URLField(max_length=200, blank=True)
+    pizzeria_website = models.URLField(max_length=200, blank=True, verbose_name='Main Pizzeria Website')
     online_ordering = models.URLField(max_length=200, blank=True)
     pizzeria_logo = models.ImageField(upload_to='images/pizzeria_logos/', blank=True)
 
