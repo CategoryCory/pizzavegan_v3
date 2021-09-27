@@ -7,6 +7,18 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
+from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
+
+
+class ArticlePageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'ArticleSinglePage',
+        related_name='article_tagged_items',
+        on_delete=models.CASCADE,
+    )
+
 
 class ArticleListPage(Page):
     intro = RichTextField(blank=True)
@@ -17,7 +29,12 @@ class ArticleListPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        all_articles = self.get_children().live().order_by('-first_published_at')
+        # all_articles = self.get_children().live().order_by('-first_published_at')
+        all_articles = ArticleSinglePage.objects.live().order_by('-first_published_at')
+
+        if request.GET.get('tag', None):
+            tags = request.GET.get('tag')
+            all_articles = all_articles.filter(tags__slug__in=[tags])
 
         paginator = Paginator(all_articles, 6)
         page = request.GET.get('page', 1)
@@ -57,6 +74,7 @@ class ArticleSinglePage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('title'),
@@ -66,5 +84,6 @@ class ArticleSinglePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('subtitle'),
         FieldPanel('body', classname='full'),
+        FieldPanel('tags'),
         ImageChooserPanel('featured_image'),
     ]
