@@ -53,6 +53,9 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
+        <!-- Broadstreet interstitial zone -->
+        <broadstreet-zone zone-id="91225"></broadstreet-zone>
+
         <header class="flex items-center justify-between bg-white px-6 py-4 lg:px-14 lg:py-6 border-b shadow sticky top-0 z-20">
             <a href="{% url 'pages:home' %}" class="">
                 <img src="{% static 'images/pizzavegan-main-logo.svg' %}" class="h-12" alt="PizzaVegan Logo" loading="lazy">
