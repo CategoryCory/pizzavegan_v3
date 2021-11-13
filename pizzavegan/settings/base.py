@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'api_v1.apps.ApiV1Config',
 
     'wagtail.contrib.forms',
+    'wagtail.contrib.modeladmin',
     'wagtail.contrib.redirects',
     'wagtail.contrib.routable_page',
     'wagtail.embeds',

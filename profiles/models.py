@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import date
+
 from .helpers import geocode_address
-import datetime, logging
+
+import logging
 
 CustomUser = get_user_model()
 logger = logging.getLogger(__name__)
